@@ -4,6 +4,7 @@ $(document).ready(function () {
 
     $('#submit').on('click', function (e) {
         e.preventDefault();
+        $("#data").empty();
         var query = $('#search').val();
 
         $.ajax({
