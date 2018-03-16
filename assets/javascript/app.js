@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-
+    
 
     $('#submit').on('click', function (e) {
         e.preventDefault();
@@ -38,11 +38,22 @@ $(document).ready(function () {
             error: function (error) {
                 console.log(error);
             }
+
+
+            
+
         });
 
     });
 
+    
+
     // https://developers.zomato.com/api/v2.1/search?q=tacos&count=20
 
     // a935c21d6210ae554c1a824b76165e48
+
+    // fatSecret api key c40057b455724db2804c75ec57a9f9d6
+
+    // fatSecret shared secret 991cdd08c3354611b1d5047ab42bbbd0
+
 });
