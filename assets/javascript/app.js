@@ -1,5 +1,16 @@
 $(document).ready(function () {
 
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyDROSTywWg_ixRczEBDOcFtjiEOoSS4CaQ",
+        authDomain: "stayfit-198201.firebaseapp.com",
+        databaseURL: "https://stayfit-198201.firebaseio.com",
+        projectId: "stayfit-198201",
+        storageBucket: "stayfit-198201.appspot.com",
+        messagingSenderId: "38227001509"
+    };
+    firebase.initializeApp(config);
+
 
 
     $('#submit').on('click', function (e) {
@@ -24,6 +35,6 @@ $(document).ready(function () {
         });
 
     });
-  
+
 
 });
