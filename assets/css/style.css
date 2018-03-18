@@ -1,4 +1,5 @@
-#visualization {
-    height: 50vw;
-    
+#payscale {
+    position: absolute;
+    bottom: 100;
+    border: 5px solid red;
 }
