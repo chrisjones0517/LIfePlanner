@@ -68,4 +68,40 @@ $(document).ready(function () {
     });
 
 
+
+    $('#weather').on('click', function (e) {
+        e.preventDefault();
+        console.log("wasclicked")
+        WaetherCall()
+    })
+    var units = 'imperial';
+    function WaetherCall() {
+        var inputWeather = "Houston"   //$("#search-input").val().trim() ;
+        //api.openweathermap.org/data/2.5/forecast?lat=35&lon=139; getting info from Mohammed lt return 
+        var queryURL = "http://api.openweathermap.org/data/2.5/forecast?q=" + inputWeather + ",us&APPID=eeda0b646e014b160ccbce009bb655ef";
+        $.ajax({
+            url: queryURL,
+            method: "GET",
+            data: {
+                cnt: 16,
+                units: units
+            }
+
+        }).then(function (data) {
+            console.log(data)
+            lat = data.city.coord.lat;
+            lon = data.city.coord.lon;
+            city = data.city.name;
+            cityPop = data.city.population;
+            highF = Math.round(data.list[0].main.temp_max) + '°';
+            lowF = Math.round(data.list[0].main.temp_min) + '°';
+            description = data.list[0].weather[0].description;
+            console.log(lat, lon)
+            console.log(city, cityPop)
+            console.log(lowF, highF,description)
+        });
+
+
+    }
+
 });
