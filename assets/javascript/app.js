@@ -12,29 +12,72 @@ $(document).ready(function () {
     firebase.initializeApp(config);
 
 
-
-    $('#submit').on('click', function (e) {
-        e.preventDefault();
-        $("#data").empty();
-        var query = $('#search').val();
-
+    $("#send").on("click", function () {
+        var userName = $("#username").val();
+            userName = userName.toLowerCase();
+        var userPassword = $("#password").val();
 
 
-        var url = "https://api.datausa.io/api/?show=geo&sumlevel=state&required=avg_wage";
-
-        d3.json(url, function (json) {
-
-            var data = json.data.map(function (data) {
-                return json.headers.reduce(function (obj, header, i) {
-                    obj[header] = data[i];
-                    return obj;
-                    console.log(obj);
-                }, {});
-            });
-
+        var compareUsername = $.grep(snapshot, function (val) {
+            return (val.name === userName)
         });
 
-    });
+        if (compareUsername.length) { //if length is 1 => true
+            console.log("Name already used")
+        } else {
+            console.log("registered")
+            //users tree in firebase
+            db.ref("users/" + dbIndex).set({
+                id : dbIndex,
+                name: userName,
+                passkey: userPassword
+            });
+        }
+
+
+
+    })
+
+
+
+    // that will pull all users in database for login and signin
+    db.ref("users").on("value", function (res) {
+        snapshot = res.val()
+        // console.log(snapshot);
+        // console.log(res);
+        if (res.exists()) { //conditional to increase index number for future signin
+            dbIndex = snapshot.length;
+            console.log(dbIndex);
+        } else {
+            dbIndex = 0;
+            console.log(dbIndex);
+        }
+
+
+    })
+
+
+
+    $("#compare").on("click", function () {
+        var compareUser = $("#username1").val();
+        var comparePass = $("#password1").val();
+
+
+        //login array will hold user data
+        var userLogin = $.grep(snapshot, function (val) {
+
+            //bring user information based on login info
+            //compare against username and password
+            return (val.name === compareUser && val.passkey === comparePass)
+        });
+        console.log(userLogin)
+        if (userLogin.length) { //if length is 1 => true
+            console.log("good to go")
+        } else {
+            console.log("try again")
+        }
+    })
+    
 
 
 });
