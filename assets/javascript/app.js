@@ -11,7 +11,7 @@ $(document).ready(function () {
     };
     firebase.initializeApp(config);
 
-
+    //register new user
     $("#send").on("click", function () {
         var userName = $("#username").val();
             userName = userName.toLowerCase();
@@ -40,7 +40,7 @@ $(document).ready(function () {
 
 
 
-    // that will pull all users in database for login and signin
+    // user login
     db.ref("users").on("value", function (res) {
         snapshot = res.val()
         // console.log(snapshot);
@@ -71,7 +71,7 @@ $(document).ready(function () {
             return (val.name === compareUser && val.passkey === comparePass)
         });
         console.log(userLogin)
-        if (userLogin.length) { //if length is 1 => true
+        if (userLogin.length) { //if array length is 1 => true
             console.log("good to go")
         } else {
             console.log("try again")
