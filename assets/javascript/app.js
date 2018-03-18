@@ -44,7 +44,6 @@ $(document).ready(function () {
                 cnt: 16,
                 units: units
             }
-
         }).then(function (data) {
             console.log(data)
             lat = data.city.coord.lat;
@@ -54,12 +53,20 @@ $(document).ready(function () {
             highF = Math.round(data.list[0].main.temp_max) + '°';
             lowF = Math.round(data.list[0].main.temp_min) + '°';
             description = data.list[0].weather[0].description;
+            icon = data.list[0].weather[0].icon;
             console.log(lat, lon)
             console.log(city, cityPop)
             console.log(lowF, highF,description)
+           // $('#icon').html().addClass((icon));
+            //$('#description').html(titleCase(description));
+            $('#city').html('city: ' + city)
+            $('#cityPop').html('cityPop: ' + cityPop);
+            $('#description').html('description: ' + description)
+            $('#highF').html('highF: ' + highF);
+            $('#lowF').html('lowF: ' + lowF);
+           
         });
-
-
+        
     }
 
 });
