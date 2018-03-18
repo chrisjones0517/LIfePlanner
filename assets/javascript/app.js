@@ -5,55 +5,32 @@ $(document).ready(function () {
     $('#submit').on('click', function (e) {
         e.preventDefault();
         $("#data").empty();
-        var query = $('#search').val();
-        var city_state = 'Houston tx';
-        var profession = 'accountant';
-
-        var queryUrl = `https://api.datausa.io/attrs/search/?q=${city_state}&kind=geo`;
-        var queryUrl2 = `https://api.datausa.io/attrs/search/?q=${profession}&kind=soc`;
-
-        $.ajax({
-            url: queryUrl,
-            method: 'GET'
-        }).then(function(response) {
-            console.log(response.data[0]);
-            var conf = confirm("Is your city " + response.data[0][1]);
-            if (conf === true) {
-                city_stateId = response.data[0][0];
-            }
-            
-
-        }).then(function(response) {
-            $.ajax({
-                url: queryUrl2,
-                method: 'GET'
-            
-            }).then(function(response) {
-                console.log(response);
-            });
-        
-        });
+some()
     });
 
+    function some (){
+var key
+var pattern = $("#search").val();
+        $.ajax({
+            url: "https://en.wikipedia.org/w/api.php?format=json&action=query&generator=search&gsrnamespace=0&gsrlimit=10&prop=pageimages|extracts&pilimit=max&exintro&explaintext&exsentences=1&exlimit=max&gsrsearch="+pattern,
+            dataType: "jsonp",
+            success: function(data) {
+              //$("#api").html(JSON.stringify(data, null, 3));    
+              console.log(data)  
+              for(key in data.query.pages){
+                var titleArt = data.query.pages[key].title;
+                var extractArt = data.query.pages[key].extract;
+                var linkArt = 'https://en.wikipedia.org/?curid=' + data.query.pages[key].pageid;
+                //console.log(linkArt)
+                var imgArt;
 
+                var contentHTML = '<div class="col-md-4"><div class="box-result"><div class="bg-result"></div><a href="' +  linkArt + '" target="_blank"><div class="box-content center-block"><div class="article-thumbnail"><img src="' + imgArt + '" alt="" /></div><h1>'+ titleArt +'</h1><p>' + extractArt + '</p></div></a></div></div>';
 
+              }
+            
+            }
+          });
+    }
 
-
-
-
-        // var url = "https://api.datausa.io/api/?show=geo&sumlevel=all&required=grads_men,grads_women";
-        // d3.json(url, function (json) {
-        //     var data = json.data.map(function (data) {
-        //         return json.headers.reduce(function (obj, header, i) {
-        //             obj[header] = data[i];
-        //             console.log("here", obj)
-        //             return obj;
-        //             //console.log("imhere", obj[header]);
-        //         }, {});
-        //     });
-        // });
-
-
-    
 
 });
