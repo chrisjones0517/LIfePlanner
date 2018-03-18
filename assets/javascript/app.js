@@ -22,24 +22,35 @@ $(document).ready(function () {
         var userName = $("#username").val();
         userName = userName.toLowerCase();
         var userPassword = $("#password").val();
+        var userProfession = $("#userprofession").val();
+        var userFullName = $("#fullname").val();
+
+        //validation
+        if (userName != "" && userPassword != "" && userFullName != "" && userProfession != "") {
 
 
-        var compareUsername = $.grep(snapshotVal, function (val) {
-            return (val.name === userName)
-        });
-        
+            var compareUsername = $.grep(snapshotVal, function (val) {
+                return (val.name === userName)
+            });
+
             if (compareUsername.length) { //if length is 1 => true
-               console.log("Name already used")
+                console.log("Name already used")
             } else {
                 console.log("registered")
                 //users tree in firebase
                 db.ref("users/" + dbIndex).set({
                     id: dbIndex,
                     name: userName,
-                    passkey: userPassword
+                    passkey: userPassword,
+                    profession: userProfession,
+                    fullname: userFullName
                 });
             }
-        
+        } else {
+            console.log("please fill in all the fields")
+        }
+
+
 
 
 
