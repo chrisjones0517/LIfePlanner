@@ -11,28 +11,35 @@ $(document).ready(function () {
     };
     firebase.initializeApp(config);
 
+    var db = firebase.database();
+    var dbIndex;
+    var snapshot,
+        snapshotVal;
+
+
     //register new user
     $("#send").on("click", function () {
         var userName = $("#username").val();
-            userName = userName.toLowerCase();
+        userName = userName.toLowerCase();
         var userPassword = $("#password").val();
 
 
-        var compareUsername = $.grep(snapshot, function (val) {
+        var compareUsername = $.grep(snapshotVal, function (val) {
             return (val.name === userName)
         });
-
-        if (compareUsername.length) { //if length is 1 => true
-            console.log("Name already used")
-        } else {
-            console.log("registered")
-            //users tree in firebase
-            db.ref("users/" + dbIndex).set({
-                id : dbIndex,
-                name: userName,
-                passkey: userPassword
-            });
-        }
+        
+            if (compareUsername.length) { //if length is 1 => true
+               console.log("Name already used")
+            } else {
+                console.log("registered")
+                //users tree in firebase
+                db.ref("users/" + dbIndex).set({
+                    id: dbIndex,
+                    name: userName,
+                    passkey: userPassword
+                });
+            }
+        
 
 
 
@@ -42,11 +49,11 @@ $(document).ready(function () {
 
     // user login
     db.ref("users").on("value", function (res) {
-        snapshot = res.val()
-        // console.log(snapshot);
+        snapshot = res;
+        snapshotVal = res.val();
         // console.log(res);
         if (res.exists()) { //conditional to increase index number for future signin
-            dbIndex = snapshot.length;
+            dbIndex = snapshotVal.length;
             console.log(dbIndex);
         } else {
             dbIndex = 0;
@@ -64,7 +71,7 @@ $(document).ready(function () {
 
 
         //login array will hold user data
-        var userLogin = $.grep(snapshot, function (val) {
+        var userLogin = $.grep(snapshotVal, function (val) {
 
             //bring user information based on login info
             //compare against username and password
@@ -77,7 +84,7 @@ $(document).ready(function () {
             console.log("try again")
         }
     })
-    
+
 
 
 });
