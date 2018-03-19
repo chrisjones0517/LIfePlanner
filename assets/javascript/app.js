@@ -42,7 +42,7 @@ $(document).ready(function () {
                     xhr.setRequestHeader('Authorization', 'Bearer ' + 'KZasPLkGaB4qx+wuKxVDBoBHMO3iu+sTcYuhf9Et/1ueVH3efsEr3OEpWUXl24ukjrYWm8GTLn94+RbOE/FKKg==')
                 },
                 success: function (response) {
-                 //   console.log(response);
+                    //   console.log(response);
                     var myRoot = response.OccupationDetail[0];
                     var title = myRoot.OnetTitle;
                     console.log(title);
@@ -70,8 +70,8 @@ $(document).ready(function () {
                     console.log('US Median Per Capita Income: $29,829');
                     console.log(myRoot);
                     console.log(`Estimated current number of '${title}' jobs in ${stateName}: ${crntStateEmp}`); // Output to page
-                    
-                    console.log(`Projected annual openings for '${title}' jobs in ${stateName}: ${projectedAnnualOpeningsSt}`); 
+
+                    console.log(`Projected annual openings for '${title}' jobs in ${stateName}: ${projectedAnnualOpeningsSt}`);
                     console.log(`Estimated number of '${title}' jobs in the U.S.: ${projectedAnnualOpeningsUS}`)
                 },
                 error: function (request, status, errorThrown) {
@@ -79,9 +79,16 @@ $(document).ready(function () {
                 }
             });
         });
+        
+
+        var numbeoUrl = `http://anyorigin.com/go?url=https%3A//www.numbeo.com/api/indices%3Fapi_key%3D2iev2m2k4slcbo%26query%3D${cityStateZip}&callback=?`;
+
+        $.getJSON(numbeoUrl, function (data) {
+            console.log(data.contents);
+        });
 
 
-
+        
     });
 
 
@@ -136,8 +143,6 @@ $(document).ready(function () {
     });
 
 
-
-   
 
 });
 
