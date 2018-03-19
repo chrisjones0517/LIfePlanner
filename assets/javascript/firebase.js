@@ -58,7 +58,7 @@ $(document).ready(function () {
 
 
 
-    // user login
+    // user login index counter
     db.ref("users").on("value", function (res) {
         snapshot = res;
         snapshotVal = res.val();
@@ -75,7 +75,7 @@ $(document).ready(function () {
     })
 
 
-
+    // login 
     $("#compare").on("click", function () {
         var compareUser = $("#username1").val();
         var comparePass = $("#password1").val();
