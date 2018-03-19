@@ -28,7 +28,7 @@ $(document).ready(function () {
                 //  console.log(occTitle);
                 //  console.log(occCode);
             },
-            error: function(request,status,errorThrown) {
+            error: function (request, status, errorThrown) {
                 console.log('This is where the error will be output to the user.');
             }
         }).then(function () {
@@ -42,13 +42,19 @@ $(document).ready(function () {
                     xhr.setRequestHeader('Authorization', 'Bearer ' + 'KZasPLkGaB4qx+wuKxVDBoBHMO3iu+sTcYuhf9Et/1ueVH3efsEr3OEpWUXl24ukjrYWm8GTLn94+RbOE/FKKg==')
                 },
                 success: function (response) {
-                    console.log(response);
+                 //   console.log(response);
                     var myRoot = response.OccupationDetail[0];
                     var title = myRoot.OnetTitle;
                     console.log(title);
                     var localWages = myRoot.Wages.BLSAreaWagesList;
                     var natWages = myRoot.Wages.NationalWagesList;
                     console.log(localWages);
+                    var stateStats = myRoot.Projections.Projections[0];
+                    var nationalStats = myRoot.Projections.Projections[1];
+                    var crntStateEmp = stateStats.EstimatedEmployment;
+                    var projectedAnnualOpeningsSt = stateStats.ProjectedAnnualJobOpening;
+                    var projectedAnnualOpeningsUS = nationalStats.ProjectedAnnualJobOpening;
+                    var stateName = stateStats.StateName;
                     for (var i = 0; i < localWages.length; i++) {
                         if (localWages[i].RateType === 'Annual') {
                             console.log('City median income: ' + localWages[i].Median);
@@ -63,8 +69,12 @@ $(document).ready(function () {
                     }
                     console.log('US Median Per Capita Income: $29,829');
                     console.log(myRoot);
+                    console.log(`Estimated current number of '${title}' jobs in ${stateName}: ${crntStateEmp}`); // Output to page
+                    
+                    console.log(`Projected annual openings for '${title}' jobs in ${stateName}: ${projectedAnnualOpeningsSt}`); 
+                    console.log(`Estimated number of '${title}' jobs in the U.S.: ${projectedAnnualOpeningsUS}`)
                 },
-                error: function(request,status,errorThrown) {
+                error: function (request, status, errorThrown) {
                     console.log('This is where my error will go to be ouput to the user.');
                 }
             });
@@ -117,14 +127,17 @@ $(document).ready(function () {
         e.preventDefault();
         $.ajax({
             url: climateUrl,
-            data: {CITY:'houston,tx'},
+            data: { CITY: 'houston,tx' },
             method: 'GET',
             headers: { token: 'WWKoJVmRVKlQKXOsSHFiQZXozlzIBzJY' }
-        }).then(function(response) {
+        }).then(function (response) {
             console.log(response);
         });
     });
 
+
+
+   
 
 });
 
