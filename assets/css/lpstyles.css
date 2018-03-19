@@ -7682,8 +7682,8 @@ button.close {
     margin: 1px;
     text-indent: -999px;
     cursor: pointer;
-    background-color: #000\9;
-    background-color: rgba(0, 0, 0, 0);
+    /* background-color: #000\9; */
+    /* background-color: rgba(0, 0, 0, 0); */
     border: 1px solid #fff;
     border-radius: 10px
 }
@@ -10424,7 +10424,7 @@ button.close {
     content: "\f23a"
 }
 
-@charset "UTF-8";
+
 /*!
 Animate.css - http://daneden.me/animate
 Licensed under the MIT license - http://opensource.org/licenses/MIT
@@ -16077,20 +16077,6 @@ h6,
     animation-delay: 1.4s;
 }
 
-@keyframes Snow {
-    ` 0% {
-        transform: translateY(0px);
-        opacity: 0;
-    }
-    50% {
-        transform: translateY(25px);
-        opacity: 1;
-    }
-    100% {
-        transform: translateY(45px);
-        opacity: 0.3;
-    }
-}
 
 .ng-pageslide {
     background: rgba(250, 250, 250, 0.95);
