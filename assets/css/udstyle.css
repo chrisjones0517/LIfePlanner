@@ -14,15 +14,29 @@ body {
 }
 
 .box {
-    border: 1px solid #555;
+    border: 2px solid #28a745;;
     box-shadow: 5px 5px 10px #000;
 }
 
 .boxheader {
     background: #999; 
-    border-bottom: 1px solid #555;
+    border-bottom: 2px solid #28a745;;
 }
 
 .boxbody {
-    background: #eee;
+    background: #fff;
+}
+
+.spacer {
+    height: 75px;
+}
+.currentstat {
+    position: fixed;
+    left: 0px;
+    bottom: 0px;
+    height: 50px;
+    width: 100%;
+    background: #999;
+    border-top: 4px solid #28a745;;
+    border-bottom: 4px solid #28a745;;
 }
