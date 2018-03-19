@@ -3,7 +3,7 @@ body {
 }
 .container {
     background: rgba(255, 255, 255, 0.301);
-    box-shadow: 5px 5px 10px #888;
+    box-shadow: 0px 0px 20px #555;
 }
 
 .searchbox {
@@ -11,4 +11,18 @@ body {
     background: #888;
     padding: 10px 0;
     box-shadow: 5px 5px 10px #000;
+}
+
+.box {
+    border: 1px solid #555;
+    box-shadow: 5px 5px 10px #000;
+}
+
+.boxheader {
+    background: #999; 
+    border-bottom: 1px solid #555;
+}
+
+.boxbody {
+    background: #eee;
 }
