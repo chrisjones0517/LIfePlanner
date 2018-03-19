@@ -8,7 +8,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
         crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" integrity="sha384-3AB7yXWz4OeoZcPbieVW64vVXEwADiYyAEhwilzWsLw+9FgqpyjjStpPnpBO8o8S" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" integrity="sha384-3AB7yXWz4OeoZcPbieVW64vVXEwADiYyAEhwilzWsLw+9FgqpyjjStpPnpBO8o8S"
+        crossorigin="anonymous">
     <link rel="stylesheet" href="assets/css/udstyle.css">
     <title>Life Planner</title>
 </head>
@@ -16,19 +17,33 @@
 <body>
     <header>
         <div class="navbar bg-dark">
-            <p>
+            <p class="mt-1">
                 <span class="h2 text-light">Life</span>
                 <span class="h2 text-success">Planner</span>
             </p>
             <div class="usergreeting float-right text-light">
-                <span class = "lead">Welcome </span><span class="lead username">User </span><i class="h3 fas fa-user-circle"></i>
+                <span class="lead">Welcome </span>
+                <span class="lead username">User </span>
+                <i class="h3 fas fa-user-circle"></i>
             </div>
         </div>
-        
+
     </header>
-    <div class="container">
+    <div class="container mt-3 pt-3">
 
         <div class="row mt-3">
+
+            <div class="col-xs-12 col-sm-12 mb-3">
+                <div class = "searchbox">
+                    <label for="pro">What is your Profession: </label>
+                    <input id="pro" type="text">
+                    <label for="city">What city: </label>
+                    <input id="city" type="text">
+                    <button type="submit">Search</button>
+                </div>
+
+            </div>
+
             <div class="col-md-4">
                 <div class="card">
                     <div class="card-header bg-warning">
@@ -61,7 +76,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-header">
