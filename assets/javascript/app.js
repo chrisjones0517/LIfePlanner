@@ -5,25 +5,203 @@ $(document).ready(function () {
     $('#submit').on('click', function (e) {
         e.preventDefault();
         $("#data").empty();
-        var query = $('#search').val();
+        var occupation = $('#search').val();
+        var cityStateZip = $('#cityStateZip').val();
+        // $('#city').val();
+        var occCode;
+
+        var queryUrl = `https://api.careeronestop.org/v1/occupation/NzX2rM28B8dZLR3/${occupation}/y/0/10`;
 
 
+        $.ajax({
+            url: queryUrl,
+            dataType: 'json',
+            type: 'GET',
+            beforeSend: function (xhr) {
 
-        var url = "https://api.datausa.io/api/?show=geo&sumlevel=state&required=avg_wage";
+                xhr.setRequestHeader('Authorization', 'Bearer ' + 'KZasPLkGaB4qx+wuKxVDBoBHMO3iu+sTcYuhf9Et/1ueVH3efsEr3OEpWUXl24ukjrYWm8GTLn94+RbOE/FKKg==')
+            },
+            success: function (response) {
+                var occTitle = response.OccupationList[0].OnetTitle;
+                occCode = response.OccupationList[0].OnetCode;
+                //   console.log(response.OccupationList)
+                //  console.log(occTitle);
+                //  console.log(occCode);
+            },
+            error: function (request, status, errorThrown) {
+                console.log('This is where the error will be output to the user.');
+            }
+        }).then(function () {
 
-        d3.json(url, function (json) {
+            $.ajax({
+                url: `https://api.careeronestop.org/v1/occupation/NzX2rM28B8dZLR3/${occCode}/${cityStateZip}?training=false&interest=false&videos=false&tasks=false&dwas=false&wages=true&alternateOnetTitles=false&projectedEmployment=true&ooh=false&stateLMILinks=false&relatedOnetTitles=false&skills=false&knowledge=false&ability=false&trainingPrograms=false`,
+                dataType: 'json',
+                type: 'GET',
+                beforeSend: function (xhr) {
 
-            var data = json.data.map(function (data) {
-                return json.headers.reduce(function (obj, header, i) {
-                    obj[header] = data[i];
-                    return obj;
-                    console.log(obj);
-                }, {});
+                    xhr.setRequestHeader('Authorization', 'Bearer ' + 'KZasPLkGaB4qx+wuKxVDBoBHMO3iu+sTcYuhf9Et/1ueVH3efsEr3OEpWUXl24ukjrYWm8GTLn94+RbOE/FKKg==')
+                },
+                success: function (response) {
+                    //   console.log(response);
+                    var myRoot = response.OccupationDetail[0];
+                    var title = myRoot.OnetTitle;
+                    console.log(title);
+                    var localWages = myRoot.Wages.BLSAreaWagesList;
+                    var natWages = myRoot.Wages.NationalWagesList;
+                    console.log(localWages);
+                    var stateStats = myRoot.Projections.Projections[0];
+                    var nationalStats = myRoot.Projections.Projections[1];
+                    var crntStateEmp = stateStats.EstimatedEmployment;
+                    var projectedAnnualOpeningsSt = stateStats.ProjectedAnnualJobOpening;
+                    var projectedAnnualOpeningsUS = nationalStats.ProjectedAnnualJobOpening;
+                    var stateName = stateStats.StateName;
+                    for (var i = 0; i < localWages.length; i++) {
+                        if (localWages[i].RateType === 'Annual') {
+                            console.log('City median income: ' + localWages[i].Median);
+                            //  $('#someHTMLid').text(localWages[i].Median);
+                        }
+                    }
+                    for (var i = 0; i < natWages.length; i++) {
+                        if (natWages[i].RateType === 'Annual') {
+                            console.log('National median income: ' + natWages[i].Median);
+                            //   $('#someHTMLid').text(natWages[i].Median);
+                        }
+                    }
+                    console.log('US Median Per Capita Income: $29,829');
+                    console.log(myRoot);
+                    console.log(`Estimated current number of '${title}' jobs in ${stateName}: ${crntStateEmp}`); // Output to page
+
+                    console.log(`Projected annual openings for '${title}' jobs in ${stateName}: ${projectedAnnualOpeningsSt}`);
+                    console.log(`Estimated number of '${title}' jobs in the U.S.: ${projectedAnnualOpeningsUS}`)
+                },
+                error: function (request, status, errorThrown) {
+                    console.log('This is where my error will go to be ouput to the user.');
+                }
             });
+        });
+        
 
+        var numbeoUrl = `http://anyorigin.com/go?url=https%3A//www.numbeo.com/api/indices%3Fapi_key%3D2iev2m2k4slcbo%26query%3D${cityStateZip}&callback=?`;
+
+        $.getJSON(numbeoUrl, function (data) {
+            console.log(data.contents);
         });
 
-    });
-  
 
+        
+    });
+
+
+
+    $('#weather').on('click', function (e) {
+        e.preventDefault();
+        console.log("wasclicked")
+        WaetherCall()
+    })
+    var units = 'imperial';
+    var inputWeather = "Houston"
+    //weather function
+    function WaetherCall() {
+        //will take input from search based on lat and long
+        //$("#search-input").val().trim() ;
+       
+        var queryURL = "http://api.openweathermap.org/data/2.5/forecast?q=" + inputWeather + ",us&APPID=eeda0b646e014b160ccbce009bb655ef";
+        $.ajax({
+            url: queryURL,
+            method: "GET",
+            data: {
+                cnt: 16,
+                units: units
+            }
+
+        }).then(function (data) {
+            console.log(data)
+            lat = data.city.coord.lat;
+            lon = data.city.coord.lon;
+            city = data.city.name;
+            cityPop = data.city.population;
+            highF = Math.round(data.list[0].main.temp_max) + '°';
+            lowF = Math.round(data.list[0].main.temp_min) + '°';
+            description = data.list[0].weather[0].description;
+            console.log(lat, lon)
+            console.log(city, cityPop)
+            console.log(lowF, highF, description)
+            //appending info
+            $('#city').html('city: ' + city)
+            $('#cityPop').html('cityPop: ' + cityPop);
+            $('#description').html('description: ' + description)
+            $('#highF').html('highF: ' + highF);
+            $('#lowF').html('lowF: ' + lowF);
+            //based on weather lat and lon grabbing time information
+            var times_Stamp = (Math.round((new Date().getTime()) / 1000)).toString();
+            $.ajax({
+                url: "https://maps.googleapis.com/maps/api/timezone/json?location=" + lat + "," + lon + "&timestamp=" + times_Stamp,
+                type: "POST",
+            }).done(function (response) {
+                var Cur_Date = new Date();
+                var UTC = Cur_Date.getTime() + (Cur_Date.getTimezoneOffset() * 60000);
+                var Loc_Date = new Date(UTC + (1000 * response.rawOffset) + (1000 * response.dstOffset));
+                $("#timeOfLocation").html('Current Time : ' + Loc_Date);
+                getHist()
+            });
+        });
+
+
+    }
+
+    //    $('#climate').on('click', function (e) {
+    function getHist() {
+        // e.preventDefault();
+        // url = "https://www.ncdc.noaa.gov/cdo-web/api/v2/data?datasetid=GSOM&locationid=" + city + "&datatypeid=TMAX&startdate=2018-01-01&enddate=2018-04-01&units=standard"
+        //getting city information from first weather api
+        url = "https://www.ncdc.noaa.gov/cdo-web/api/v2/search?limit=50&offset=1&resulttype=CITY&text=" + city + "&datasetid=GSOM&startdate=2018-01-01&enddate=2018-02-01&sortfield=score&sortorder=desc"
+        var tokenFromNoaa = "WWKoJVmRVKlQKXOsSHFiQZXozlzIBzJY";
+        $.ajax({
+<<<<<<< HEAD
+            url: climateUrl,
+            data: { CITY: 'houston,tx' },
+            method: 'GET',
+            headers: { token: 'WWKoJVmRVKlQKXOsSHFiQZXozlzIBzJY' }
+        }).then(function (response) {
+            console.log(response);
+        });
+    });
+
+
+
+=======
+            url: url,
+            headers: {
+                token: tokenFromNoaa
+            },  
+            success: function (data) {
+                //console.log(data.results[0].station)
+                console.log(data);
+                cityToPass = data.results[0].id;
+                console.log(cityToPass)
+
+                //console.log(data.results[0].date)
+            }
+        })
+        //passing city id after pact
+            .then(function (data) {
+                url = "https://www.ncdc.noaa.gov/cdo-web/api/v2/data?datasetid=GSOM&locationid=" + cityToPass + "&datatypeid=TAVG&startdate=2018-01-01&enddate=2018-04-01&units=standard"
+                $.ajax({
+                    url: url,
+                    headers: {
+                        token: tokenFromNoaa
+                    },
+                }).then(function (data) {
+                     console.log(data);
+                     newMaxTemp = (data.results[0].value);
+                     $('#newMaxTemp').html('lowF: ' + newMaxTemp);
+                    // var convertWe = ((highF/10)*9/5+32)
+                    // console.log(convertWe)
+                });
+
+            })
+        //});
+    }
+>>>>>>> 8d55569fcb8d445cb333be4a9d836745757f3802
 });
+

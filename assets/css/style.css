@@ -1,3 +1,9 @@
+<<<<<<< HEAD
+#payscale {
+    position: absolute;
+    bottom: 100;
+    border: 5px solid red;
+=======
 #visualization {
     height: 50vw;
 }
@@ -94,4 +100,5 @@ h2.create-txt-btn:hover {
     100% {
         opacity: 1;
     }
+>>>>>>> master
 }
