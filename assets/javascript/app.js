@@ -139,7 +139,6 @@ $(document).ready(function () {
             });
         });
 
-
     }
 
     //    $('#climate').on('click', function (e) {
@@ -178,7 +177,6 @@ $(document).ready(function () {
                     // var convertWe = ((highF/10)*9/5+32)
                     // console.log(convertWe)
                 });
-
             })
         //});
     }
@@ -186,12 +184,12 @@ $(document).ready(function () {
     var input = document.getElementById('autocomplete');
     var search = new google.maps.places.Autocomplete(input, { types: ['(regions)'] });
     google.maps.event.addListener(search, 'place_changed', function () {
-    
+
     });
     google.maps.event.addListener(search, 'place_changed', function (event) {
         var input = document.getElementById('autocomplete').value;
         var geocodeURL = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + input + '&key=AIzaSyC75PI0JP6R87nUSYn4R8iySVG0WGUZqMQ';
-    console.log(input)
+        console.log(input)
     });
 });
 

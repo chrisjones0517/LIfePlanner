@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" integrity="sha384-3AB7yXWz4OeoZcPbieVW64vVXEwADiYyAEhwilzWsLw+9FgqpyjjStpPnpBO8o8S"
         crossorigin="anonymous">
     <link rel="stylesheet" href="assets/css/udstyle.css">
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=places&language=en&key=AIzaSyC75PI0JP6R87nUSYn4R8iySVG0WGUZqMQ"></script>
     <title>Life Planner</title>
 </head>
 
@@ -46,8 +47,11 @@
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="inputGroup-sizing-default">City</span>
+
                         </div>
                         <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                        <input class="form-control input-lg" type="text" id="autocomplete" placeholder="Show me the weather in city..." onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search for City here'" />
+
                     </div>
 
                     <button type="button" class="btn btn-outline-light btn-lg">Search Career</button>
@@ -140,6 +144,7 @@
         crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.js"></script>
     <script src="assets/javascript/data.js"></script>
+    <script src="assets/javascript/app.js"></script>
     
 </body>
 
