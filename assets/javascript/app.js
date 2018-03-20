@@ -82,17 +82,9 @@ $(document).ready(function () {
                 }
             });
         });
-<<<<<<< HEAD
-
-=======
->>>>>>> e6edaf58b03fac01a67a77baf6b3b479475eae4e
 
 
 
-<<<<<<< HEAD
-
-=======
->>>>>>> e6edaf58b03fac01a67a77baf6b3b479475eae4e
     });
 
 
@@ -176,12 +168,12 @@ $(document).ready(function () {
 <<<<<<< HEAD
             //passing city id after pact
 =======
-<<<<<<< HEAD
+
             //passing city id after pact
-=======
+
             //passing city id after pact 
->>>>>>> e6edaf58b03fac01a67a77baf6b3b479475eae4e
->>>>>>> 0b8fd89fc305222422aa08ea35c1bc92319d21c5
+
+>>>>>>> master
             .then(function (data) {
                 url = "https://www.ncdc.noaa.gov/cdo-web/api/v2/data?datasetid=GSOM&locationid=" + cityToPass + "&datatypeid=TMAX&startdate=2018-01-01&enddate=2018-04-01&units=standard"
                 $.ajax({
@@ -195,22 +187,16 @@ $(document).ready(function () {
                     $('#newMaxTemp').html('lowF: ' + newMaxTemp);
                     // var convertWe = ((highF/10)*9/5+32)
                     // console.log(convertWe)
-
-                    let myMaxTempPerMonth = new Set();
-                    for (i = 0; i < data.results.length; i++) {
-                        myMaxTempPerMonth = myMaxTempPerMonth.add(moment(data.results[i].date).format('MMM YYYY'));
-                    }
-                    console.log(myMaxTempPerMonth);
-
-
                 });
             })
         //});
     }
 <<<<<<< HEAD
-    ///google auto city
 =======
-<<<<<<< HEAD
+
+    ///google auto city
+
+>>>>>>> master
 
     function formatDollar(num) {
         var p = num.toFixed().split(".");
@@ -218,9 +204,7 @@ $(document).ready(function () {
             return  num=="-" ? acc : num + (i && !(i % 3) ? "," : "") + acc;
         }, "");
     }
-=======
     ///google auto city 
->>>>>>> 0b8fd89fc305222422aa08ea35c1bc92319d21c5
     var input = document.getElementById('autocomplete');
     var search = new google.maps.places.Autocomplete(input, { types: ['(regions)'] });
     google.maps.event.addListener(search, 'place_changed', function () {
@@ -231,6 +215,9 @@ $(document).ready(function () {
         var geocodeURL = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + input + '&key=AIzaSyC75PI0JP6R87nUSYn4R8iySVG0WGUZqMQ';
         console.log(input)
     });
->>>>>>> e6edaf58b03fac01a67a77baf6b3b479475eae4e
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
 });
 
