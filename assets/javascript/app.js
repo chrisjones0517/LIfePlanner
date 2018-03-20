@@ -12,7 +12,7 @@ $(document).ready(function () {
 
         var queryUrl = `https://api.careeronestop.org/v1/occupation/NzX2rM28B8dZLR3/${occupation}/y/0/10`;
 
-        
+
         $.ajax({
             url: queryUrl,
             dataType: 'json',
@@ -29,7 +29,7 @@ $(document).ready(function () {
                 //  console.log(occCode);
             }
         }).then(function () {
-            
+
             $.ajax({
                 url: `https://api.careeronestop.org/v1/occupation/NzX2rM28B8dZLR3/${occCode}/${cityStateZip}?training=false&interest=false&videos=false&tasks=false&dwas=false&wages=true&alternateOnetTitles=false&projectedEmployment=true&ooh=false&stateLMILinks=false&relatedOnetTitles=false&skills=false&knowledge=false&ability=false&trainingPrograms=false`,
                 dataType: 'json',
@@ -49,13 +49,13 @@ $(document).ready(function () {
                     for (var i = 0; i < localWages.length; i++) {
                         if (localWages[i].RateType === 'Annual') {
                             console.log('City median income: ' + localWages[i].Median);
-                          //  $('#someHTMLid').text(localWages[i].Median);
+                            //  $('#someHTMLid').text(localWages[i].Median);
                         }
                     }
                     for (var i = 0; i < natWages.length; i++) {
                         if (natWages[i].RateType === 'Annual') {
                             console.log('National median income: ' + natWages[i].Median);
-                         //   $('#someHTMLid').text(natWages[i].Median);
+                            //   $('#someHTMLid').text(natWages[i].Median);
                         }
                     }
                     console.log(myRoot);
@@ -78,11 +78,12 @@ $(document).ready(function () {
 
     //for pulling correct temp
     var units = 'imperial';
+    var inputWeather = "Houston"
     //weather function
     function WaetherCall() {
         //will take input from search based on lat and long
-        var inputWeather = "New York"   //$("#search-input").val().trim() ;
-        //api.openweathermap.org/data/2.5/forecast?lat=35&lon=139; getting info from Mohammed lt return 
+        //$("#search-input").val().trim() ;
+       
         var queryURL = "http://api.openweathermap.org/data/2.5/forecast?q=" + inputWeather + ",us&APPID=eeda0b646e014b160ccbce009bb655ef";
         $.ajax({
             url: queryURL,
@@ -121,11 +122,51 @@ $(document).ready(function () {
                 var UTC = Cur_Date.getTime() + (Cur_Date.getTimezoneOffset() * 60000);
                 var Loc_Date = new Date(UTC + (1000 * response.rawOffset) + (1000 * response.dstOffset));
                 $("#timeOfLocation").html('Current Time : ' + Loc_Date);
-
+                getHist()
             });
         });
 
     }
 
+    //    $('#climate').on('click', function (e) {
+    function getHist() {
+        // e.preventDefault();
+        // url = "https://www.ncdc.noaa.gov/cdo-web/api/v2/data?datasetid=GSOM&locationid=" + city + "&datatypeid=TMAX&startdate=2018-01-01&enddate=2018-04-01&units=standard"
+        //getting city information from first weather api
+        url = "https://www.ncdc.noaa.gov/cdo-web/api/v2/search?limit=50&offset=1&resulttype=CITY&text=" + city + "&datasetid=GSOM&startdate=2018-01-01&enddate=2018-02-01&sortfield=score&sortorder=desc"
+        var tokenFromNoaa = "WWKoJVmRVKlQKXOsSHFiQZXozlzIBzJY";
+        $.ajax({
+            url: url,
+            headers: {
+                token: tokenFromNoaa
+            },  
+            success: function (data) {
+                //console.log(data.results[0].station)
+                console.log(data);
+                cityToPass = data.results[0].id;
+                console.log(cityToPass)
+
+                //console.log(data.results[0].date)
+            }
+        })
+        //passing city id after pact
+            .then(function (data) {
+                url = "https://www.ncdc.noaa.gov/cdo-web/api/v2/data?datasetid=GSOM&locationid=" + cityToPass + "&datatypeid=TAVG&startdate=2018-01-01&enddate=2018-04-01&units=standard"
+                $.ajax({
+                    url: url,
+                    headers: {
+                        token: tokenFromNoaa
+                    },
+                }).then(function (data) {
+                     console.log(data);
+                     newMaxTemp = (data.results[0].value);
+                     $('#newMaxTemp').html('lowF: ' + newMaxTemp);
+                    // var convertWe = ((highF/10)*9/5+32)
+                    // console.log(convertWe)
+                });
+
+            })
+        //});
+    }
 
 });
