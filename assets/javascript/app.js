@@ -9,7 +9,7 @@ $(document).ready(function () {
         var occupation = $('#occupation').val();
         var cityStateZip = $('#cityStateZip').val();
         $('.occupation').text(occupation);
-        $('#cityStateZip').text(cityStateZip);
+        $('#location').text(cityStateZip);
         // $('#city').val();
         var occCode;
 
