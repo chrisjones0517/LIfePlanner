@@ -82,16 +82,17 @@ $(document).ready(function () {
                 }
             });
         });
+<<<<<<< HEAD
 
-
-        var numbeoUrl = `http://anyorigin.com/go?url=https%3A//www.numbeo.com/api/indices%3Fapi_key%3D2iev2m2k4slcbo%26query%3D${cityStateZip}&callback=?`;
-
-        $.getJSON(numbeoUrl, function (data) {
-            console.log(data.contents);
-        });
+=======
+>>>>>>> e6edaf58b03fac01a67a77baf6b3b479475eae4e
 
 
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> e6edaf58b03fac01a67a77baf6b3b479475eae4e
     });
 
 
@@ -102,7 +103,7 @@ $(document).ready(function () {
         WaetherCall()
     })
     var units = 'imperial';
-    var inputWeather = "Houston"
+    var inputWeather = "Dallas, TX, USA"
     //weather function
     function WaetherCall() {
         //will take input from search based on lat and long
@@ -149,7 +150,6 @@ $(document).ready(function () {
             });
         });
 
-
     }
 
     //    $('#climate').on('click', function (e) {
@@ -173,9 +173,13 @@ $(document).ready(function () {
                 //console.log(data.results[0].date)
             }
         })
+<<<<<<< HEAD
             //passing city id after pact
+=======
+            //passing city id after pact 
+>>>>>>> e6edaf58b03fac01a67a77baf6b3b479475eae4e
             .then(function (data) {
-                url = "https://www.ncdc.noaa.gov/cdo-web/api/v2/data?datasetid=GSOM&locationid=" + cityToPass + "&datatypeid=TAVG&startdate=2018-01-01&enddate=2018-04-01&units=standard"
+                url = "https://www.ncdc.noaa.gov/cdo-web/api/v2/data?datasetid=GSOM&locationid=" + cityToPass + "&datatypeid=TMAX&startdate=2018-01-01&enddate=2018-04-01&units=standard"
                 $.ajax({
                     url: url,
                     headers: {
@@ -188,10 +192,10 @@ $(document).ready(function () {
                     // var convertWe = ((highF/10)*9/5+32)
                     // console.log(convertWe)
                 });
-
             })
         //});
     }
+<<<<<<< HEAD
 
     function formatDollar(num) {
         var p = num.toFixed().split(".");
@@ -199,5 +203,18 @@ $(document).ready(function () {
             return  num=="-" ? acc : num + (i && !(i % 3) ? "," : "") + acc;
         }, "");
     }
+=======
+    ///google auto city 
+    var input = document.getElementById('autocomplete');
+    var search = new google.maps.places.Autocomplete(input, { types: ['(regions)'] });
+    google.maps.event.addListener(search, 'place_changed', function () {
+
+    });
+    google.maps.event.addListener(search, 'place_changed', function (event) {
+        var input = document.getElementById('autocomplete').value;
+        var geocodeURL = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + input + '&key=AIzaSyC75PI0JP6R87nUSYn4R8iySVG0WGUZqMQ';
+        console.log(input)
+    });
+>>>>>>> e6edaf58b03fac01a67a77baf6b3b479475eae4e
 });
 
