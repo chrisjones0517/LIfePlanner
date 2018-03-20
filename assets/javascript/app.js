@@ -9,7 +9,7 @@ $(document).ready(function () {
         var occupation = $('#occupation').val();
         var cityStateZip = $('#cityStateZip').val();
         $('.occupation').text(occupation);
-        $('#location').text(cityStateZip);
+        $('.location').text(cityStateZip);
         // $('#city').val();
         var occCode;
 
@@ -54,6 +54,8 @@ $(document).ready(function () {
                     console.log(myRoot);
                     var stateStats = myRoot.Projections.Projections[0];
                     var nationalStats = myRoot.Projections.Projections[1];
+                    console.log(nationalStats);
+                    var crntUSemp = nationalStats.EstimatedEmployment;
                     var crntStateEmp = stateStats.EstimatedEmployment;
                     var projectedAnnualOpeningsSt = stateStats.ProjectedAnnualJobOpening;
                     var projectedAnnualOpeningsUS = nationalStats.ProjectedAnnualJobOpening;
@@ -72,10 +74,14 @@ $(document).ready(function () {
                     }
                     console.log('US Median Per Capita Income: $29,829');
                     console.log(myRoot);
-                    console.log(`Estimated current number of '${title}' jobs in ${stateName}: ${crntStateEmp}`); // Output to page
-
-                    console.log(`Projected annual openings for '${title}' jobs in ${stateName}: ${projectedAnnualOpeningsSt}`);
-                    console.log(`Estimated number of '${title}' jobs in the U.S.: ${projectedAnnualOpeningsUS}`)
+                    
+                    $('#crntUSemp').text(crntUSemp);
+                    $('#crntStateEmp').text(crntStateEmp);
+                    $('#projectedAnnualOpeningsUS').text(projectedAnnualOpeningsUS);
+                    $('#projectedAnnualOpeningsSt').text(projectedAnnualOpeningsSt);
+                    
+                    
+                    
                 },
                 error: function (request, status, errorThrown) {
                     console.log('This is where my error will go to be ouput to the user.');
@@ -165,15 +171,7 @@ $(document).ready(function () {
                 //console.log(data.results[0].date)
             }
         })
-<<<<<<< HEAD
             //passing city id after pact
-=======
-
-            //passing city id after pact
-
-            //passing city id after pact 
-
->>>>>>> master
             .then(function (data) {
                 url = "https://www.ncdc.noaa.gov/cdo-web/api/v2/data?datasetid=GSOM&locationid=" + cityToPass + "&datatypeid=TMAX&startdate=2018-01-01&enddate=2018-04-01&units=standard"
                 $.ajax({
@@ -191,12 +189,9 @@ $(document).ready(function () {
             })
         //});
     }
-<<<<<<< HEAD
-=======
 
     ///google auto city
 
->>>>>>> master
 
     function formatDollar(num) {
         var p = num.toFixed().split(".");
@@ -215,9 +210,5 @@ $(document).ready(function () {
         var geocodeURL = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + input + '&key=AIzaSyC75PI0JP6R87nUSYn4R8iySVG0WGUZqMQ';
         console.log(input)
     });
-<<<<<<< HEAD
-=======
-
->>>>>>> master
 });
 
