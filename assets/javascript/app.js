@@ -3,10 +3,13 @@ $(document).ready(function () {
 
 
     $('#submit').on('click', function (e) {
+
         e.preventDefault();
         $("#data").empty();
-        var occupation = $('#search').val();
+        var occupation = $('#occupation').val();
         var cityStateZip = $('#cityStateZip').val();
+        $('.occupation').text(occupation);
+        $('#location').text(cityStateZip);
         // $('#city').val();
         var occCode;
 
@@ -24,31 +27,31 @@ $(document).ready(function () {
             success: function (response) {
                 var occTitle = response.OccupationList[0].OnetTitle;
                 occCode = response.OccupationList[0].OnetCode;
-                //   console.log(response.OccupationList)
-                //  console.log(occTitle);
-                //  console.log(occCode);
+                console.log(response.OccupationList)
+                console.log(occTitle);
+                console.log(occCode);
             },
             error: function (request, status, errorThrown) {
                 console.log('This is where the error will be output to the user.');
             }
         }).then(function () {
-
+            
             $.ajax({
                 url: `https://api.careeronestop.org/v1/occupation/NzX2rM28B8dZLR3/${occCode}/${cityStateZip}?training=false&interest=false&videos=false&tasks=false&dwas=false&wages=true&alternateOnetTitles=false&projectedEmployment=true&ooh=false&stateLMILinks=false&relatedOnetTitles=false&skills=false&knowledge=false&ability=false&trainingPrograms=false`,
                 dataType: 'json',
                 type: 'GET',
                 beforeSend: function (xhr) {
 
-                    xhr.setRequestHeader('Authorization', 'Bearer ' + 'KZasPLkGaB4qx+wuKxVDBoBHMO3iu+sTcYuhf9Et/1ueVH3efsEr3OEpWUXl24ukjrYWm8GTLn94+RbOE/FKKg==')
+                    xhr.setRequestHeader('Authorization', 'Bearer ' + 'KZasPLkGaB4qx+wuKxVDBoBHMO3iu+sTcYuhf9Et/1ueVH3efsEr3OEpWUXl24ukjrYWm8GTLn94+RbOE/FKKg==');
                 },
                 success: function (response) {
-                    //   console.log(response);
+                    console.log(response);
                     var myRoot = response.OccupationDetail[0];
                     var title = myRoot.OnetTitle;
                     console.log(title);
                     var localWages = myRoot.Wages.BLSAreaWagesList;
                     var natWages = myRoot.Wages.NationalWagesList;
-                    console.log(localWages);
+                    console.log(myRoot);
                     var stateStats = myRoot.Projections.Projections[0];
                     var nationalStats = myRoot.Projections.Projections[1];
                     var crntStateEmp = stateStats.EstimatedEmployment;
@@ -58,13 +61,13 @@ $(document).ready(function () {
                     for (var i = 0; i < localWages.length; i++) {
                         if (localWages[i].RateType === 'Annual') {
                             console.log('City median income: ' + localWages[i].Median);
-                            //  $('#someHTMLid').text(localWages[i].Median);
+                            $('#medianCityWages').text(formatDollar(parseInt(localWages[i].Median)));
                         }
                     }
                     for (var i = 0; i < natWages.length; i++) {
                         if (natWages[i].RateType === 'Annual') {
                             console.log('National median income: ' + natWages[i].Median);
-                            //   $('#someHTMLid').text(natWages[i].Median);
+                               $('#USwages').text(formatDollar(parseInt(natWages[i].Median)));
                         }
                     }
                     console.log('US Median Per Capita Income: $29,829');
@@ -79,9 +82,17 @@ $(document).ready(function () {
                 }
             });
         });
+<<<<<<< HEAD
+
+=======
+>>>>>>> e6edaf58b03fac01a67a77baf6b3b479475eae4e
 
 
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> e6edaf58b03fac01a67a77baf6b3b479475eae4e
     });
 
 
@@ -139,7 +150,6 @@ $(document).ready(function () {
             });
         });
 
-
     }
 
     //    $('#climate').on('click', function (e) {
@@ -163,7 +173,15 @@ $(document).ready(function () {
                 //console.log(data.results[0].date)
             }
         })
+<<<<<<< HEAD
             //passing city id after pact
+=======
+<<<<<<< HEAD
+            //passing city id after pact
+=======
+            //passing city id after pact 
+>>>>>>> e6edaf58b03fac01a67a77baf6b3b479475eae4e
+>>>>>>> 0b8fd89fc305222422aa08ea35c1bc92319d21c5
             .then(function (data) {
                 url = "https://www.ncdc.noaa.gov/cdo-web/api/v2/data?datasetid=GSOM&locationid=" + cityToPass + "&datatypeid=TMAX&startdate=2018-01-01&enddate=2018-04-01&units=standard"
                 $.ajax({
@@ -186,11 +204,23 @@ $(document).ready(function () {
 
 
                 });
-
             })
         //});
     }
+<<<<<<< HEAD
     ///google auto city
+=======
+<<<<<<< HEAD
+
+    function formatDollar(num) {
+        var p = num.toFixed().split(".");
+        return "$" + p[0].split("").reverse().reduce(function(acc, num, i, orig) {
+            return  num=="-" ? acc : num + (i && !(i % 3) ? "," : "") + acc;
+        }, "");
+    }
+=======
+    ///google auto city 
+>>>>>>> 0b8fd89fc305222422aa08ea35c1bc92319d21c5
     var input = document.getElementById('autocomplete');
     var search = new google.maps.places.Autocomplete(input, { types: ['(regions)'] });
     google.maps.event.addListener(search, 'place_changed', function () {
@@ -199,7 +229,8 @@ $(document).ready(function () {
     google.maps.event.addListener(search, 'place_changed', function (event) {
         var input = document.getElementById('autocomplete').value;
         var geocodeURL = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + input + '&key=AIzaSyC75PI0JP6R87nUSYn4R8iySVG0WGUZqMQ';
-    console.log(input)
+        console.log(input)
     });
+>>>>>>> e6edaf58b03fac01a67a77baf6b3b479475eae4e
 });
 
