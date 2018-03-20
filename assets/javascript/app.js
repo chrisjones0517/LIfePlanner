@@ -27,6 +27,9 @@ $(document).ready(function () {
                 //   console.log(response.OccupationList)
                 //  console.log(occTitle);
                 //  console.log(occCode);
+            },
+            error: function (request, status, errorThrown) {
+                console.log('This is where the error will be output to the user.');
             }
         }).then(function () {
 
@@ -39,13 +42,19 @@ $(document).ready(function () {
                     xhr.setRequestHeader('Authorization', 'Bearer ' + 'KZasPLkGaB4qx+wuKxVDBoBHMO3iu+sTcYuhf9Et/1ueVH3efsEr3OEpWUXl24ukjrYWm8GTLn94+RbOE/FKKg==')
                 },
                 success: function (response) {
-                    console.log(response);
+                 //   console.log(response);
                     var myRoot = response.OccupationDetail[0];
                     var title = myRoot.OnetTitle;
                     console.log(title);
                     var localWages = myRoot.Wages.BLSAreaWagesList;
                     var natWages = myRoot.Wages.NationalWagesList;
                     console.log(localWages);
+                    var stateStats = myRoot.Projections.Projections[0];
+                    var nationalStats = myRoot.Projections.Projections[1];
+                    var crntStateEmp = stateStats.EstimatedEmployment;
+                    var projectedAnnualOpeningsSt = stateStats.ProjectedAnnualJobOpening;
+                    var projectedAnnualOpeningsUS = nationalStats.ProjectedAnnualJobOpening;
+                    var stateName = stateStats.StateName;
                     for (var i = 0; i < localWages.length; i++) {
                         if (localWages[i].RateType === 'Annual') {
                             console.log('City median income: ' + localWages[i].Median);
@@ -58,7 +67,15 @@ $(document).ready(function () {
                             //   $('#someHTMLid').text(natWages[i].Median);
                         }
                     }
+                    console.log('US Median Per Capita Income: $29,829');
                     console.log(myRoot);
+                    console.log(`Estimated current number of '${title}' jobs in ${stateName}: ${crntStateEmp}`); // Output to page
+                    
+                    console.log(`Projected annual openings for '${title}' jobs in ${stateName}: ${projectedAnnualOpeningsSt}`); 
+                    console.log(`Estimated number of '${title}' jobs in the U.S.: ${projectedAnnualOpeningsUS}`)
+                },
+                error: function (request, status, errorThrown) {
+                    console.log('This is where my error will go to be ouput to the user.');
                 }
             });
         });
@@ -74,9 +91,6 @@ $(document).ready(function () {
         console.log("wasclicked")
         WaetherCall()
     })
-
-
-    //for pulling correct temp
     var units = 'imperial';
     var inputWeather = "Houston"
     //weather function
@@ -92,8 +106,8 @@ $(document).ready(function () {
                 cnt: 16,
                 units: units
             }
+
         }).then(function (data) {
-            //taking all infor from api
             console.log(data)
             lat = data.city.coord.lat;
             lon = data.city.coord.lon;
@@ -102,7 +116,6 @@ $(document).ready(function () {
             highF = Math.round(data.list[0].main.temp_max) + '°';
             lowF = Math.round(data.list[0].main.temp_min) + '°';
             description = data.list[0].weather[0].description;
-            icon = data.list[0].weather[0].icon;
             console.log(lat, lon)
             console.log(city, cityPop)
             console.log(lowF, highF, description)
@@ -125,6 +138,7 @@ $(document).ready(function () {
                 getHist()
             });
         });
+
 
     }
 
@@ -168,5 +182,5 @@ $(document).ready(function () {
             })
         //});
     }
-
 });
+
