@@ -47,16 +47,16 @@ $(document).ready(function () {
                     xhr.setRequestHeader('Authorization', 'Bearer ' + 'KZasPLkGaB4qx+wuKxVDBoBHMO3iu+sTcYuhf9Et/1ueVH3efsEr3OEpWUXl24ukjrYWm8GTLn94+RbOE/FKKg==');
                 },
                 success: function (response) {
-                  //  console.log(response);
+                    //  console.log(response);
                     var myRoot = response.OccupationDetail[0];
                     var title = myRoot.OnetTitle;
-                 //   console.log(title);
+                    //   console.log(title);
                     var localWages = myRoot.Wages.BLSAreaWagesList;
                     var natWages = myRoot.Wages.NationalWagesList;
-                 //   console.log(myRoot);
+                    //   console.log(myRoot);
                     var stateStats = myRoot.Projections.Projections[0];
                     var nationalStats = myRoot.Projections.Projections[1];
-                 //   console.log(nationalStats);
+                    //   console.log(nationalStats);
                     var crntUSemp = nationalStats.EstimatedEmployment;
                     var crntStateEmp = stateStats.EstimatedEmployment;
                     var projectedAnnualOpeningsSt = stateStats.ProjectedAnnualJobOpening;
@@ -64,13 +64,13 @@ $(document).ready(function () {
                     var stateName = stateStats.StateName;
                     for (var i = 0; i < localWages.length; i++) {
                         if (localWages[i].RateType === 'Annual') {
-                        //    console.log('City median income: ' + localWages[i].Median);
+                            //    console.log('City median income: ' + localWages[i].Median);
                             $('#medianCityWages').text(formatDollar(parseInt(localWages[i].Median)));
                         }
                     }
                     for (var i = 0; i < natWages.length; i++) {
                         if (natWages[i].RateType === 'Annual') {
-                         //   console.log('National median income: ' + natWages[i].Median);
+                            //   console.log('National median income: ' + natWages[i].Median);
                             $('#USwages').text(formatDollar(parseInt(natWages[i].Median)));
                         }
                     }
@@ -96,10 +96,43 @@ $(document).ready(function () {
         var numbeoUrl = `http://anyorigin.com/go?url=https%3A//www.numbeo.com/api/indices%3Fapi_key%3D2iev2m2k4slcbo%26query%3D${cityStateZip}&callback=?`;
 
         $.getJSON(numbeoUrl, function (data) {
-            console.log(data.contents);
+            var myData = data.contents;
+            var statsName = myData.name;
+            var costOfLiving = Math.round(myData.cpi_index);
+            var housingToIncomeRatio = myData.property_price_to_income_ratio.toFixed(2);
+            var trafficTimeIndex = Math.round(myData.traffic_time_index);
+            var crimeIndex = Math.round(myData.crime_index);
+            var pollutionIndex = Math.round(myData.pollution_index);
+            var qualityOfLifeIndex = Math.round(myData.quality_of_life_index);
+            console.log(myData);
+            $('#statsName').text(statsName);
+            $('#costOfLiving').text(costOfLiving);
+            $('#housingToIncomeRatio').text(housingToIncomeRatio);
+            $('#trafficTimeIndex').text(trafficTimeIndex);
+            $('#crimeIndex').text(crimeIndex);
+            $('#pollutionIndex').text(pollutionIndex);
+            $('#qualityOfLifeIndex').text(qualityOfLifeIndex);
+
+            console.log(statsName);
+            console.log(costOfLiving);
+            console.log(housingToIncomeRatio);
+
         });
 
 
+
+        $.getJSON('http://anyorigin.com/go?url=https%3A//api.greatschools.org/schools/CA/Alameda/public/%3Fkey%3Dc3fa23155c53d73ae3e185eb12ec0b84&sort=parent_rating&limit=20&callback=?', function (data) {
+            console.log(data.contents);
+            var text, parser, xmlDoc;
+            text = data.contents;
+            parser = new DOMParser();
+            xmlDoc = parser.parseFromString(text, "text/xml");
+            
+            $('#schoolInfo').text(xmlDoc.getElementsByTagName('name')[0].childNodes[0].nodeValue);
+            console.log(xmlDoc.getElementsByTagName('school')[0].childNodes[0].nodeValue);
+
+
+        });
     });
 
 
@@ -216,15 +249,15 @@ $(document).ready(function () {
         }, "");
     }
     ///google auto city 
-    var input = document.getElementById('autocomplete');
-    var search = new google.maps.places.Autocomplete(input, { types: ['(regions)'] });
-    google.maps.event.addListener(search, 'place_changed', function () {
+    // var input = document.getElementById('autocomplete');
+    // var search = new google.maps.places.Autocomplete(input, { types: ['(regions)'] });
+    // google.maps.event.addListener(search, 'place_changed', function () {
 
-    });
-    google.maps.event.addListener(search, 'place_changed', function (event) {
-        var input = document.getElementById('autocomplete').value;
-        var geocodeURL = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + input + '&key=AIzaSyC75PI0JP6R87nUSYn4R8iySVG0WGUZqMQ';
-        console.log(input)
-    });
+    // });
+    // google.maps.event.addListener(search, 'place_changed', function (event) {
+    //     var input = document.getElementById('autocomplete').value;
+    //     var geocodeURL = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + input + '&key=AIzaSyC75PI0JP6R87nUSYn4R8iySVG0WGUZqMQ';
+    //     console.log(input)
+    // });
 });
 
