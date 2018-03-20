@@ -28,23 +28,28 @@ $(document).ready(function () {
         //validation
         if (userName != "" && userPassword != "" && userFullName != "" && userProfession != "") {
 
-
-            var compareUsername = $.grep(snapshotVal, function (val) {
-                return (val.name === userName)
-            });
-
-            if (compareUsername.length) { //if length is 1 => true
-                console.log("Name already used")
+            if (userPassword.length < 8) {
+                console.log(userPassword)
+                console.log("password should be 8 characters or more!")
             } else {
-                console.log("registered")
-                //users tree in firebase
-                db.ref("users/" + dbIndex).set({
-                    id: dbIndex,
-                    name: userName,
-                    passkey: userPassword,
-                    profession: userProfession,
-                    fullname: userFullName
+
+                var compareUsername = $.grep(snapshotVal, function (val) {
+                    return (val.name === userName)
                 });
+
+                if (compareUsername.length) { //if length is 1 => true
+                    console.log("Name already used")
+                } else {
+                    console.log("registered")
+                    //users tree in firebase
+                    db.ref("users/" + dbIndex).set({
+                        id: dbIndex,
+                        name: userName,
+                        passkey: userPassword,
+                        profession: userProfession,
+                        fullname: userFullName
+                    });
+                }
             }
         } else {
             console.log("please fill in all the fields")
