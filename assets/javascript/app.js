@@ -165,7 +165,15 @@ $(document).ready(function () {
                 //console.log(data.results[0].date)
             }
         })
+<<<<<<< HEAD
             //passing city id after pact
+=======
+
+            //passing city id after pact
+
+            //passing city id after pact 
+
+>>>>>>> master
             .then(function (data) {
                 url = "https://www.ncdc.noaa.gov/cdo-web/api/v2/data?datasetid=GSOM&locationid=" + cityToPass + "&datatypeid=TMAX&startdate=2018-01-01&enddate=2018-04-01&units=standard"
                 $.ajax({
@@ -183,6 +191,12 @@ $(document).ready(function () {
             })
         //});
     }
+<<<<<<< HEAD
+=======
+
+    ///google auto city
+
+>>>>>>> master
 
     function formatDollar(num) {
         var p = num.toFixed().split(".");
@@ -201,5 +215,9 @@ $(document).ready(function () {
         var geocodeURL = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + input + '&key=AIzaSyC75PI0JP6R87nUSYn4R8iySVG0WGUZqMQ';
         console.log(input)
     });
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
 });
 
