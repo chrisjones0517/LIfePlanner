@@ -42,7 +42,7 @@ $(document).ready(function () {
                     xhr.setRequestHeader('Authorization', 'Bearer ' + 'KZasPLkGaB4qx+wuKxVDBoBHMO3iu+sTcYuhf9Et/1ueVH3efsEr3OEpWUXl24ukjrYWm8GTLn94+RbOE/FKKg==')
                 },
                 success: function (response) {
-                    //   console.log(response);
+                 //   console.log(response);
                     var myRoot = response.OccupationDetail[0];
                     var title = myRoot.OnetTitle;
                     console.log(title);
@@ -70,8 +70,8 @@ $(document).ready(function () {
                     console.log('US Median Per Capita Income: $29,829');
                     console.log(myRoot);
                     console.log(`Estimated current number of '${title}' jobs in ${stateName}: ${crntStateEmp}`); // Output to page
-
-                    console.log(`Projected annual openings for '${title}' jobs in ${stateName}: ${projectedAnnualOpeningsSt}`);
+                    
+                    console.log(`Projected annual openings for '${title}' jobs in ${stateName}: ${projectedAnnualOpeningsSt}`); 
                     console.log(`Estimated number of '${title}' jobs in the U.S.: ${projectedAnnualOpeningsUS}`)
                 },
                 error: function (request, status, errorThrown) {
@@ -79,16 +79,9 @@ $(document).ready(function () {
                 }
             });
         });
-        
-
-        var numbeoUrl = `http://anyorigin.com/go?url=https%3A//www.numbeo.com/api/indices%3Fapi_key%3D2iev2m2k4slcbo%26query%3D${cityStateZip}&callback=?`;
-
-        $.getJSON(numbeoUrl, function (data) {
-            console.log(data.contents);
-        });
 
 
-        
+
     });
 
 
@@ -157,19 +150,6 @@ $(document).ready(function () {
         url = "https://www.ncdc.noaa.gov/cdo-web/api/v2/search?limit=50&offset=1&resulttype=CITY&text=" + city + "&datasetid=GSOM&startdate=2018-01-01&enddate=2018-02-01&sortfield=score&sortorder=desc"
         var tokenFromNoaa = "WWKoJVmRVKlQKXOsSHFiQZXozlzIBzJY";
         $.ajax({
-<<<<<<< HEAD
-            url: climateUrl,
-            data: { CITY: 'houston,tx' },
-            method: 'GET',
-            headers: { token: 'WWKoJVmRVKlQKXOsSHFiQZXozlzIBzJY' }
-        }).then(function (response) {
-            console.log(response);
-        });
-    });
-
-
-
-=======
             url: url,
             headers: {
                 token: tokenFromNoaa
@@ -183,9 +163,9 @@ $(document).ready(function () {
                 //console.log(data.results[0].date)
             }
         })
-        //passing city id after pact
+        //passing city id after pact 
             .then(function (data) {
-                url = "https://www.ncdc.noaa.gov/cdo-web/api/v2/data?datasetid=GSOM&locationid=" + cityToPass + "&datatypeid=TAVG&startdate=2018-01-01&enddate=2018-04-01&units=standard"
+                url = "https://www.ncdc.noaa.gov/cdo-web/api/v2/data?datasetid=GSOM&locationid=" + cityToPass + "&datatypeid=TMAX&startdate=2018-01-01&enddate=2018-04-01&units=standard"
                 $.ajax({
                     url: url,
                     headers: {
@@ -202,6 +182,5 @@ $(document).ready(function () {
             })
         //});
     }
->>>>>>> 8d55569fcb8d445cb333be4a9d836745757f3802
 });
 
