@@ -42,7 +42,7 @@ $(document).ready(function () {
                     xhr.setRequestHeader('Authorization', 'Bearer ' + 'KZasPLkGaB4qx+wuKxVDBoBHMO3iu+sTcYuhf9Et/1ueVH3efsEr3OEpWUXl24ukjrYWm8GTLn94+RbOE/FKKg==')
                 },
                 success: function (response) {
-                 //   console.log(response);
+                    //   console.log(response);
                     var myRoot = response.OccupationDetail[0];
                     var title = myRoot.OnetTitle;
                     console.log(title);
@@ -70,8 +70,8 @@ $(document).ready(function () {
                     console.log('US Median Per Capita Income: $29,829');
                     console.log(myRoot);
                     console.log(`Estimated current number of '${title}' jobs in ${stateName}: ${crntStateEmp}`); // Output to page
-                    
-                    console.log(`Projected annual openings for '${title}' jobs in ${stateName}: ${projectedAnnualOpeningsSt}`); 
+
+                    console.log(`Projected annual openings for '${title}' jobs in ${stateName}: ${projectedAnnualOpeningsSt}`);
                     console.log(`Estimated number of '${title}' jobs in the U.S.: ${projectedAnnualOpeningsUS}`)
                 },
                 error: function (request, status, errorThrown) {
@@ -92,12 +92,12 @@ $(document).ready(function () {
         WaetherCall()
     })
     var units = 'imperial';
-    var inputWeather = "Houston"
+    var inputWeather = "Dallas, TX, USA"
     //weather function
     function WaetherCall() {
         //will take input from search based on lat and long
         //$("#search-input").val().trim() ;
-       
+
         var queryURL = "http://api.openweathermap.org/data/2.5/forecast?q=" + inputWeather + ",us&APPID=eeda0b646e014b160ccbce009bb655ef";
         $.ajax({
             url: queryURL,
@@ -153,7 +153,7 @@ $(document).ready(function () {
             url: url,
             headers: {
                 token: tokenFromNoaa
-            },  
+            },
             success: function (data) {
                 //console.log(data.results[0].station)
                 console.log(data);
@@ -163,7 +163,7 @@ $(document).ready(function () {
                 //console.log(data.results[0].date)
             }
         })
-        //passing city id after pact 
+            //passing city id after pact 
             .then(function (data) {
                 url = "https://www.ncdc.noaa.gov/cdo-web/api/v2/data?datasetid=GSOM&locationid=" + cityToPass + "&datatypeid=TMAX&startdate=2018-01-01&enddate=2018-04-01&units=standard"
                 $.ajax({
@@ -172,9 +172,9 @@ $(document).ready(function () {
                         token: tokenFromNoaa
                     },
                 }).then(function (data) {
-                     console.log(data);
-                     newMaxTemp = (data.results[0].value);
-                     $('#newMaxTemp').html('lowF: ' + newMaxTemp);
+                    console.log(data);
+                    newMaxTemp = (data.results[0].value);
+                    $('#newMaxTemp').html('lowF: ' + newMaxTemp);
                     // var convertWe = ((highF/10)*9/5+32)
                     // console.log(convertWe)
                 });
@@ -182,5 +182,16 @@ $(document).ready(function () {
             })
         //});
     }
+    ///google auto city 
+    var input = document.getElementById('autocomplete');
+    var search = new google.maps.places.Autocomplete(input, { types: ['(regions)'] });
+    google.maps.event.addListener(search, 'place_changed', function () {
+    
+    });
+    google.maps.event.addListener(search, 'place_changed', function (event) {
+        var input = document.getElementById('autocomplete').value;
+        var geocodeURL = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + input + '&key=AIzaSyC75PI0JP6R87nUSYn4R8iySVG0WGUZqMQ';
+    console.log(input)
+    });
 });
 
