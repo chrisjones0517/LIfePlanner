@@ -163,7 +163,7 @@ $(document).ready(function () {
                 //console.log(data.results[0].date)
             }
         })
-            //passing city id after pact 
+            //passing city id after pact
             .then(function (data) {
                 url = "https://www.ncdc.noaa.gov/cdo-web/api/v2/data?datasetid=GSOM&locationid=" + cityToPass + "&datatypeid=TMAX&startdate=2018-01-01&enddate=2018-04-01&units=standard"
                 $.ajax({
@@ -177,16 +177,24 @@ $(document).ready(function () {
                     $('#newMaxTemp').html('lowF: ' + newMaxTemp);
                     // var convertWe = ((highF/10)*9/5+32)
                     // console.log(convertWe)
+
+                    let myMaxTempPerMonth = new Set();
+                    for (i = 0; i < data.results.length; i++) {
+                        myMaxTempPerMonth = myMaxTempPerMonth.add(moment(data.results[i].date).format('MMM YYYY'));
+                    }
+                    console.log(myMaxTempPerMonth);
+
+
                 });
 
             })
         //});
     }
-    ///google auto city 
+    ///google auto city
     var input = document.getElementById('autocomplete');
     var search = new google.maps.places.Autocomplete(input, { types: ['(regions)'] });
     google.maps.event.addListener(search, 'place_changed', function () {
-    
+
     });
     google.maps.event.addListener(search, 'place_changed', function (event) {
         var input = document.getElementById('autocomplete').value;
