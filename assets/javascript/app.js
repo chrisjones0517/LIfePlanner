@@ -200,6 +200,6 @@ $(document).ready(function () {
         var geocodeURL = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + input + '&key=AIzaSyC75PI0JP6R87nUSYn4R8iySVG0WGUZqMQ';
         console.log(input)
     });
-
+//end 
 });
 
