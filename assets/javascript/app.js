@@ -7,20 +7,18 @@ $(document).ready(function () {
         e.preventDefault();
         $("#data").empty();
         var occupation = $('#occupation').val();
-        var cityStateZip = $('#cityStateZip').val();
+        var cityStateCountry = $('#autocomplete').val().trim();
         var medianPerCapUS = '$29,829';
-        var city, state; //Global variables
-
-        returnCityState(occupation); // should remain unchanged
+        var myArr = cityStateCountry.split(',');
+        var city = myArr[0].trim();
+        var state = myArr[1].trim();
+        var cityState = myArr[0] + ',' + myArr[1];
+        console.log(cityState);
 
         //Return the City and State
-        function returnCityState(strng) {
-            city = str.substring(0, str.indexOf(",")).trim();
-            state = str.split(',').pop().trim();
-            return [city, state]
-        }
+       
         $('.occupation').text(occupation);
-        $('#location').text(cityStateZip);
+        $('#location').text(cityState);
         // $('#city').val();
         var occCode;
 
@@ -48,7 +46,7 @@ $(document).ready(function () {
         }).then(function () {
 
             $.ajax({
-                url: `https://api.careeronestop.org/v1/occupation/NzX2rM28B8dZLR3/${occCode}/${cityStateZip}?training=false&interest=false&videos=false&tasks=false&dwas=false&wages=true&alternateOnetTitles=false&projectedEmployment=true&ooh=false&stateLMILinks=false&relatedOnetTitles=false&skills=false&knowledge=false&ability=false&trainingPrograms=false`,
+                url: `https://api.careeronestop.org/v1/occupation/NzX2rM28B8dZLR3/${occCode}/${cityState}?training=false&interest=false&videos=false&tasks=false&dwas=false&wages=true&alternateOnetTitles=false&projectedEmployment=true&ooh=false&stateLMILinks=false&relatedOnetTitles=false&skills=false&knowledge=false&ability=false&trainingPrograms=false`,
                 dataType: 'json',
                 type: 'GET',
                 beforeSend: function (xhr) {
@@ -93,9 +91,9 @@ $(document).ready(function () {
                 }
             });
         });
-
+        console.log(cityState);
         // Numbeo goes here
-        var numbeoUrl = `http://anyorigin.com/go?url=https%3A//www.numbeo.com/api/indices%3Fapi_key%3D2iev2m2k4slcbo%26query%3D${cityStateZip}&callback=?`;
+        var numbeoUrl = `http://anyorigin.com/go?url=https%3A//www.numbeo.com/api/indices%3Fapi_key%3D2iev2m2k4slcbo%26query%3D${cityState}&callback=?`;
 
         $.getJSON(numbeoUrl, function (data) {
             var myData = data.contents;
@@ -122,18 +120,35 @@ $(document).ready(function () {
         });
 
 
+       
 
-        $.getJSON(`http://anyorigin.com/go?url=https%3A//api.greatschools.org/schools/${state}/${city}/public/%3Fkey%3Dc3fa23155c53d73ae3e185eb12ec0b84&sort=parent_rating&limit=20&callback=?`, function (data) {
+        console.log(state);
+        console.log(city);
+        var schoolUrl = `http://anyorigin.com/go?url=https%3A//api.greatschools.org/schools/${state}/${city}/public/%3Fkey%3Dc3fa23155c53d73ae3e185eb12ec0b84&callback=?`;
+
+        $.getJSON(schoolUrl, function(data) {
+	
+
             console.log(data.contents);
             var text, parser, xmlDoc;
             text = data.contents;
             parser = new DOMParser();
             xmlDoc = parser.parseFromString(text, "text/xml");
-            var x = xmlDoc.getElementsByTagName('name')[0].childNodes[0].nodeValue;
-            console.log(x);
+            var school = xmlDoc.getElementsByTagName('school');
+            var name = xmlDoc.getElementsByTagName('name');
+            var gradeRange = xmlDoc.getElementsByTagName('gradeRange');
+            var parentRating = xmlDoc.getElementsByTagName('parentRating');
+            var gsRating = xmlDoc.getElementsByTagName('gsRating');
+            
             $('#schoolInfo').text(xmlDoc.getElementsByTagName('name')[0].childNodes[0].nodeValue);
             console.log(xmlDoc.getElementsByTagName('name')[0].childNodes[0].nodeValue);
-            console.log()
+            for (var i = 0; i < 20; i++) {
+                console.log(school[i]);
+                console.log(name[i]);
+                console.log(gradeRange[i]);
+                console.log(parentRating[i]);
+                console.log(gsRating);
+            }
 
 
         });
