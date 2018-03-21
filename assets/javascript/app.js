@@ -14,7 +14,7 @@ $(document).ready(function () {
         returnCityState(occupation); // should remain unchanged
 
         //Return the City and State
-        function returnCityState(strng) {
+        function returnCityState(str) {
             city = str.substring(0, str.indexOf(",")).trim();
             state = str.split(',').pop().trim();
             return [city, state]
