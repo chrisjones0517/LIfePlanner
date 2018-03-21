@@ -16,15 +16,7 @@ $(document).ready(function () {
         console.log(cityState);
 
         //Return the City and State
-<<<<<<< HEAD
-       
-=======
-        function returnCityState(str) {
-            city = str.substring(0, str.indexOf(",")).trim();
-            state = str.split(',').pop().trim();
-            return [city, state]
-        }
->>>>>>> e3e16e297dd82238838a9b80391c4e01561abfea
+
         $('.occupation').text(occupation);
         $('#location').text(cityState);
         // $('#city').val();
@@ -128,36 +120,48 @@ $(document).ready(function () {
         });
 
 
-       
+
 
         console.log(state);
         console.log(city);
         var schoolUrl = `http://anyorigin.com/go?url=https%3A//api.greatschools.org/schools/${state}/${city}/public/%3Fkey%3Dc3fa23155c53d73ae3e185eb12ec0b84&callback=?`;
 
-        $.getJSON(schoolUrl, function(data) {
-	
+        $.getJSON(schoolUrl, function (data) {
 
-            console.log(data.contents);
+
+         //   console.log(data.contents);
             var text, parser, xmlDoc;
             text = data.contents;
             parser = new DOMParser();
             xmlDoc = parser.parseFromString(text, "text/xml");
-            var school = xmlDoc.getElementsByTagName('school');
+            var schoolArr = [];
+            var schoolAttrArr = [];
             var name = xmlDoc.getElementsByTagName('name');
             var gradeRange = xmlDoc.getElementsByTagName('gradeRange');
             var parentRating = xmlDoc.getElementsByTagName('parentRating');
             var gsRating = xmlDoc.getElementsByTagName('gsRating');
-            
+            var type = xmlDoc.getElementsByTagName('type');
+            var enrollment = xmlDoc.getElementsByTagName('enrollment');
+            var address = xmlDoc.getElementsByTagName('address');
+            var phone = xmlDoc.getElementsByTagName('phone');
+
+
             $('#schoolInfo').text(xmlDoc.getElementsByTagName('name')[0].childNodes[0].nodeValue);
             console.log(xmlDoc.getElementsByTagName('name')[0].childNodes[0].nodeValue);
             for (var i = 0; i < 20; i++) {
-                console.log(school[i]);
-                console.log(name[i]);
-                console.log(gradeRange[i]);
-                console.log(parentRating[i]);
-                console.log(gsRating);
+                
+                schoolAttrArr.push(
+                name[i].childNodes[0].nodeValue,
+                type[i].childNodes[0].nodeValue,
+                gradeRange[i].childNodes[0].nodeValue,
+                parentRating[i].childNodes[0].nodeValue,
+                gsRating[i].childNodes[0].nodeValue,
+                enrollment[i].childNodes[0].nodeValue,
+                address[i].childNodes[0].nodeValue,
+                phone[i].childNodes[0].nodeValue);
+                schoolArr.push(schoolAttrArr[i], + ' next school');
             }
-
+            console.log(schoolArr);
 
         });
     });
@@ -213,7 +217,7 @@ $(document).ready(function () {
                 var Loc_Date = new Date(UTC + (1000 * response.rawOffset) + (1000 * response.dstOffset));
                 $("#timeOfLocation").html('Current Time : ' + Loc_Date);
                 getHist()
-                
+
             });
         });
 
@@ -257,35 +261,35 @@ $(document).ready(function () {
                     for (i = 0; i < data.results.length; i++) {
                         myMaxTempPerMonth = myMaxTempPerMonth.add(moment(data.results[i].date).format('MMM YYYY'));
                     }
-                     console.log(myMaxTempPerMonth);
-                     var newWeather = Array.from(myMaxTempPerMonth);
-                     console.log(newWeather);
-                     //looping from waether return
-                     $('#newMaxTemp').html('Month max temp: ' + newWeather[0]);
-                   // console.log("imhere"+data)
+                    console.log(myMaxTempPerMonth);
+                    var newWeather = Array.from(myMaxTempPerMonth);
+                    console.log(newWeather);
+                    //looping from waether return
+                    $('#newMaxTemp').html('Month max temp: ' + newWeather[0]);
+                    // console.log("imhere"+data)
                 })
-                .then(function (data) {
-                    url = "https://www.ncdc.noaa.gov/cdo-web/api/v2/data?datasetid=GSOM&locationid=" + cityToPass + "&datatypeid=TMIN&startdate=2018-01-01&enddate=2018-04-01&units=standard"
-                    $.ajax({
-                        url: url,
-                        headers: {
-                            token: tokenFromNoaa
-                        },
-                    }).then(function (data) {
-                        console.log(data);
-                        newMaxTemp = (data.results[0].value);
-                        let myMaxTempPerMonth = new Set();
-                        for (i = 0; i < data.results.length; i++) {
-                            myMaxTempPerMonth = myMaxTempPerMonth.add(moment(data.results[i].date).format('MMM YYYY'));
-    
-                        }
-                         console.log(myMaxTempPerMonth);
-                         var newWeather = Array.from(myMaxTempPerMonth);
-                         console.log(newWeather);
-                         $('#newMinTemp').html('Month min temp: ' + newWeather[0]);
-                    });  
-                });
-               
+                    .then(function (data) {
+                        url = "https://www.ncdc.noaa.gov/cdo-web/api/v2/data?datasetid=GSOM&locationid=" + cityToPass + "&datatypeid=TMIN&startdate=2018-01-01&enddate=2018-04-01&units=standard"
+                        $.ajax({
+                            url: url,
+                            headers: {
+                                token: tokenFromNoaa
+                            },
+                        }).then(function (data) {
+                            console.log(data);
+                            newMaxTemp = (data.results[0].value);
+                            let myMaxTempPerMonth = new Set();
+                            for (i = 0; i < data.results.length; i++) {
+                                myMaxTempPerMonth = myMaxTempPerMonth.add(moment(data.results[i].date).format('MMM YYYY'));
+
+                            }
+                            console.log(myMaxTempPerMonth);
+                            var newWeather = Array.from(myMaxTempPerMonth);
+                            console.log(newWeather);
+                            $('#newMinTemp').html('Month min temp: ' + newWeather[0]);
+                        });
+                    });
+
             })
         //});
     }
@@ -307,6 +311,6 @@ $(document).ready(function () {
         var geocodeURL = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + input + '&key=AIzaSyC75PI0JP6R87nUSYn4R8iySVG0WGUZqMQ';
         console.log(input)
     });
-//end 
+    //end 
 });
 
