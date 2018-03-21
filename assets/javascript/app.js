@@ -9,6 +9,8 @@ $(document).ready(function () {
         var occupation = $('#occupation').val();
         var cityStateZip = $('#cityStateZip').val();
         var medianPerCapUS = '$29,829';
+        var state;
+        var city; 
         $('.occupation').text(occupation);
         $('.location').text(cityStateZip);
         $('#medianPerCapUS').text(medianPerCapUS);
@@ -127,9 +129,11 @@ $(document).ready(function () {
             text = data.contents;
             parser = new DOMParser();
             xmlDoc = parser.parseFromString(text, "text/xml");
-            
+            var x = xmlDoc.getElementsByTagName('name')[0].childNodes[0].nodeValue;
+            console.log(x);
             $('#schoolInfo').text(xmlDoc.getElementsByTagName('name')[0].childNodes[0].nodeValue);
-            console.log(xmlDoc.getElementsByTagName('school')[0].childNodes[0].nodeValue);
+            console.log(xmlDoc.getElementsByTagName('name')[0].childNodes[0].nodeValue);
+            console.log()
 
 
         });
