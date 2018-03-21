@@ -8,10 +8,8 @@ $(document).ready(function () {
         $("#data").empty();
         var occupation = $('#occupation').val();
         var cityStateZip = $('#cityStateZip').val();
-        var medianPerCapUS = '$29,829';
         $('.occupation').text(occupation);
-        $('.location').text(cityStateZip);
-        $('#medianPerCapUS').text(medianPerCapUS);
+        $('#location').text(cityStateZip);
         // $('#city').val();
         var occCode;
 
@@ -29,15 +27,15 @@ $(document).ready(function () {
             success: function (response) {
                 var occTitle = response.OccupationList[0].OnetTitle;
                 occCode = response.OccupationList[0].OnetCode;
-                // console.log(response.OccupationList)
-                // console.log(occTitle);
-                // console.log(occCode);
+                console.log(response.OccupationList)
+                console.log(occTitle);
+                console.log(occCode);
             },
             error: function (request, status, errorThrown) {
                 console.log('This is where the error will be output to the user.');
             }
         }).then(function () {
-
+            
             $.ajax({
                 url: `https://api.careeronestop.org/v1/occupation/NzX2rM28B8dZLR3/${occCode}/${cityStateZip}?training=false&interest=false&videos=false&tasks=false&dwas=false&wages=true&alternateOnetTitles=false&projectedEmployment=true&ooh=false&stateLMILinks=false&relatedOnetTitles=false&skills=false&knowledge=false&ability=false&trainingPrograms=false`,
                 dataType: 'json',
@@ -47,44 +45,37 @@ $(document).ready(function () {
                     xhr.setRequestHeader('Authorization', 'Bearer ' + 'KZasPLkGaB4qx+wuKxVDBoBHMO3iu+sTcYuhf9Et/1ueVH3efsEr3OEpWUXl24ukjrYWm8GTLn94+RbOE/FKKg==');
                 },
                 success: function (response) {
-                    //  console.log(response);
+                    console.log(response);
                     var myRoot = response.OccupationDetail[0];
                     var title = myRoot.OnetTitle;
-                    //   console.log(title);
+                    console.log(title);
                     var localWages = myRoot.Wages.BLSAreaWagesList;
                     var natWages = myRoot.Wages.NationalWagesList;
-                    //   console.log(myRoot);
+                    console.log(myRoot);
                     var stateStats = myRoot.Projections.Projections[0];
                     var nationalStats = myRoot.Projections.Projections[1];
-                    //   console.log(nationalStats);
-                    var crntUSemp = nationalStats.EstimatedEmployment;
                     var crntStateEmp = stateStats.EstimatedEmployment;
                     var projectedAnnualOpeningsSt = stateStats.ProjectedAnnualJobOpening;
                     var projectedAnnualOpeningsUS = nationalStats.ProjectedAnnualJobOpening;
                     var stateName = stateStats.StateName;
                     for (var i = 0; i < localWages.length; i++) {
                         if (localWages[i].RateType === 'Annual') {
-                            //    console.log('City median income: ' + localWages[i].Median);
+                            console.log('City median income: ' + localWages[i].Median);
                             $('#medianCityWages').text(formatDollar(parseInt(localWages[i].Median)));
                         }
                     }
                     for (var i = 0; i < natWages.length; i++) {
                         if (natWages[i].RateType === 'Annual') {
-                            //   console.log('National median income: ' + natWages[i].Median);
-                            $('#USwages').text(formatDollar(parseInt(natWages[i].Median)));
+                            console.log('National median income: ' + natWages[i].Median);
+                               $('#USwages').text(formatDollar(parseInt(natWages[i].Median)));
                         }
                     }
-                    // console.log('US Median Per Capita Income: $29,829');
-                    // console.log(myRoot);
-                    // console.log(myRoot.Projections.Projections[1].EstimatedEmployment);
+                    console.log('US Median Per Capita Income: $29,829');
+                    console.log(myRoot);
+                    console.log(`Estimated current number of '${title}' jobs in ${stateName}: ${crntStateEmp}`); // Output to page
 
-                    $('#crntUSemp').text(crntUSemp);
-                    $('#crntStateEmp').text(crntStateEmp);
-                    $('#projectedAnnualOpeningsUS').text(formatCommas(parseInt(projectedAnnualOpeningsUS)));
-                    $('#projectedAnnualOpeningsSt').text(projectedAnnualOpeningsSt);
-
-
-
+                    console.log(`Projected annual openings for '${title}' jobs in ${stateName}: ${projectedAnnualOpeningsSt}`);
+                    console.log(`Estimated number of '${title}' jobs in the U.S.: ${projectedAnnualOpeningsUS}`)
                 },
                 error: function (request, status, errorThrown) {
                     console.log('This is where my error will go to be ouput to the user.');
@@ -92,47 +83,8 @@ $(document).ready(function () {
             });
         });
 
-        // Numbeo goes here
-        var numbeoUrl = `http://anyorigin.com/go?url=https%3A//www.numbeo.com/api/indices%3Fapi_key%3D2iev2m2k4slcbo%26query%3D${cityStateZip}&callback=?`;
-
-        $.getJSON(numbeoUrl, function (data) {
-            var myData = data.contents;
-            var statsName = myData.name;
-            var costOfLiving = Math.round(myData.cpi_index);
-            var housingToIncomeRatio = myData.property_price_to_income_ratio.toFixed(2);
-            var trafficTimeIndex = Math.round(myData.traffic_time_index);
-            var crimeIndex = Math.round(myData.crime_index);
-            var pollutionIndex = Math.round(myData.pollution_index);
-            var qualityOfLifeIndex = Math.round(myData.quality_of_life_index);
-            console.log(myData);
-            $('#statsName').text(statsName);
-            $('#costOfLiving').text(costOfLiving);
-            $('#housingToIncomeRatio').text(housingToIncomeRatio);
-            $('#trafficTimeIndex').text(trafficTimeIndex);
-            $('#crimeIndex').text(crimeIndex);
-            $('#pollutionIndex').text(pollutionIndex);
-            $('#qualityOfLifeIndex').text(qualityOfLifeIndex);
-
-            console.log(statsName);
-            console.log(costOfLiving);
-            console.log(housingToIncomeRatio);
-
-        });
 
 
-
-        $.getJSON('http://anyorigin.com/go?url=https%3A//api.greatschools.org/schools/CA/Alameda/public/%3Fkey%3Dc3fa23155c53d73ae3e185eb12ec0b84&sort=parent_rating&limit=20&callback=?', function (data) {
-            console.log(data.contents);
-            var text, parser, xmlDoc;
-            text = data.contents;
-            parser = new DOMParser();
-            xmlDoc = parser.parseFromString(text, "text/xml");
-            
-            $('#schoolInfo').text(xmlDoc.getElementsByTagName('name')[0].childNodes[0].nodeValue);
-            console.log(xmlDoc.getElementsByTagName('school')[0].childNodes[0].nodeValue);
-
-
-        });
     });
 
 
@@ -213,7 +165,7 @@ $(document).ready(function () {
                 //console.log(data.results[0].date)
             }
         })
-            //passing city id after pact
+
             .then(function (data) {
                 url = "https://www.ncdc.noaa.gov/cdo-web/api/v2/data?datasetid=GSOM&locationid=" + cityToPass + "&datatypeid=TMAX&startdate=2018-01-01&enddate=2018-04-01&units=standard"
                 $.ajax({
@@ -231,33 +183,23 @@ $(document).ready(function () {
             })
         //});
     }
-
-    ///google auto city
-
-
     function formatDollar(num) {
         var p = num.toFixed().split(".");
-        return "$" + p[0].split("").reverse().reduce(function (acc, num, i, orig) {
-            return num == "-" ? acc : num + (i && !(i % 3) ? "," : "") + acc;
-        }, "");
-    }
-
-    function formatCommas(num) {
-        var p = num.toFixed().split(".");
-        return p[0].split("").reverse().reduce(function (acc, num, i, orig) {
-            return num == "-" ? acc : num + (i && !(i % 3) ? "," : "") + acc;
+        return "$" + p[0].split("").reverse().reduce(function(acc, num, i, orig) {
+            return  num=="-" ? acc : num + (i && !(i % 3) ? "," : "") + acc;
         }, "");
     }
     ///google auto city 
-    // var input = document.getElementById('autocomplete');
-    // var search = new google.maps.places.Autocomplete(input, { types: ['(regions)'] });
-    // google.maps.event.addListener(search, 'place_changed', function () {
+    var input = document.getElementById('autocomplete');
+    var search = new google.maps.places.Autocomplete(input, { types: ['(regions)'] });
+    google.maps.event.addListener(search, 'place_changed', function () {
 
-    // });
-    // google.maps.event.addListener(search, 'place_changed', function (event) {
-    //     var input = document.getElementById('autocomplete').value;
-    //     var geocodeURL = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + input + '&key=AIzaSyC75PI0JP6R87nUSYn4R8iySVG0WGUZqMQ';
-    //     console.log(input)
-    // });
+    });
+    google.maps.event.addListener(search, 'place_changed', function (event) {
+        var input = document.getElementById('autocomplete').value;
+        var geocodeURL = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + input + '&key=AIzaSyC75PI0JP6R87nUSYn4R8iySVG0WGUZqMQ';
+        console.log(input)
+    });
+
 });
 
