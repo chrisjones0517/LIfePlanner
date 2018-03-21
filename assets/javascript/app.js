@@ -190,6 +190,7 @@ $(document).ready(function () {
                 var Loc_Date = new Date(UTC + (1000 * response.rawOffset) + (1000 * response.dstOffset));
                 $("#timeOfLocation").html('Current Time : ' + Loc_Date);
                 getHist()
+                
             });
         });
 
@@ -227,10 +228,41 @@ $(document).ready(function () {
                 }).then(function (data) {
                     console.log(data);
                     newMaxTemp = (data.results[0].value);
-                    $('#newMaxTemp').html('lowF: ' + newMaxTemp);
-                    // var convertWe = ((highF/10)*9/5+32)
+
                     // console.log(convertWe)
+                    let myMaxTempPerMonth = new Set();
+                    for (i = 0; i < data.results.length; i++) {
+                        myMaxTempPerMonth = myMaxTempPerMonth.add(moment(data.results[i].date).format('MMM YYYY'));
+                    }
+                     console.log(myMaxTempPerMonth);
+                     var newWeather = Array.from(myMaxTempPerMonth);
+                     console.log(newWeather);
+                     //looping from waether return
+                     $('#newMaxTemp').html('Month max temp: ' + newWeather[0]);
+                   // console.log("imhere"+data)
+                })
+                .then(function (data) {
+                    url = "https://www.ncdc.noaa.gov/cdo-web/api/v2/data?datasetid=GSOM&locationid=" + cityToPass + "&datatypeid=TMIN&startdate=2018-01-01&enddate=2018-04-01&units=standard"
+                    $.ajax({
+                        url: url,
+                        headers: {
+                            token: tokenFromNoaa
+                        },
+                    }).then(function (data) {
+                        console.log(data);
+                        newMaxTemp = (data.results[0].value);
+                        let myMaxTempPerMonth = new Set();
+                        for (i = 0; i < data.results.length; i++) {
+                            myMaxTempPerMonth = myMaxTempPerMonth.add(moment(data.results[i].date).format('MMM YYYY'));
+    
+                        }
+                         console.log(myMaxTempPerMonth);
+                         var newWeather = Array.from(myMaxTempPerMonth);
+                         console.log(newWeather);
+                         $('#newMinTemp').html('Month min temp: ' + newWeather[0]);
+                    });  
                 });
+               
             })
         //});
     }
