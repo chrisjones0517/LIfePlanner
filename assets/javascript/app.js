@@ -189,10 +189,11 @@ $(document).ready(function () {
     $('#weather').on('click', function (e) {
         e.preventDefault();
         console.log("wasclicked")
-        WaetherCall()
+        WaetherCall();
+        //pullingCityPic()
     });
     var units = 'imperial';
-    var inputWeather = "Dallas, TX, USA"
+    var inputWeather = "VEgas, TX"
     //weather function
     function WaetherCall() {
         //will take input from search based on lat and long
@@ -236,6 +237,7 @@ $(document).ready(function () {
                 var Loc_Date = new Date(UTC + (1000 * response.rawOffset) + (1000 * response.dstOffset));
                 $("#timeOfLocation").html('Current Time : ' + Loc_Date);
                 getHist()
+                pullingCityPic()
 
             });
         });
@@ -332,5 +334,25 @@ $(document).ready(function () {
         console.log(input)
     });
     //end 
+    function pullingCityPic(){
+        var queryURL = "https://pixabay.com/api/?key=8449388-e25d53a8bbc2d9948e151d998&q="+city+"&image_type=photo";
+        $.ajax({
+            url: queryURL,
+            method: "GET",  
+        }).then(function (response) { 
+            console.log(response)
+            $("#dropping").empty()
+            var results = response.hits;
+        for (var i = 0; i < results.length; i++) {
+            var imgLocation = $("<div class='cityPictures'>");
+            var urlsrc = results[i].largeImageURL;
+            //console.log(urlsrc)
+            var pic = $("<img>").addClass("pic rounded-circle").attr("src", urlsrc);
+            imgLocation.append(pic);
+            $("#dropping").append(imgLocation);
+        }
+        })
+
+    }
 });
 
