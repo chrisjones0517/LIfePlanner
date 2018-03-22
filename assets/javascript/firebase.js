@@ -22,10 +22,10 @@ $(document).ready(function () {
         var userName = $("#username").val();
         userName = userName.toLowerCase();
         var userPassword = $("#password").val();
-        var userProfession = $("#userprofession").val();
         var userFullName = $("#fullname").val();
 
         //validation
+        //all feilds should have some values
         if (userName != "" && userPassword != "" && userFullName != "" && userProfession != "") {
 
             if (userPassword.length < 8) {
