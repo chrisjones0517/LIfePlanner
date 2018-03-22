@@ -104,3 +104,35 @@ hr {
     font-weight: bold;
     font-style: italic;
 }
+
+
+/* USER Bubble */
+
+.pulsatingButton {
+    width: 100px;
+    height: 100px;
+    transform: translate(200px , 200px);
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 100%;
+    animation: pulse-shadow 3s infinite;
+
+}
+
+ @keyframes pulse-shadow {
+    0% {
+        box-shadow: 0 0;
+    }
+    30% {
+        box-shadow: 0 0;
+    }
+    70% {
+        box-shadow: 0 0 5px 10px rgba(0, 0, 0, 0.2);
+    }
+    70% {
+        box-shadow: 0 0 5px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    90% {
+        box-shadow: 0 0 5px 12px transparent;
+    }
+} 

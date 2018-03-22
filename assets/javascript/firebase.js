@@ -112,7 +112,7 @@ $(document).ready(function () {
         } else {
             dbIndex = 0;
             console.log(dbIndex);
-        }
+        };
 
 
     })
@@ -153,5 +153,10 @@ $(document).ready(function () {
         }, 2500)
     })
 
+
+    //########### user bubble ##############
+    $(".pulsatingButton").mousedown(function(e){
+        console.log("e.pageX: " + e.pageX + ", e.pageY: " + e.pageY);
+    })
 
 });
