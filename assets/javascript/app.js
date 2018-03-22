@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-    
+
     $('#submit').on('click', function (e) {
 
         e.preventDefault();
@@ -15,19 +15,19 @@ $(document).ready(function () {
         var cityState = cityStateWithSpace.replace(', ', ',');
         console.log(city);
         console.log(state);
-        
-        
+
+
         console.log(cityState);
 
-        //Return the City and State
+        
 
         $('.occupation').text(occupation);
         $('#location').text(cityState);
-        // $('#city').val();
+        
+        // career stats ///////////////////////////////////////////////////////////////////////////////
+
         var occCode;
-
         var queryUrl = `https://api.careeronestop.org/v1/occupation/NzX2rM28B8dZLR3/${occupation}/y/0/10`;
-
 
         $.ajax({
             url: queryUrl,
@@ -45,7 +45,7 @@ $(document).ready(function () {
                 console.log(occCode);
             },
             error: function (request, status, errorThrown) {
-                console.log('This is where the error will be output to the user.');
+                $('#careerStats').append('There was an error processing your request for career stats. Please try another search term.');
             }
         }).then(function () {
 
@@ -67,22 +67,33 @@ $(document).ready(function () {
                     console.log(myRoot);
                     var stateStats = myRoot.Projections.Projections[0];
                     var nationalStats = myRoot.Projections.Projections[1];
+                    var crntUSemp = nationalStats.EstimatedEmployment;
                     var crntStateEmp = stateStats.EstimatedEmployment;
-                    var projectedAnnualOpeningsSt = stateStats.ProjectedAnnualJobOpening;
-                    var projectedAnnualOpeningsUS = nationalStats.ProjectedAnnualJobOpening;
+                    var projectedAnnualOpeningsSt = formatCommas(parseInt(stateStats.ProjectedAnnualJobOpening));
+                    var projectedAnnualOpeningsUS = formatCommas(parseInt(nationalStats.ProjectedAnnualJobOpening));
                     var stateName = stateStats.StateName;
                     for (var i = 0; i < localWages.length; i++) {
                         if (localWages[i].RateType === 'Annual') {
-                            console.log('City median income: ' + localWages[i].Median);
-                            $('#medianCityWages').text(formatDollar(parseInt(localWages[i].Median)));
+                            
+                            var cityMedianIncomeForOcc = formatDollar(parseInt(localWages[i].Median));
                         }
                     }
                     for (var i = 0; i < natWages.length; i++) {
                         if (natWages[i].RateType === 'Annual') {
-                            console.log('National median income: ' + natWages[i].Median);
-                            $('#USwages').text(formatDollar(parseInt(natWages[i].Median)));
+                            
+                            var USmedianIncomeForOcc = formatDollar(parseInt(natWages[i].Median));
                         }
                     }
+                    $('#careerStats').empty();
+                    $('#careerStats').append(`
+                        <p>US Median Per Capita Income: $29,829</p>
+                        <p>US Median Wages for <strong>${title}</strong>: <strong>${USmedianIncomeForOcc}</strong></p>
+                        <p>Estimated number of <strong>${title}</strong> jobs in the US: <strong>${crntUSemp}</strong></p>
+                        <p>Projected number of annual job openings for <strong>${title}</strong> in the US: <strong>${projectedAnnualOpeningsUS}</strong></p>
+                        <p>Median Wages for <strong>${title}</strong> in <strong>${cityStateWithSpace}</strong>: <strong>${cityMedianIncomeForOcc}</strong></p>
+                        <p>Estimated number of <strong>${title}</strong> jobs in <strong>${state}</strong>: <strong>${crntStateEmp}</strong></p>
+                        <p>Projected number of annual job openings for <strong>${title}</strong> in <strong>${state}</strong>: <strong>${projectedAnnualOpeningsSt}</strong></p>
+                    `);
                     console.log('US Median Per Capita Income: $29,829');
                     console.log(myRoot);
                     console.log(`Estimated current number of '${title}' jobs in ${stateName}: ${crntStateEmp}`); // Output to page
@@ -91,16 +102,20 @@ $(document).ready(function () {
                     console.log(`Estimated number of '${title}' jobs in the U.S.: ${projectedAnnualOpeningsUS}`)
                 },
                 error: function (request, status, errorThrown) {
-                    console.log('This is where my error will go to be ouput to the user.');
+                    $('#careerStats').append('There was an error processing your request for career stats. Please try another search term.');
                 }
             });
         });
-        
+
         console.log(cityState);
-        // Numbeo goes here
+        
+        // City Data /////////////////////////////////////////////////////////////////////////////////////////////////
+
         var numbeoUrl = `http://anyorigin.com/go?url=https%3A//www.numbeo.com/api/indices%3Fapi_key%3D2iev2m2k4slcbo%26query%3D${cityState}&callback=?`;
 
         $.getJSON(numbeoUrl, function (data) {
+
+        }).then(function(data) {
             var myData = data.contents;
             var statsName = myData.name;
             var costOfLiving = Math.round(myData.cpi_index);
@@ -110,53 +125,51 @@ $(document).ready(function () {
             var pollutionIndex = Math.round(myData.pollution_index);
             var qualityOfLifeIndex = Math.round(myData.quality_of_life_index);
             console.log(myData);
-            $('#careerStats').append(`
-                <p>
-            
+       
+            $('#cityData').empty();
+            $('#cityData').append(`
+                <h5>Statistics for <strong>${statsName}:</strong></h5>
+                <p>Cost of Living: <strong>${costOfLiving}</strong></p>
+                <p>Housing to Income Ratio: <strong>${housingToIncomeRatio}</strong></p>
+                <p>Traffic Time Index: <strong>${trafficTimeIndex}</strong></p>
+                <p>Crime Index: <strong>${crimeIndex}</strong></p>
+                <p>Pollution Index: <strong>${pollutionIndex}</strong></p>
+                <p>Quality of Life Index: <strong>${qualityOfLifeIndex}</strong></p>
             `);
-            
-            $('#statsName').text(statsName);
-            $('#costOfLiving').text(costOfLiving);
-            $('#housingToIncomeRatio').text(housingToIncomeRatio);
-            $('#trafficTimeIndex').text(trafficTimeIndex);
-            $('#crimeIndex').text(crimeIndex);
-            $('#pollutionIndex').text(pollutionIndex);
-            $('#qualityOfLifeIndex').text(qualityOfLifeIndex);
 
             console.log(statsName);
             console.log(costOfLiving);
             console.log(housingToIncomeRatio);
-
+            
+        }).fail(function(error) {
+            console.log(error);
+            $('#cityData').append('There was an error processing your request for city data. Please try another search term.');
         });
-
-
-
 
         console.log(state);
         console.log(city);
 
+        // school data ////////////////////////////////////////////////////////////////////////////////////////
+        
         var schoolUrl = `http://anyorigin.com/go?url=https%3A//api.greatschools.org/schools/${state}/${city}/public/%3Fkey%3Dc3fa23155c53d73ae3e185eb12ec0b84%26sort%3Dparent_rating%26limit%3D20&callback=?`;
 
         $.getJSON(schoolUrl, function (data) {
 
+        }).then(function(data) {
             //   console.log(data.contents);
             var text, parser, xmlDoc;
             text = data.contents;
             parser = new DOMParser();
             xmlDoc = parser.parseFromString(text, "text/xml");
             var schoolArr = [];
-
-
-
-
             var school = xmlDoc.getElementsByTagName('school');
 
             console.log(name.length);
 
-         //   $('#schoolInfo').text(xmlDoc.getElementsByTagName('name')[0].childNodes[0].nodeValue);
+            //   $('#schoolInfo').text(xmlDoc.getElementsByTagName('name')[0].childNodes[0].nodeValue);
             console.log(xmlDoc.getElementsByTagName('name')[0].childNodes[0].nodeValue);
             console.log(school);
-           // console.log(school[0].children[1].textContent);
+            // console.log(school[0].children[1].textContent);
 
 
             for (var i = 0; i < school.length; i++) {
@@ -168,7 +181,7 @@ $(document).ready(function () {
                 if (gsRating !== '1' && gsRating !== '2' && gsRating !== '3' && gsRating !== '4' && gsRating !== '5') {
                     school[i].children[5].textContent = 'N/A';
                 }
-                
+                // add $('#someDiv').empty(); /////////////////////////////////<!-- Important! -->////////////////////////////////
                 $('.container').append(`
                     <div class="outerSchoolDiv">
                         <span>${school[i].children[1].textContent}</span>  
@@ -187,6 +200,9 @@ $(document).ready(function () {
 
             console.log(schoolArr);
 
+        }).fail(function(error) {
+            console.log(error);
+            $('.container').append('<h3>There was an error processing your request for school data. Please try another search term.</h3>');
         });
     });
 
@@ -345,23 +361,23 @@ $(document).ready(function () {
         console.log(input)
     });
     //end 
-    function pullingCityPic(){
-        var queryURL = "https://pixabay.com/api/?key=8449388-e25d53a8bbc2d9948e151d998&q="+city+"&image_type=photo";
+    function pullingCityPic() {
+        var queryURL = "https://pixabay.com/api/?key=8449388-e25d53a8bbc2d9948e151d998&q=" + city + "&image_type=photo";
         $.ajax({
             url: queryURL,
-            method: "GET",  
-        }).then(function (response) { 
+            method: "GET",
+        }).then(function (response) {
             console.log(response)
             $("#dropping").empty()
             var results = response.hits;
-        for (var i = 0; i < results.length; i++) {
-            var imgLocation = $("<div class='cityPictures'>");
-            var urlsrc = results[i].largeImageURL;
-            //console.log(urlsrc)
-            var pic = $("<img>").addClass("pic rounded-circle").attr("src", urlsrc);
-            imgLocation.append(pic);
-            $("#dropping").append(imgLocation);
-        }
+            for (var i = 0; i < results.length; i++) {
+                var imgLocation = $("<div class='cityPictures'>");
+                var urlsrc = results[i].largeImageURL;
+                //console.log(urlsrc)
+                var pic = $("<img>").addClass("pic rounded-circle").attr("src", urlsrc);
+                imgLocation.append(pic);
+                $("#dropping").append(imgLocation);
+            }
         })
 
     }
