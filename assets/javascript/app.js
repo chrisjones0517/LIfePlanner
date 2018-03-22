@@ -107,7 +107,7 @@ $(document).ready(function () {
             });
         });
 
-        console.log(cityState);
+        console.log(cityState);      
         
         // City Data /////////////////////////////////////////////////////////////////////////////////////////////////
 
