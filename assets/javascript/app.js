@@ -1,23 +1,6 @@
 $(document).ready(function () {
 
-    $('#schoolInfo').append(`
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th scope="col">School Name</th>
-                        <th scope="col">Type</th>
-                        <th scope="col">Grade Range</th>
-                        <th scope="col">Parent Ratings</th>
-                        <th scope="col">GreatSchools Ratings</th>
-                        <th scope="col">Website</th>
-                    </tr>
-                </thead>
-                <tbody id="schoolTable">
-                </tbody>
-            </table>
-    `);
-
-
+    
     $('#submit').on('click', function (e) {
 
         e.preventDefault();
@@ -28,7 +11,12 @@ $(document).ready(function () {
         var myArr = cityStateCountry.split(',');
         var city = myArr[0].trim();
         var state = myArr[1].trim();
-        var cityState = myArr[0] + ',' + myArr[1];
+        var cityStateWithSpace = myArr[0] + ',' + myArr[1];
+        var cityState = cityStateWithSpace.replace(', ', ',');
+        console.log(city);
+        console.log(state);
+        
+        
         console.log(cityState);
 
         //Return the City and State
@@ -107,6 +95,7 @@ $(document).ready(function () {
                 }
             });
         });
+        
         console.log(cityState);
         // Numbeo goes here
         var numbeoUrl = `http://anyorigin.com/go?url=https%3A//www.numbeo.com/api/indices%3Fapi_key%3D2iev2m2k4slcbo%26query%3D${cityState}&callback=?`;
@@ -121,6 +110,11 @@ $(document).ready(function () {
             var pollutionIndex = Math.round(myData.pollution_index);
             var qualityOfLifeIndex = Math.round(myData.quality_of_life_index);
             console.log(myData);
+            $('#careerStats').append(`
+                <p>
+            
+            `);
+            
             $('#statsName').text(statsName);
             $('#costOfLiving').text(costOfLiving);
             $('#housingToIncomeRatio').text(housingToIncomeRatio);
@@ -162,20 +156,31 @@ $(document).ready(function () {
          //   $('#schoolInfo').text(xmlDoc.getElementsByTagName('name')[0].childNodes[0].nodeValue);
             console.log(xmlDoc.getElementsByTagName('name')[0].childNodes[0].nodeValue);
             console.log(school);
-            console.log(school[0].children[1].textContent);
+           // console.log(school[0].children[1].textContent);
 
 
             for (var i = 0; i < school.length; i++) {
-
-                $('#schoolTable').append(`
-                    <tr>
-                        <td>${school[i].children[1].textContent}</td>   // name
-                        <td>${school[i].children[2].textContent}</td>   //type
-                        <td>${school[i].children[3].textContent}</td>   // grade range
-                        <td>${school[i].children[6].textContent}</td>   // parent ratings 
-                        <td>${school[i].children[5].textContent}</td>   // gs ratings
-                        <td><a href="${school[i].children[15].textContent}" target="_blank">Learn More</a></td>  // website
-                    </tr>
+                var parentRating = school[i].children[6].textContent;
+                var gsRating = school[i].children[5].textContent;
+                if (parentRating !== '1' && parentRating !== '2' && parentRating !== '3' && parentRating !== '4' && parentRating !== '5') {
+                    school[i].children[6].textContent = 'N/A';
+                }
+                if (gsRating !== '1' && gsRating !== '2' && gsRating !== '3' && gsRating !== '4' && gsRating !== '5') {
+                    school[i].children[5].textContent = 'N/A';
+                }
+                
+                $('.container').append(`
+                    <div class="outerSchoolDiv">
+                        <span>${school[i].children[1].textContent}</span>  
+                        <span>${school[i].children[2].textContent}</span>
+                        <span>${school[i].children[3].textContent}</span>   
+                        <div class="innerSchoolDiv">
+                            <span>Parent Rating: ${school[i].children[6].textContent}</span><br>                               
+                            <span>GreatSchools Rating: ${school[i].children[5].textContent}</span><br>
+                            <span class="gsRatingDesc">(1 - 10)</span>   
+                            <span class="schoolLink"><a href="${school[i].children[15].textContent}" target="_blank">Learn More</a></span> 
+                        </div>
+                    </div>
                 `);
             }
 
@@ -185,6 +190,19 @@ $(document).ready(function () {
         });
     });
 
+    function formatDollar(num) {
+        var p = num.toFixed().split(".");
+        return "$" + p[0].split("").reverse().reduce(function (acc, num, i, orig) {
+            return num == "-" ? acc : num + (i && !(i % 3) ? "," : "") + acc;
+        }, "");
+    }
+
+    function formatCommas(num) {
+        var p = num.toFixed().split(".");
+        return p[0].split("").reverse().reduce(function (acc, num, i, orig) {
+            return num == "-" ? acc : num + (i && !(i % 3) ? "," : "") + acc;
+        }, "");
+    }
 
     $('#weather').on('click', function (e) {
         e.preventDefault();
@@ -315,13 +333,6 @@ $(document).ready(function () {
         //});
     }
 
-
-    function formatDollar(num) {
-        var p = num.toFixed().split(".");
-        return "$" + p[0].split("").reverse().reduce(function (acc, num, i, orig) {
-            return num == "-" ? acc : num + (i && !(i % 3) ? "," : "") + acc;
-        }, "");
-    }
     ///google auto city 
     var input = document.getElementById('autocomplete');
     var search = new google.maps.places.Autocomplete(input, { types: ['(regions)'] });

@@ -6,3 +6,16 @@
     width: 150px;
     padding: 10px;
 }
+
+.innerSchoolDiv {
+    border: 1px solid black;
+}
+
+.gsRatingDesc {
+    font-weight: 300;
+}
+
+.schoolLink {
+    float: right;
+    margin-right: 2rem;
+}
