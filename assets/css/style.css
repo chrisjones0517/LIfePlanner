@@ -1,3 +1,8 @@
 .bold, .occupation, .location {
     font-weight: 700;
 }
+.pic{
+    height: 150px;
+    width: 150px;
+    padding: 10px;
+}
