@@ -22,29 +22,37 @@
 </head>
 
 <body>
-
-    <div class="userReg animated flipInY">
-        <div class="register float-left mr-2">
-            <label for="username">username: </label>
-            <input type="text" id="username"> <br>
-            <label for="password">password:</label>
-            <input type="password" id="password"> <br>
-            <label for="fullname">full name:</label>
-            <input type="text" id="fullname"> <br>
-            <button id="send">register</button>
-        </div>
-        <div class="login float-left mr-4">
-            <label for="username1">username: </label>
-            <input type="text" id="username1"> <br>
-            <label for="password1">password:</label>
-            <input type="password" id="password1"> <br>
-            <button id="compare">login</button>
-        </div>
-        <div class="guest">
-            login as guest
+    <div class="screen">
+        <div class="userReg animated flipInY">
+            <div class="toplabel">
+                Welcome to Life Planner!
+            </div>
+            <div class="register float-left mr-2">
+                <p class = "userheadtext">New User:</p>
+                <hr>
+                <label for="username">Username: </label>
+                <input type="text" id="username"> <br>
+                <label for="password">Password:</label>
+                <input type="password" id="password"> <br>
+                <label for="fullname">Full name:</label>
+                <input type="text" id="fullname"> <br>
+                <button id="send">Register</button>
+            </div>
+            <div class="login float-left mr-4">
+                <p class = "userheadtext">Current User:</p>
+                <hr>
+                <label for="username1">Username: </label>
+                <input type="text" id="username1"> <br>
+                <label for="password1">Password:</label>
+                <input type="password" id="password1"> <br>
+                <button id="compare">Login</button>
+            </div>
+            <div class="guest">
+                <button id = "guest">Login as guest</button>
+            </div>
         </div>
     </div>
-
+        
     <script src="./assets/javascript/firebase.js"></script>
 </body>
 

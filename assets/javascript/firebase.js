@@ -98,6 +98,12 @@ $(document).ready(function () {
         }
     })
 
+    $("#guest").on("click", function(){
+        $(".userReg").toggleClass("flipInY hinge")
+        setTimeout (function(){
+            $(".screen").hide();
+        },2500)
+    })
 
 
 });
