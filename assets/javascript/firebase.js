@@ -15,7 +15,7 @@ $(document).ready(function () {
     var dbIndex;
     var snapshot,
         snapshotVal,
-        userLogin; //store login info
+        userLogin =[]; //store login info
 
 
     //register new user
@@ -57,8 +57,16 @@ $(document).ready(function () {
                         passkey: userPassword,
                         fullname: userFullName
                     });
-                    //store user for later use
 
+                    var x = {
+                        id: dbIndex,
+                        name: userName,
+                        passkey: userPassword,
+                        fullname: userFullName
+                    }
+                    //store user for later use
+                    userLogin.push(x);
+                    console.log(userLogin); 
                 } //end of username comparison
             }
         } else {
