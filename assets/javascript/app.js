@@ -150,7 +150,7 @@ $(document).ready(function () {
         console.log(city);
 
         // school data ////////////////////////////////////////////////////////////////////////////////////////
-        
+        var makeError
         var schoolUrl = `http://anyorigin.com/go?url=https%3A//api.greatschools.org/schools/${state}/${city}/public/%3Fkey%3Dc3fa23155c53d73ae3e185eb12ec0b84%26sort%3Dparent_rating%26limit%3D20&callback=?`;
 
         $.getJSON(schoolUrl, function (data) {
