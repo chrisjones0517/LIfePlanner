@@ -14,7 +14,8 @@ $(document).ready(function () {
     var db = firebase.database();
     var dbIndex;
     var snapshot,
-        snapshotVal;
+        snapshotVal,
+        userLogin; //store login info
 
 
     //register new user
@@ -46,13 +47,19 @@ $(document).ready(function () {
                 } else {
                     console.log("registered")
                     //users tree in firebase
+                    $(".userReg").addClass("flipOutY");
+                    setTimeout(() => {
+                        $(".screen").hide();
+                    }, 1000);
                     db.ref("users/" + dbIndex).set({
                         id: dbIndex,
                         name: userName,
                         passkey: userPassword,
                         fullname: userFullName
                     });
-                }
+                    //store user for later use
+
+                } //end of username comparison
             }
         } else {
             var message = "Please fill in all the fields";
@@ -64,12 +71,20 @@ $(document).ready(function () {
 
     function getSalty(selector, text) {
         $(selector).addClass("shake");
+        $(selector).css({
+            "background": "var(--red)",
+            "border": "var(--red)"
+        })
         $(".userReg").css("height", "310px")
-        setTimeout(() => {
-            $("#regMessage").text(text)   
+        setTimeout(() => { // delay to show message
+            $("#regMessage").text(text);
         }, 500);
-        
+
         setTimeout(function () {
+            $(selector).css({ // delay to reset to defaults
+                "background": "var(--blue)",
+                "border": "var(--blue)"
+            });
             $(selector).removeClass("shake");
             $(".userReg").css("height", "280px")
             $("#regMessage").text("")
@@ -98,12 +113,13 @@ $(document).ready(function () {
     // login 
     $("#compare").on("click", function () {
         var compareUser = $("#username1").val();
+        compareUser = compareUser.toLowerCase();
         var comparePass = $("#password1").val();
         var clickedButton = "#compare"
 
 
-        //login array will hold user data
-        var userLogin = $.grep(snapshotVal, function (val) {
+        //userlogin array will hold user data
+        userLogin = $.grep(snapshotVal, function (val) {
 
             //bring user information based on login info
             //compare against username and password
@@ -112,9 +128,13 @@ $(document).ready(function () {
         console.log(userLogin)
         if (userLogin.length) { //if array length is 1 => true
             console.log("good to go")
+            $(".userReg").addClass("flipOutY");
+            setTimeout(() => {
+                $(".screen").hide();
+            }, 1000);
         } else {
             var message = "Either username or password is incorrect";
-            getSalty(clickedButton, message)
+            getSalty(clickedButton, message);
         }
     })
 
