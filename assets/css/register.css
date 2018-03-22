@@ -1,0 +1,18 @@
+.userReg {
+    position: absolute;
+    top:calc(50vh - 100px);
+    left: calc(50vw - 400px);
+    width: 800px;
+    height: 200px;
+    background: var(--blue);
+    color: #FFF;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 5px;
+    border-radius: 10px;
+}
+
+.register, .login {
+    border-right: 1px solid #888;
+    height: 180px;
+}
