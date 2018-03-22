@@ -1,4 +1,5 @@
 .screen {
+    position: fixed;
     background: rgba(0, 0, 0, 0.671);
     width: 100vw;
     height: 100vh;
@@ -12,7 +13,8 @@
     height: 280px;
     border-radius: 10px;
     border: 3px solid var(--blue);
-    background: #FFF
+    background: #FFF;
+    transition: .5s
 }
 
 .toplabel {
@@ -28,7 +30,7 @@
 }
 
 
-.register, .login {
+.register, .login, .guest {
     border-right: 1px solid #ccc;
     height: 220px;
 }
@@ -88,4 +90,12 @@ hr {
 #guest {/* guest button */
     margin: 0px;
     transform: translateX(-10px)
+}
+
+#regMessage {
+    padding-left: 20px;
+    font-size: 25px;
+    color: var(--red);
+    font-weight: bold;
+    font-style: italic;
 }

@@ -22,7 +22,7 @@
 </head>
 
 <body>
-    <div class="screen">
+    <div class="screen animated">
         <div class="userReg animated flipInY">
             <div class="toplabel">
                 Welcome to Life Planner!
@@ -36,7 +36,7 @@
                 <input type="password" id="password"> <br>
                 <label for="fullname">Full name:</label>
                 <input type="text" id="fullname"> <br>
-                <button id="send">Register</button>
+                <button id="send" class="animated">Register</button>
             </div>
             <div class="login float-left mr-4">
                 <p class = "userheadtext">Current User:</p>
@@ -45,11 +45,12 @@
                 <input type="text" id="username1"> <br>
                 <label for="password1">Password:</label>
                 <input type="password" id="password1"> <br>
-                <button id="compare">Login</button>
+                <button id="compare" class="animated">Login</button>
             </div>
-            <div class="guest">
+            <div class="guest clearfix">
                 <button id = "guest">Login as guest</button>
             </div>
+            <p id = "regMessage"></p>
         </div>
     </div>
         

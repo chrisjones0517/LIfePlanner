@@ -23,14 +23,16 @@ $(document).ready(function () {
         userName = userName.toLowerCase();
         var userPassword = $("#password").val();
         var userFullName = $("#fullname").val();
+        var clickedButton = "#send"
 
         //validation
         //all feilds should have some values
-        if (userName != "" && userPassword != "" && userFullName != "" && userProfession != "") {
+        if (userName != "" && userPassword != "" && userFullName != "") {
 
             if (userPassword.length < 8) {
                 console.log(userPassword)
-                console.log("password should be 8 characters or more!")
+                var message = "password should be 8 characters or more!";
+                getSalty(clickedButton, message);
             } else {
 
                 var compareUsername = $.grep(snapshotVal, function (val) {
@@ -38,7 +40,9 @@ $(document).ready(function () {
                 });
 
                 if (compareUsername.length) { //if length is 1 => true
-                    console.log("Name already used")
+                    var message = "Name already used";
+                    getSalty(clickedButton, message);
+
                 } else {
                     console.log("registered")
                     //users tree in firebase
@@ -46,17 +50,31 @@ $(document).ready(function () {
                         id: dbIndex,
                         name: userName,
                         passkey: userPassword,
-                        profession: userProfession,
                         fullname: userFullName
                     });
                 }
             }
         } else {
-            console.log("please fill in all the fields")
+            var message = "Please fill in all the fields";
+            getSalty(clickedButton, message);
         }
 
 
     })
+
+    function getSalty(selector, text) {
+        $(selector).addClass("shake");
+        $(".userReg").css("height", "310px")
+        setTimeout(() => {
+            $("#regMessage").text(text)   
+        }, 500);
+        
+        setTimeout(function () {
+            $(selector).removeClass("shake");
+            $(".userReg").css("height", "280px")
+            $("#regMessage").text("")
+        }, 2000)
+    }
 
 
 
@@ -81,6 +99,7 @@ $(document).ready(function () {
     $("#compare").on("click", function () {
         var compareUser = $("#username1").val();
         var comparePass = $("#password1").val();
+        var clickedButton = "#compare"
 
 
         //login array will hold user data
@@ -94,15 +113,16 @@ $(document).ready(function () {
         if (userLogin.length) { //if array length is 1 => true
             console.log("good to go")
         } else {
-            console.log("try again")
+            var message = "Either username or password is incorrect";
+            getSalty(clickedButton, message)
         }
     })
 
-    $("#guest").on("click", function(){
+    $("#guest").on("click", function () {
         $(".userReg").toggleClass("flipInY hinge")
-        setTimeout (function(){
-            $(".screen").hide();
-        },2500)
+        setTimeout(function () {
+            $(".screen").hide(1000);
+        }, 2500)
     })
 
 
