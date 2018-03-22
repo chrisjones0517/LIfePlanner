@@ -1,5 +1,21 @@
 $(document).ready(function () {
 
+    $('#schoolInfo').append(`
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">School Name</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Grade Range</th>
+                        <th scope="col">Parent Ratings</th>
+                        <th scope="col">GreatSchools Ratings</th>
+                        <th scope="col">Website</th>
+                    </tr>
+                </thead>
+                <tbody id="schoolTable">
+                </tbody>
+            </table>
+    `);
 
 
     $('#submit').on('click', function (e) {
@@ -124,43 +140,46 @@ $(document).ready(function () {
 
         console.log(state);
         console.log(city);
-        var schoolUrl = `http://anyorigin.com/go?url=https%3A//api.greatschools.org/schools/${state}/${city}/public/%3Fkey%3Dc3fa23155c53d73ae3e185eb12ec0b84&callback=?`;
+
+        var schoolUrl = `http://anyorigin.com/go?url=https%3A//api.greatschools.org/schools/${state}/${city}/public/%3Fkey%3Dc3fa23155c53d73ae3e185eb12ec0b84%26sort%3Dparent_rating%26limit%3D20&callback=?`;
 
         $.getJSON(schoolUrl, function (data) {
 
-
-         //   console.log(data.contents);
+            //   console.log(data.contents);
             var text, parser, xmlDoc;
             text = data.contents;
             parser = new DOMParser();
             xmlDoc = parser.parseFromString(text, "text/xml");
             var schoolArr = [];
-            var schoolAttrArr = [];
-            var name = xmlDoc.getElementsByTagName('name');
-            var gradeRange = xmlDoc.getElementsByTagName('gradeRange');
-            var parentRating = xmlDoc.getElementsByTagName('parentRating');
-            var gsRating = xmlDoc.getElementsByTagName('gsRating');
-            var type = xmlDoc.getElementsByTagName('type');
-            var enrollment = xmlDoc.getElementsByTagName('enrollment');
-            var address = xmlDoc.getElementsByTagName('address');
-            var phone = xmlDoc.getElementsByTagName('phone');
 
 
-            $('#schoolInfo').text(xmlDoc.getElementsByTagName('name')[0].childNodes[0].nodeValue);
+
+
+            var school = xmlDoc.getElementsByTagName('school');
+
+            console.log(name.length);
+
+         //   $('#schoolInfo').text(xmlDoc.getElementsByTagName('name')[0].childNodes[0].nodeValue);
             console.log(xmlDoc.getElementsByTagName('name')[0].childNodes[0].nodeValue);
-            for (var i = 0; i < 20; i++) {
-                
-                schoolAttrArr.push(
-                name[i].childNodes[0].nodeValue,
-                type[i].childNodes[0].nodeValue,
-                gradeRange[i].childNodes[0].nodeValue,
-                parentRating[i].childNodes[0].nodeValue,
-                gsRating[i].childNodes[0].nodeValue,
-                enrollment[i].childNodes[0].nodeValue,
-                address[i].childNodes[0].nodeValue,
-                phone[i].childNodes[0].nodeValue);
-                schoolArr.push(schoolAttrArr[i], + ' next school');
+            console.log(school);
+            console.log(school[0].children[1].textContent);
+
+
+            for (var i = 0; i < school.length; i++) {
+
+                $('#schoolTable').append(`
+                    <tr>
+                        <td>${school[i].children[1].textContent}</td>   // name
+                        <td>${school[i].children[2].textContent}</td>   //type
+                        <td>${school[i].children[3].textContent}</td>   // grade range
+                        <td>${school[i].children[6].textContent}</td>   // parent ratings 
+                        <td>${school[i].children[5].textContent}</td>   // gs ratings
+                        <td><a href="${school[i].children[15].textContent}" target="_blank">Learn More</a></td>  // website
+                    </tr>
+                `);
             }
+
+
             console.log(schoolArr);
 
         });
@@ -293,6 +312,7 @@ $(document).ready(function () {
             })
         //});
     }
+
 
     function formatDollar(num) {
         var p = num.toFixed().split(".");
