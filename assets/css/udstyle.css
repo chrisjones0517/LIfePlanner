@@ -1,10 +1,10 @@
 body {
     background: rgb(204, 228, 255);
 }
-.container {
+/* .container {
     background: rgba(255, 255, 255, 0.301);
     box-shadow: 0px 0px 20px #555;
-}
+} */
 
 .searchbox {
     text-align: center;

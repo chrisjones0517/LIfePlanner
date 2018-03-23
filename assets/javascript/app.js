@@ -401,7 +401,7 @@ $(document).ready(function () {
     });
     //end 
     function pullingCityPic() {
-        var queryURL = "https://pixabay.com/api/?key=8449388-e25d53a8bbc2d9948e151d998&q=" + city + "&image_type=photo";
+        var queryURL = "https://pixabay.com/api/?key=8449388-e25d53a8bbc2d9948e151d998&q=" + city + "&image_type=photo&per_page=5";
         $.ajax({
             url: queryURL,
             method: "GET",
