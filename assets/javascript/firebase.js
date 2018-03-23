@@ -90,8 +90,8 @@ $(document).ready(function () {
 
         setTimeout(function () {
             $(selector).css({ // delay to reset to defaults
-                "background": "var(--blue)",
-                "border": "var(--blue)"
+                "background": "var(--green)",
+                "border": "var(--green)"
             });
             $(selector).removeClass("shake");
             $(".userReg").css("height", "280px")
@@ -118,7 +118,7 @@ $(document).ready(function () {
     })
 
 
-    // login 
+    // login button
     $("#compare").on("click", function () {
         var compareUser = $("#username1").val();
         compareUser = compareUser.toLowerCase();
@@ -147,7 +147,7 @@ $(document).ready(function () {
     })
 
     $("#guest").on("click", function () {
-        $(".userReg").toggleClass("flipInY hinge")
+        $(".screen").addClass("fadeOut")
         setTimeout(function () {
             $(".screen").hide(1000);
         }, 2500)
