@@ -2,7 +2,7 @@ $(document).ready(function () {
 
 
     $('#submit').on('click', function (e) {
-
+console.log("was clicked")
         e.preventDefault();
         $("#data").empty();
         var occupation = $('#occupation').val();
