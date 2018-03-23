@@ -2,7 +2,7 @@ $(document).ready(function () {
 
 
     $('#submit').on('click', function (e) {
-
+console.log("was clicked")
         e.preventDefault();
         $("#data").empty();
         var occupation = $('#occupation').val();
@@ -226,7 +226,7 @@ $(document).ready(function () {
         //pullingCityPic()
     });
     var units = 'imperial';
-    var inputWeather = "VEgas, TX"
+    var inputWeather = "San Francisco"
     //weather function
     function WaetherCall() {
         //will take input from search based on lat and long
@@ -300,47 +300,86 @@ $(document).ready(function () {
         })
 
             .then(function (data) {
-                url = "https://www.ncdc.noaa.gov/cdo-web/api/v2/data?datasetid=GSOM&locationid=" + cityToPass + "&datatypeid=TMAX&startdate=2018-01-01&enddate=2018-04-01&units=standard"
+                url = "https://www.ncdc.noaa.gov/cdo-web/api/v2/data?datasetid=GSOM&locationid=" + cityToPass + "&datatypeid=TMAX&startdate=2017-01-01&enddate=2018-01-01&units=standard&limit=1000"
                 $.ajax({
                     url: url,
                     headers: {
                         token: tokenFromNoaa
                     },
                 }).then(function (data) {
-                    console.log(data);
-                    newMaxTemp = (data.results[0].value);
-
-                    // console.log(convertWe)
-                    let myMaxTempPerMonth = new Set();
-                    for (i = 0; i < data.results.length; i++) {
-                        myMaxTempPerMonth = myMaxTempPerMonth.add(moment(data.results[i].date).format('MMM YYYY'));
+                    
+                    data = data.results
+                    let uniqMonthsSet = new Set();
+                    for (i = 0; i < data.length; i++) {
+                        uniqMonthsSet = uniqMonthsSet.add(data[i].date); //Get me only unique line items
                     }
-                    console.log(myMaxTempPerMonth);
-                    var newWeather = Array.from(myMaxTempPerMonth);
-                    console.log(newWeather);
-                    //looping from waether return
-                    $('#newMaxTemp').html('Month max temp: ' + newWeather[0]);
-                    // console.log("imhere"+data)
+                    
+                    var uniqueMonthsArr = Array.from(uniqMonthsSet) //Convert the Set back to an array
+                  
+                  var avgTempsData = []; //Array to store unique Months and AvgTempData
+                  for (i=0; i < uniqueMonthsArr.length; i++) {
+                    var dataPerMonth = data.filter((fromData) => fromData.date.indexOf(uniqueMonthsArr[i]) > -1).length;
+                    var objTemps = getAverageTemp(data, uniqueMonthsArr[i], dataPerMonth); //{month: "Jan 2017", temps: 43}
+                    avgTempsData.push(objTemps[0]);  
+                  }
+    
+                  function getAverageTemp(arr, month, monthlyData) {
+                        var values = arr.filter((fromData) => fromData.date.indexOf(uniqueMonthsArr[i]) > -1)
+                                        .reduce(function(prev, value) { return prev + value.value; }, 0);
+                        var avg = Math.round (values / monthlyData);
+                        var formattedMonth = moment(month).format('MMM'); //"Jan 2017"
+                        var obj = {month: formattedMonth, temps: avg};
+                        //console.log(obj);
+                        return [obj];  
+                  }
+                   /////////////////////loop for getitng TEMP MAX --------------for DISPLAY
+                for (i = 0; i < avgTempsData.length; i++){
+                  var monthToMax = avgTempsData[i].month;
+                  var tempToMax = avgTempsData[i].temps
+                  console.log(monthToMax,tempToMax)
+                    }
+
                 })
                     .then(function (data) {
-                        url = "https://www.ncdc.noaa.gov/cdo-web/api/v2/data?datasetid=GSOM&locationid=" + cityToPass + "&datatypeid=TMIN&startdate=2018-01-01&enddate=2018-04-01&units=standard"
+                        url = "https://www.ncdc.noaa.gov/cdo-web/api/v2/data?datasetid=GSOM&locationid=" + cityToPass + "&datatypeid=TMIN&startdate=2017-01-01&enddate=2018-01-01&units=standard&limit=1000"
                         $.ajax({
                             url: url,
                             headers: {
                                 token: tokenFromNoaa
                             },
                         }).then(function (data) {
-                            console.log(data);
-                            newMaxTemp = (data.results[0].value);
-                            let myMaxTempPerMonth = new Set();
-                            for (i = 0; i < data.results.length; i++) {
-                                myMaxTempPerMonth = myMaxTempPerMonth.add(moment(data.results[i].date).format('MMM YYYY'));
-
+                    
+                            data = data.results
+                            let uniqMonthsSet = new Set();
+                            for (i = 0; i < data.length; i++) {
+                                uniqMonthsSet = uniqMonthsSet.add(data[i].date); //Get me only unique line items
                             }
-                            console.log(myMaxTempPerMonth);
-                            var newWeather = Array.from(myMaxTempPerMonth);
-                            console.log(newWeather);
-                            $('#newMinTemp').html('Month min temp: ' + newWeather[0]);
+                            
+                            var uniqueMonthsArr = Array.from(uniqMonthsSet) //Convert the Set back to an array
+                          
+                          var avgTempsData = []; //Array to store unique Months and AvgTempData
+                          for (i=0; i < uniqueMonthsArr.length; i++) {
+                            var dataPerMonth = data.filter((fromData) => fromData.date.indexOf(uniqueMonthsArr[i]) > -1).length;
+                            var objTemps = getAverageTemp(data, uniqueMonthsArr[i], dataPerMonth); //{month: "Jan 2017", temps: 43}
+                            avgTempsData.push(objTemps[0]);  
+                          }
+            
+                          function getAverageTemp(arr, month, monthlyData) {
+                                var values = arr.filter((fromData) => fromData.date.indexOf(uniqueMonthsArr[i]) > -1)
+                                                .reduce(function(prev, value) { return prev + value.value; }, 0);
+                                var avg = Math.round (values / monthlyData);
+                                var formattedMonth = moment(month).format('MMM'); //"Jan 2017"
+                                var obj = {month: formattedMonth, temps: avg};
+                                //console.log(obj);
+                                return [obj];  
+                          }
+                          //////////////////////////loop for getitng TEMP MIN --------------for DISPLAY
+                        for (i = 0; i < avgTempsData.length; i++){
+                          var monthToMin = avgTempsData[i].month;
+                          var tempToMin = avgTempsData[i].temps
+                          console.log(monthToMin,tempToMin)
+                            }
+        
                         });
                     });
 
@@ -361,7 +400,7 @@ $(document).ready(function () {
     });
     //end 
     function pullingCityPic() {
-        var queryURL = "https://pixabay.com/api/?key=8449388-e25d53a8bbc2d9948e151d998&q=" + city + "&image_type=photo";
+        var queryURL = "https://pixabay.com/api/?key=8449388-e25d53a8bbc2d9948e151d998&q=" + city + "&image_type=photo&per_page=5";
         $.ajax({
             url: queryURL,
             method: "GET",
