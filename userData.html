@@ -13,10 +13,7 @@
     <link rel="stylesheet" href="assets/css/udstyle.css">
     <link rel="stylesheet" href="assets/css/style.css">
     <script src="https://maps.googleapis.com/maps/api/js?libraries=places&language=en&key=AIzaSyC75PI0JP6R87nUSYn4R8iySVG0WGUZqMQ"></script>
-<<<<<<< HEAD
 
-=======
->>>>>>> master
     <title>Life Planner</title>
 </head>
 
@@ -56,7 +53,8 @@
                         </div>
                         <input type="text" id="cityStateZip" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
                         <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
-                        <input class="form-control input-lg" type="text" id="autocomplete" placeholder="Show me the weather in city..." onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search for City here'" />
+                        <input class="form-control input-lg" type="text" id="autocomplete" placeholder="Search" onfocus="this.placeholder = ''"
+                            onblur="this.placeholder = 'Search for City here'" />
 
                     </div>
 
@@ -66,31 +64,22 @@
 
             </div>
 
-            <div class="col-xm-12 col-md-4 my-2">
-                <div class="card">
-                    <div class="card-header bg-warning">
-                        Quote
-                    </div>
-                    <div class="card-body">
-                        <blockquote class="blockquote mb-0">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-                            <footer class="blockquote-footer">Someone famous in
-                                <cite title="Source Title">Source Title</cite>
-                            </footer>
-                        </blockquote>
-                    </div>
-                </div>
-            </div>
-
-
             <div class="col-xm-12 col-md-8 my-2">
                 <div class="card">
                     <div class="card-header bg-warning">
-                        Quote
+                        Weather
                     </div>
                     <div class="card-body">
                         <blockquote class="blockquote mb-0">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                            <p>Weather.</p>
+                            <p id="timeOfLocation"></p>
+                            <p id="city"></p>
+                            <p id="cityPop"></p>
+                            <p id="description"></p>
+                            <p id="highF"></p>
+                            <p id="lowF"></p>
+                            <p id="newMaxTemp"></p>
+                            <p id="newMinTemp"></p>
                             <footer class="blockquote-footer">Someone famous in
                                 <cite title="Source Title">Source Title</cite>
                             </footer>
@@ -98,29 +87,18 @@
                     </div>
                 </div>
             </div>
-        </div>
-
-        <div class="row my-1">
-            <div class="col-xm-12 col-md-6 my-2">
-                <div class="box">
-                    <div class="boxheader py-1">
-                        <p class="h4 pl-4 font-italic">Career Stats</p>
-                    </div>
-                    <div class="boxbody p-2 lead">
-                        <p><strong>US Median Per Capita Income:</strong> $29,829</p>
-                        <p><strong>US Median Income for <span class="occupation"></span>:</strong> <span id="USwages"></span></p>
-                        <p><strong>Median Income for <span class="occupation"></span> in <span id="location"></span>:</strong> <span id="medianCityWages"></span></p>
-                    </div>
-                </div>
-            </div>
 
 
 
-            <div class="col-xm-12 col-md-6 my-2">
+            <div class="col-xm-12 col-md-4 my-2">
+
+
                 <div class="card">
-                    <div class="card-header">
-                        Quote
+                    <div class="card-header bg-warning">
+                        Schools
                     </div>
+                    <div id="schoolInfo" class="card-body">
+                        
                     <div class="card-body">
                         <blockquote class="blockquote mb-0">
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
@@ -128,30 +106,71 @@
                                 <cite title="Source Title">Source Title</cite>
                             </footer>
                         </blockquote>
+
                     </div>
                 </div>
             </div>
         </div>
 
-        
-        
-        
-    </div>
-    <div class="spacer"></div>
-    
-    <div class="currentstat"></div>
+  
+
+            <div class="row my-1">
+
+                <div class="col-xm-12 col-md-6 my-2">
+                    <div class="card">
+                        <div class="card-header bg-warning">
+                            <p class="h4 pl-4 font-italic">Career Stats</p>
+                        </div>
+                        <div id="careerStats" class="card-body">
+                            
+                        </div>
+                    </div>
+                </div>
 
 
 
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.js"></script>
-    <script src="./assets/javascript/data.js"></script>
-    <script src="./assets/javascript/app.js"></script>
+                <div class="col-xm-12 col-md-6 my-2">
+                    <div class="card">
+                        <div class="card-header bg-warning">
+                            City Data
+                        </div>
+                        <div id="cityData" class="card-body">
+                           
+                            <blockquote class="blockquote mb-0">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                                <footer class="blockquote-footer">Someone famous in
+                                    <cite title="Source Title">Source Title</cite>
+                                </footer>
+                            </blockquote>
+                            <div id="dropping">
+                               
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+        </div>
+        <div class="spacer"></div>
+
+        <div class="currentstat"></div>
+
+
+
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.js"></script>
+        <script src="./assets/javascript/data.js"></script>
+        <script src="./assets/javascript/app.js"></script>
+        <!-- Link to Moment.js should go here -->
+        <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
 </body>
 
 </html>
