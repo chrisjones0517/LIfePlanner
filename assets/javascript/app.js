@@ -452,7 +452,7 @@ $(document).ready(function () {
                 var imgLocation = $("<div class='cityPictures'>");
                 var urlsrc = results[i].largeImageURL;
                 //console.log(urlsrc)
-                var pic = $("<img>").addClass("pic rounded-circle").attr("src", urlsrc);
+                var pic = $("<img>").addClass("pic rounded-circle hoverable").attr("src", urlsrc);
                 imgLocation.append(pic);
                 $("#dropping").append(imgLocation);
             }
