@@ -7,6 +7,7 @@ $(document).ready(function () {
 
     $('#submit').on('click', function (e) {
         console.log("was clicked")
+        $(".tohide").show()
         e.preventDefault();
         console.log($('#autocomplete').val());
         if ($('#autocomplete').val() === '') {
