@@ -69,6 +69,11 @@
 .black {
     color: #000;
 }
+
+.checked {
+    color: #ffd700; 
+}
+
 .gftp{
  
     text-align: center;
