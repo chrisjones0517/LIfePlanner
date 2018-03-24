@@ -6,43 +6,38 @@
 }
 
 .userReg {
-    position: absolute;
-    top:calc(50vh - 100px);
-    left: calc(50vw - 400px);
-    width: 850px;
-    height: 280px;
+    position: relative;
+    top:calc(50vh - 300px);
+    left: calc(50vw - 250px);
+    width: 500px;
+    height: 305px;
     border-radius: 5px;
-    border: 3px solid var(--green);
+    border: 3px solid #f8a725;
     background: #FFF;
     transition: .5s
 }
 
-.toplabel {
-    margin-bottom: 5px;
-    padding: 5px;
-    width: 100%;
-    padding-left: 10px;
-    background: var(--green);
-    color: #FFF;
-    font-size: 18px;
-    font-weight: bold;
-
+.wrapper {
+    position: relative;
 }
 
 
-.register, .login, .guest {
-    border-right: 1px solid #ccc;
-    height: 220px;
+.register, .login {
+    position: absolute;
+    top: 40px;
+    left: 10px;
+    height: 280px;
 }
 
 .register {
     padding: 10px 10px 0; 
-    float: left;
+    
+    
 }
 
 .login {
     padding: 20px 10px 0; 
-    float: left;
+
 }
 
 .guest {
@@ -71,19 +66,19 @@ hr {
 .userReg input {
     padding-left: 10px;
     border: transparent;
-    border-bottom: 1px dashed var(--green)
+    border-bottom: 2px dashed var(--blue);
+    width:315px;
 }
 
 .userReg input:focus {
     outline: transparent;
 }
 
-.userReg button {
+.wrapper button {
     padding: 10px 20px;
-    background: var(--green);
-    border: var(--grenn);
+    border:2px solid #ccc;
     border-radius: 5px;
-    color: #fff;
+    color: #000;
     font-weight: bold;
     margin: 10px 20px 0;
     transition: .5s
@@ -94,16 +89,53 @@ hr {
 }
 
 
-#guest {/* guest button */
+.guest {/* guest div */
+    position: absolute;
     margin: 0px;
+    right: -36px;
+    top: 220px;
+    transition: .5s;
+}
+
+#guest {  /* guest button */
+    border-radius: 33px;
+    height: 60px;
 }
 
 #regMessage {
+    position: absolute;
+    top: 300px;
     padding-left: 15px;
-    font-size: 25px;
+    font-size: 20px;
     color: var(--red);
     font-weight: bold;
     font-style: italic;
 }
 
+.regHidden {
+    display: none;
+}
+
+.btnReg {
+    position: absolute;
+    top: -40px;
+    border-radius: 0px !important;
+    background: #f8a725!important;
+    border:10px solid #f8a725!important;
+    width: 200px;
+    transition: .5s;
+    font-size: 20px;
+}
+
+.btnReg:hover {
+    background: #d68605!important;
+}
+
+.btnSign {
+    left: 42px;
+}
+
+.btnLog {
+    left:242px;
+}
 

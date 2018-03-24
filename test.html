@@ -17,45 +17,65 @@
     <title>Document</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
         crossorigin="anonymous">
-        <link rel="stylesheet" href="./assets/css/register.css">
-        <link rel="stylesheet" href="./assets/css/animate.css">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css" integrity="sha384-v2Tw72dyUXeU3y4aM2Y0tBJQkGfplr39mxZqlTBDUZAb9BGoC40+rdFCG0m10lXk"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/fontawesome.css" integrity="sha384-q3jl8XQu1OpdLgGFvNRnPdj5VIlCvgsDQTQB6owSOHWlAurxul7f+JpUOVdAiJ5P"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="./assets/css/register.css">
+    <link rel="stylesheet" href="./assets/css/animate.css">
 </head>
 
 <body>
     <div class="screen animated">
         <div class="userReg animated fadeInDown">
-            <div class="toplabel">
-                Welcome to Life Planner!
+                <button class = "btnReg btnSign">Register</button>
+                <button class = "btnReg btnLog">Login</button>
+
+            <div class="wrapper">
+                <div class="register mr-2">
+                    <p class="userheadtext">New User:</p>
+                    <hr><br>
+                    <label for="username" class = "lead">
+                        <i class="fas fa-user"></i> Username: </label>
+                    <input type="text" id="username">
+                    <br>
+                    <label for="password" class = "lead">
+                        <i class="fas fa-lock"></i> Password:</label>
+                    <input type="password" id="password">
+                    <br>
+                    <label for="fullname" class = "lead">
+                        <i class="fas fa-sticky-note"></i> Full name:</label>
+                    <input type="text" id="fullname">
+                    <br>
+                    <button id="send" class="animated">Register</button>
+                </div>
+                <div class="login mr-2 regHidden">
+                    <p class="userheadtext">Current User:</p>
+                    <hr><br>
+                    <label for="username1" class = "lead">
+                        <i class="fas fa-user"></i> Username: </label>
+                    <input type="text" id="username1">
+                    <br>
+                    <label for="password1" class = "lead">
+                        <i class="fas fa-lock"></i> Password:</label>
+                    <input type="password" id="password1">
+                    <br>
+                    <button id="compare" class="animated">Login</button>
+                </div>
+                <div class="guest">
+                    <button id="guest"><i class="fas fa-sign-out-alt"></i></button>
+                </div>
+
+
+                <p id="regMessage"></p>
             </div>
-            <div class="register mr-2">
-                <p class = "userheadtext">New User:</p>
-                <hr>
-                <label for="username">Username: </label>
-                <input type="text" id="username"> <br>
-                <label for="password">Password:</label>
-                <input type="password" id="password"> <br>
-                <label for="fullname">Full name:</label>
-                <input type="text" id="fullname"> <br>
-                <button id="send" class="animated">Register</button>
-            </div>
-            <div class="login mr-4">
-                <p class = "userheadtext">Current User:</p>
-                <hr>
-                <label for="username1">Username: </label>
-                <input type="text" id="username1"> <br>
-                <label for="password1">Password:</label>
-                <input type="password" id="password1"> <br>
-                <button id="compare" class="animated">Login</button>
-            </div>
-            <div class="guest clearfix">
-                <button id = "guest">Continue as guest</button>
-            </div>
-            <p id = "regMessage"></p>
+            
         </div>
     </div>
 
-  
-        
+
+
     <script src="./assets/javascript/firebase.js"></script>
 </body>
 

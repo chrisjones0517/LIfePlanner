@@ -83,18 +83,20 @@ $(document).ready(function () {
             "background": "var(--red)",
             "border": "var(--red)"
         })
-        $(".userReg").css("height", "310px")
+        $(".userReg").css("height", "360px");
+        $(".guest").css("top", "275px");
         setTimeout(() => { // delay to show message
             $("#regMessage").text(text);
         }, 500);
 
         setTimeout(function () {
             $(selector).css({ // delay to reset to defaults
-                "background": "var(--green)",
-                "border": "var(--green)"
+                "background": "#ccc",
+                "border": "#ccc"
             });
             $(selector).removeClass("shake");
-            $(".userReg").css("height", "280px")
+            $(".userReg").css("height", "305px")
+            $(".guest").css("top", "220px");
             $("#regMessage").text("")
         }, 2000)
     }
@@ -159,4 +161,13 @@ $(document).ready(function () {
         console.log("e.pageX: " + e.pageX + ", e.pageY: " + e.pageY);
     })
 
+    $(".btnSign").on("click", function (){
+        $(".register").removeClass("regHidden");
+        $(".login").addClass("regHidden");
+    })
+
+    $(".btnLog").on("click", function (){
+        $(".register").addClass("regHidden");
+        $(".login").removeClass("regHidden");
+    })
 });
