@@ -19,15 +19,79 @@
     float: right;
     margin-right: 2rem;
 }
+#dropping {
+    align-content: center;
 
-#schoolsDisplayed {
+}
+
+.gftp{
+    height: 244px;
+    text-align: center;
+
+}
+.cityPictures{
+    display: inline-block;
+    text-align: center;
+    margin: auto
+}
+.mainPicToDrop{
+    text-align: center
+}
+.paddingto{
+    padding: 30px
+}
+.bold {
+    font-weight: 700;
+}
+.pic{
+    height: 150px;
+    width: 150px;
+    padding: 10px;
+}
+
+.innerSchoolDiv {
+    border: 1px solid black;
+}
+
+.gsRatingDesc {
+    font-weight: 300;
+}
+
+.schoolLink {
     float: right;
+    margin-right: 2rem;
+}
+#dropping {
+    align-content: center;
+
 }
 
-.checked {
-    color: #ffd700; 
+.gftp{
+ 
+    text-align: center;
+
+}
+.cityPictures{
+    display: inline-block;
+    text-align: center;
+    margin: auto
+}
+.mainPicToDrop{
+    text-align: center
+}
+.paddingto{
+    padding: 30px
+}
+#submit {margin-top: 50px;}
+#highF{
+    font-size:50px
 }
 
-.blank {
-    color: #000;
+#autocomplete, #occupation{
+    font-size: 20px
+}
+#new{font-size: 100px;}
+#size{
+    width: 350px;
+    padding: 30px
 }
