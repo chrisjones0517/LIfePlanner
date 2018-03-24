@@ -170,7 +170,7 @@ console.log("was clicked")
             console.log(school);
             // console.log(school[0].children[1].textContent);
 
-
+            $('#schoolInfo').empty();
             for (var i = 0; i < school.length; i++) {
                 var parentRating = school[i].children[6].textContent;
                 var gsRating = school[i].children[5].textContent;
@@ -181,7 +181,7 @@ console.log("was clicked")
                     school[i].children[5].textContent = 'N/A';
                 }
                 // add $('#someDiv').empty(); /////////////////////////////////<!-- Important! -->////////////////////////////////
-                $('.container').append(`
+                $('#schoolInfo').append(`
                     <div class="outerSchoolDiv">
                         <span>${school[i].children[1].textContent}</span>  
                         <span>${school[i].children[2].textContent}</span>
