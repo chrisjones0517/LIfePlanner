@@ -65,6 +65,9 @@
     align-content: center;
 
 }
+.checked{
+    color: yellow
+}
 
 .black {
     color: #000;
