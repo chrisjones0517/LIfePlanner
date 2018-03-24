@@ -9,7 +9,7 @@
     position: absolute;
     top:calc(50vh - 100px);
     left: calc(50vw - 400px);
-    width: 800px;
+    width: 850px;
     height: 280px;
     border-radius: 5px;
     border: 3px solid var(--green);
@@ -37,14 +37,16 @@
 
 .register {
     padding: 10px 10px 0; 
+    float: left;
 }
 
 .login {
     padding: 20px 10px 0; 
+    float: left;
 }
 
 .guest {
-    padding: 70px 0px;
+    padding: 20px 0px;
     text-align: center;
 }
 
@@ -94,11 +96,10 @@ hr {
 
 #guest {/* guest button */
     margin: 0px;
-    transform: translateX(-10px)
 }
 
 #regMessage {
-    padding-left: 20px;
+    padding-left: 15px;
     font-size: 25px;
     color: var(--red);
     font-weight: bold;
@@ -106,33 +107,3 @@ hr {
 }
 
 
-/* USER Bubble */
-
-.pulsatingButton {
-    width: 100px;
-    height: 100px;
-    transform: translate(200px , 200px);
-    border: 1px solid rgba(0, 0, 0, 0.15);
-    border-radius: 100%;
-    animation: pulse-shadow 3s infinite;
-
-}
-
- @keyframes pulse-shadow {
-    0% {
-        box-shadow: 0 0;
-    }
-    30% {
-        box-shadow: 0 0;
-    }
-    70% {
-        box-shadow: 0 0 5px 10px rgba(0, 0, 0, 0.2);
-    }
-    70% {
-        box-shadow: 0 0 5px 10px rgba(0, 0, 0, 0.1);
-    }
-
-    90% {
-        box-shadow: 0 0 5px 12px transparent;
-    }
-} 
