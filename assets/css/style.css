@@ -1,97 +1,33 @@
-#visualization {
-    height: 50vw;
+.bold {
+    font-weight: 700;
 }
-
-/* JPRELOADER */
-
-#jpreBar {
-    background-color: #38B25A;
-}
-
-input.wdywfc-text {
-    width: 60%;
-    height: 50px;
-    font-size: 20px;
+.pic{
+    height: 150px;
+    width: 150px;
     padding: 10px;
 }
 
-input.wdywfc-btn {
-    min-width: 200px;
-    height: 50px;
+.innerSchoolDiv {
+    border: 1px solid black;
 }
 
-div.intro-text {
-    border: 0px solid #999;
-    padding: 10px;
-    width: 90%;
-    margin-left: auto;
-    margin-right: auto;
-    cursor: pointer;
+.gsRatingDesc {
+    font-weight: 300;
 }
 
-div.intro-text h2,
-div.intro-text h3 {
-    margin-top: 4px;
+.schoolLink {
+    float: right;
+    margin-right: 2rem;
 }
 
-h2.create-txt-btn:hover {
-    background-color: rgba(255, 255, 255, 0.3);
-    border-color: white;
+#schoolsDisplayed {
+    float: right;
 }
 
-#testimonial-slider {
-    background: #38B25A;
-    color: white;
+.checked {
+    color: #ffd700; 
 }
 
-.emphasized {
-    font-weight: bold;
-    color: #9BC4FF;
-}
-
-#list-text-rotator {
-    color: #69FF93;
-}
-
-.typed-cursor {
-    opacity: 1;
-    -webkit-animation: blink 0.7s infinite;
-    -moz-animation: blink 0.7s infinite;
-    animation: blink 0.7s infinite;
-}
-
-@keyframes blink {
-    0% {
-        opacity: 1;
-    }
-    50% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
-}
-
-@-webkit-keyframes blink {
-    0% {
-        opacity: 1;
-    }
-    50% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
-}
-
-@-moz-keyframes blink {
-    0% {
-        opacity: 1;
-    }
-    50% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
+.blank {
+    color: #000;
 }
