@@ -4,9 +4,10 @@ $(document).ready(function () {
     var city;
 
     $('#submit').on('click', function (e) {
-
+        console.log("was clicked")
         e.preventDefault();
         $("#data").empty();
+       
         var occupation = $('#occupation').val();
         var cityStateCountry = $('#autocomplete').val().trim();
         var medianPerCapUS = '$29,829';
@@ -15,6 +16,16 @@ $(document).ready(function () {
         state = myArr[1].trim();
         var cityStateWithSpace = myArr[0] + ',' + myArr[1];
         var cityState = cityStateWithSpace.replace(', ', ',');
+        console.log(city);
+        console.log(state);
+        WaetherCall();
+
+        console.log(cityState);
+
+
+
+        $('.occupation').text(occupation);
+        $('#location').text(cityState);
 
         // career stats ///////////////////////////////////////////////////////////////////////////////
 
@@ -248,14 +259,15 @@ $(document).ready(function () {
         WaetherCall();
         //pullingCityPic()
     });
+
     var units = 'imperial';
-    var inputWeather = "San Francisco"
+    //var inputWeather = $('#autocomplete')//"San Francisco"
     //weather function
     function WaetherCall() {
         //will take input from search based on lat and long
         //$("#search-input").val().trim() ;
 
-        var queryURL = "http://api.openweathermap.org/data/2.5/forecast?q=" + inputWeather + ",us&APPID=eeda0b646e014b160ccbce009bb655ef";
+        var queryURL = "http://api.openweathermap.org/data/2.5/forecast?q=" + city + ",us&APPID=eeda0b646e014b160ccbce009bb655ef";
         $.ajax({
             url: queryURL,
             method: "GET",
@@ -273,17 +285,21 @@ $(document).ready(function () {
             highF = Math.round(data.list[0].main.temp_max) + '°';
             lowF = Math.round(data.list[0].main.temp_min) + '°';
             description = data.list[0].weather[0].description;
+            const icon2 = data.list[0].weather[0].id;
             console.log(lat, lon)
             console.log(city, cityPop)
             console.log(lowF, highF, description)
-            //appending info
-            $('#city').html('city: ' + city)
-            $('#cityPop').html('cityPop: ' + cityPop);
-            $('#description').html('description: ' + description)
-            $('#highF').html('highF: ' + highF);
+            
+            $('h1.wi').addClass("wi-owm-"+icon2)
+            $('#highF').html(highF);
+           $('#city').html(city)
+            $('#cityPop').html(' City population: ' + cityPop);
+            $('#description').html( description)
+            
             $('#lowF').html('lowF: ' + lowF);
             //based on weather lat and lon grabbing time information
             var times_Stamp = (Math.round((new Date().getTime()) / 1000)).toString();
+            
             $.ajax({
                 url: "https://maps.googleapis.com/maps/api/timezone/json?location=" + lat + "," + lon + "&timestamp=" + times_Stamp,
                 type: "POST",
@@ -291,7 +307,8 @@ $(document).ready(function () {
                 var Cur_Date = new Date();
                 var UTC = Cur_Date.getTime() + (Cur_Date.getTimezoneOffset() * 60000);
                 var Loc_Date = new Date(UTC + (1000 * response.rawOffset) + (1000 * response.dstOffset));
-                $("#timeOfLocation").html('Current Time : ' + Loc_Date);
+                var formatTime = moment(Loc_Date).format(("MMM Do, hh:mm"));
+                $("#timeOfLocation").html(formatTime);
                 getHist()
                 pullingCityPic()
 
