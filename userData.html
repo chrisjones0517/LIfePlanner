@@ -35,47 +35,36 @@
 </head>
 
 <body>
-    <header>
-        <div class="navbar  bg-dark">
-            <div class="logo">
-                <p>
-                    <span class="text-light">Stay</span>
-                    <span class="text-success font-bold">Fit</span>
-                </p>
+    <header id="header" class="header-section section section-dark navbar navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header navbar-left">
+                <!-- RESPONSIVE MENU BUTTON -->
+
+                <!-- HEADER LOGO      -->
+                <a class="navbar-logo navbar-brand anchor-link" href="/" id="logo">
+                    Life Planner
+                </a>
             </div>
+            <nav id="navigation" class="navigation navbar-collapse collapse navbar-right">
+                <!-- NAVIGATION LINKS -->
+            </nav>
         </div>
     </header>
-    <div class="container-fluid mt-3">
-
-
-        <div class="row">
-
-            <!-- card for suggested meals -->
-            <div class="col-sm-12 col-md-9">
-
-                </ul>
-
-                </nav>
-
-            </div>
-
-            <!-- card for Search -->
-
-        </div>
-
-    </div>
-    </div>
-    </div>
-    <!-- HERO START LINK -->
-    <a href="#headline" class="hero-start-link anchor-link">
-        <span class="fa fa-angle-double-down"></span>
-    </a>
     </section>
     <!-- HOW IT WORKS ================================= -->
     <section id="how-it-works" class="how-it-works-section section">
         <div class="container-fluid">
-            <h2 class="section-heading text-center">LOOKING FOR CHANGE</h2>
-
+            <h2 class="section-heading text-center ">
+                <div class="hero-heading text-center" data-animation="fadeIn">
+                    <div class="intro-text">
+                        <h2>
+                            <span id="list-text-rotator" class="emphasized">
+                                <br/>
+                            </span>
+                        </h2>
+                    </div>
+                </div>
+            </h2>
         </div>
 
     </section>
@@ -112,7 +101,68 @@
         </div>
     </section>
     <!-- FAQ ================================= -->
-    <section id="faq" class="faq-section section ">
+    <section id="closing" class="closing-section   section tohide">
+            <div class="container">
+                <h2 class="section-heading">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <!-- CITY DATA  -->
+                                <label>City Data</label>
+                                <div id="cityData" class="card-body">
+                                    <blockquote class="blockquote mb-0">
+                                        <!--  -->
+                                        <footer class="blockquote-footer">Someone famous in
+                                            <cite title="Source Title">Source Title</cite>
+                                        </footer>
+                                    </blockquote>
+                                   
+                                </div>
+                                <!-- Profession search end here -->
+                            </div>
+    
+                            <div class="col-md-7">
+                                <!-- city search  -->
+                                <label>Career Stats</label>
+                                <div id="careerStats" class="card-body">
+                                    <blockquote class="blockquote mb-0">
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                                        <footer class="blockquote-footer">Someone famous in
+                                            <cite title="Source Title">Source Title</cite>
+                                        </footer>
+                                    </blockquote>
+                                </div>
+                                <!-- ends here  -->
+                            </div>
+    
+                        </div>
+                    </div>
+                </h2>
+                <!-- ++++++++++++++++++++++++++++++++++++++++++ -->
+            </div>
+        </section>
+    <!-- CLOSING ================================= -->
+    <section id="faq" class="faq-section  orange lighten-3 section tohide">
+        <div class="container">
+            <h2 class="section-heading text-center">City Pictures</h2>
+            <div class="faq-row row">
+                <div class="col-md-12">
+                    <!-- <div class="faq-item"> -->
+
+                    <div id="dropping" class="card-body text-center ">
+
+                    </div>
+                    <!-- </div> -->
+                </div>
+
+            </div>
+        </div>
+        </div>
+    </section>
+    <!-- #64b5f6 blue lighten-2
+
+ -->
+ <section id="faq" class="faq-section section tohide">
         <div class="container">
             <h2 class="section-heading text-center ">Weather Information</h2>
             <div class="faq-row row">
@@ -152,82 +202,10 @@
         </div>
         </div>
     </section>
-    <!-- CLOSING ================================= -->
-    <section id="faq" class="faq-section  orange lighten-3 section">
-        <div class="container">
-            <h2 class="section-heading text-center">City Pictures</h2>
-            <div class="faq-row row">
-                <div class="col-md-12">
-                    <!-- <div class="faq-item"> -->
-
-                    <div id="dropping" class="card-body text-center ">
-
-
-                    </div>
-                    <!-- </div> -->
-                </div>
-
-            </div>
-        </div>
-        </div>
-    </section>
-    <!-- #64b5f6 blue lighten-2
-
- -->
-    <section id="closing" class="closing-section   section">
-        <div class="container">
-
-            <h2 class="section-heading">
-
-                <div class="container">
-
-                    <div class="row">
-
-                        <div class="col-md-5">
-                            <!-- CITY DATA  -->
-                            <label>City Data</label>
-                            <div id="cityData" class="card-body">
-                                <blockquote class="blockquote mb-0">
-                                    <!--  -->
-                                    <footer class="blockquote-footer">Someone famous in
-                                        <cite title="Source Title">Source Title</cite>
-                                    </footer>
-                                </blockquote>
-                                <div id="dropping">
-
-                                </div>
-                            </div>
-                            <!-- Profession search end here -->
-                        </div>
-
-
-                        <div class="col-md-7">
-                            <!-- city search  -->
-                            <label>Career Stats</label>
-                            <div id="careerStats" class="card-body">
-                                <blockquote class="blockquote mb-0">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-                                    <footer class="blockquote-footer">Someone famous in
-                                        <cite title="Source Title">Source Title</cite>
-                                    </footer>
-                                </blockquote>
-                                <div id="dropping">
-
-                                </div>
-                            </div>
-                            <!-- ends here  -->
-                        </div>
-
-                    </div>
-                </div>
-            </h2>
-
-
-            <!-- ++++++++++++++++++++++++++++++++++++++++++ -->
-        </div>
-    </section>
+    <!-- ========================== -->
+    
     <!-- ========================================== -->
-    <section id="faq" class="faq-section section orange lighten-3">
+    <section id="faq" class="faq-section section orange lighten-3 tohide">
         <div class="container">
             <h2 class="section-heading text-center">TOP Schools</h2>
             <div class="faq-row row">
@@ -253,8 +231,9 @@
         </div>
         </div>
     </section>
+
     <!-- FOOTER ================================= -->
-    <section id="footer" class="footer-section section section-dark">
+    <section id="footer" class="footer-section section section-dark tohide">
         <div class="container">
             <div class="footer-socmed">
                 <a href="#" target="_blank">
@@ -271,26 +250,6 @@
             </div>
         </div>
     </section>
-
-    <div id="errorBody" class="modal" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Oops!</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <p id="errorMessage"></p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
@@ -300,8 +259,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.js"></script>
     <script src="./assets/javascript/data.js"></script>
     <script src="./assets/javascript/app.js"></script>
+    <script src="./assets/javascript/secpage.js"></script>
     <!-- Link to Moment.js should go here -->
     <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+
 </body>
 
 </html>
