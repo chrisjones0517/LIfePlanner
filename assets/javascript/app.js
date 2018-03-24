@@ -1,8 +1,7 @@
 $(document).ready(function () {
 
-
     $('#submit').on('click', function (e) {
-console.log("was clicked")
+
         e.preventDefault();
         $("#data").empty();
         var occupation = $('#occupation').val();
@@ -13,16 +12,7 @@ console.log("was clicked")
         var state = myArr[1].trim();
         var cityStateWithSpace = myArr[0] + ',' + myArr[1];
         var cityState = cityStateWithSpace.replace(', ', ',');
-        
 
-
-        
-
-        
-
-        $('.occupation').text(occupation);
-        $('#location').text(cityState);
-        
         // career stats ///////////////////////////////////////////////////////////////////////////////
 
         var occCode;
@@ -73,13 +63,13 @@ console.log("was clicked")
                     var stateName = stateStats.StateName;
                     for (var i = 0; i < localWages.length; i++) {
                         if (localWages[i].RateType === 'Annual') {
-                            
+
                             var cityMedianIncomeForOcc = formatDollar(parseInt(localWages[i].Median));
                         }
                     }
                     for (var i = 0; i < natWages.length; i++) {
                         if (natWages[i].RateType === 'Annual') {
-                            
+
                             var USmedianIncomeForOcc = formatDollar(parseInt(natWages[i].Median));
                         }
                     }
@@ -106,15 +96,15 @@ console.log("was clicked")
             });
         });
 
-        console.log(cityState);      
-        
+        console.log(cityState);
+
         // City Data /////////////////////////////////////////////////////////////////////////////////////////////////
 
         var numbeoUrl = `http://anyorigin.com/go?url=https%3A//www.numbeo.com/api/indices%3Fapi_key%3D2iev2m2k4slcbo%26query%3D${cityState}&callback=?`;
 
         $.getJSON(numbeoUrl, function (data) {
 
-        }).then(function(data) {
+        }).then(function (data) {
             var myData = data.contents;
             var statsName = myData.name;
             var costOfLiving = Math.round(myData.cpi_index);
@@ -124,7 +114,7 @@ console.log("was clicked")
             var pollutionIndex = Math.round(myData.pollution_index);
             var qualityOfLifeIndex = Math.round(myData.quality_of_life_index);
             console.log(myData);
-       
+
             $('#cityData').empty();
             $('#cityData').append(`
                 <h5>Statistics for <strong>${statsName}:</strong></h5>
@@ -139,22 +129,39 @@ console.log("was clicked")
             console.log(statsName);
             console.log(costOfLiving);
             console.log(housingToIncomeRatio);
-            
-        }).fail(function(error) {
+
+        }).fail(function (error) {
             console.log(error);
             $('#cityData').append('There was an error processing your request for city data. Please try another search term.');
         });
 
-        console.log(state);
-        console.log(city);
+        schoolAPIcall();
+    });
 
-        // school data ////////////////////////////////////////////////////////////////////////////////////////
-        
-        var schoolUrl = `http://anyorigin.com/go?url=https%3A//api.greatschools.org/schools/${state}/${city}/public/%3Fkey%3Dc3fa23155c53d73ae3e185eb12ec0b84%26sort%3Dparent_rating%26limit%3D20&callback=?`;
+    var schoolsOnDisplay = 5;
+
+    $('#moreSchools').on('click', function (e) {
+        e.preventDefault();
+        if (schoolsOnDisplay < 200) {
+            schoolsOnDisplay += 5;
+            schoolAPIcall();
+        }
+    });
+    $('#previousSchools').on('click', function (e) {
+        e.preventDefault();
+        if (schoolsOnDisplay > 0) {
+            schoolsOnDisplay -= 5;
+            schoolAPIcall();
+        }
+    });
+
+    // school data ////////////////////////////////////////////////////////////////////////////////////////
+    function schoolAPIcall() {
+        var schoolUrl = `http://anyorigin.com/go?url=https%3A//api.greatschools.org/schools/${state}/${city}/public/%3Fkey%3Dc3fa23155c53d73ae3e185eb12ec0b84%26sort%3Dparent_rating%26&callback=?`;
 
         $.getJSON(schoolUrl, function (data) {
 
-        }).then(function(data) {
+        }).then(function (data) {
             //   console.log(data.contents);
             var text, parser, xmlDoc;
             text = data.contents;
@@ -171,7 +178,7 @@ console.log("was clicked")
             // console.log(school[0].children[1].textContent);
 
             $('#schoolInfo').empty();
-            for (var i = 0; i < school.length; i++) {
+            for (var i = schoolsOnDisplay - 5; i < schoolsOnDisplay; i++) {
                 var parentRating = school[i].children[6].textContent;
                 var gsRating = school[i].children[5].textContent;
                 if (parentRating !== '1' && parentRating !== '2' && parentRating !== '3' && parentRating !== '4' && parentRating !== '5') {
@@ -199,11 +206,11 @@ console.log("was clicked")
 
             console.log(schoolArr);
 
-        }).fail(function(error) {
+        }).fail(function (error) {
             console.log(error);
             $('.container').append('<h3>There was an error processing your request for school data. Please try another search term.</h3>');
         });
-    });
+    }
 
     function formatDollar(num) {
         var p = num.toFixed().split(".");
@@ -307,36 +314,36 @@ console.log("was clicked")
                         token: tokenFromNoaa
                     },
                 }).then(function (data) {
-                    
+
                     data = data.results
                     let uniqMonthsSet = new Set();
                     for (i = 0; i < data.length; i++) {
                         uniqMonthsSet = uniqMonthsSet.add(data[i].date); //Get me only unique line items
                     }
-                    
+
                     var uniqueMonthsArr = Array.from(uniqMonthsSet) //Convert the Set back to an array
-                  
-                  var avgTempsData = []; //Array to store unique Months and AvgTempData
-                  for (i=0; i < uniqueMonthsArr.length; i++) {
-                    var dataPerMonth = data.filter((fromData) => fromData.date.indexOf(uniqueMonthsArr[i]) > -1).length;
-                    var objTemps = getAverageTemp(data, uniqueMonthsArr[i], dataPerMonth); //{month: "Jan 2017", temps: 43}
-                    avgTempsData.push(objTemps[0]);  
-                  }
-    
-                  function getAverageTemp(arr, month, monthlyData) {
+
+                    var avgTempsData = []; //Array to store unique Months and AvgTempData
+                    for (i = 0; i < uniqueMonthsArr.length; i++) {
+                        var dataPerMonth = data.filter((fromData) => fromData.date.indexOf(uniqueMonthsArr[i]) > -1).length;
+                        var objTemps = getAverageTemp(data, uniqueMonthsArr[i], dataPerMonth); //{month: "Jan 2017", temps: 43}
+                        avgTempsData.push(objTemps[0]);
+                    }
+
+                    function getAverageTemp(arr, month, monthlyData) {
                         var values = arr.filter((fromData) => fromData.date.indexOf(uniqueMonthsArr[i]) > -1)
-                                        .reduce(function(prev, value) { return prev + value.value; }, 0);
-                        var avg = Math.round (values / monthlyData);
+                            .reduce(function (prev, value) { return prev + value.value; }, 0);
+                        var avg = Math.round(values / monthlyData);
                         var formattedMonth = moment(month).format('MMM'); //"Jan 2017"
-                        var obj = {month: formattedMonth, temps: avg};
+                        var obj = { month: formattedMonth, temps: avg };
                         //console.log(obj);
-                        return [obj];  
-                  }
-                   /////////////////////loop for getitng TEMP MAX --------------for DISPLAY
-                for (i = 0; i < avgTempsData.length; i++){
-                  var monthToMax = avgTempsData[i].month;
-                  var tempToMax = avgTempsData[i].temps
-                  console.log(monthToMax,tempToMax)
+                        return [obj];
+                    }
+                    /////////////////////loop for getitng TEMP MAX --------------for DISPLAY
+                    for (i = 0; i < avgTempsData.length; i++) {
+                        var monthToMax = avgTempsData[i].month;
+                        var tempToMax = avgTempsData[i].temps
+                        console.log(monthToMax, tempToMax)
                     }
 
                 })
@@ -348,38 +355,38 @@ console.log("was clicked")
                                 token: tokenFromNoaa
                             },
                         }).then(function (data) {
-                    
+
                             data = data.results
                             let uniqMonthsSet = new Set();
                             for (i = 0; i < data.length; i++) {
                                 uniqMonthsSet = uniqMonthsSet.add(data[i].date); //Get me only unique line items
                             }
-                            
+
                             var uniqueMonthsArr = Array.from(uniqMonthsSet) //Convert the Set back to an array
-                          
-                          var avgTempsData = []; //Array to store unique Months and AvgTempData
-                          for (i=0; i < uniqueMonthsArr.length; i++) {
-                            var dataPerMonth = data.filter((fromData) => fromData.date.indexOf(uniqueMonthsArr[i]) > -1).length;
-                            var objTemps = getAverageTemp(data, uniqueMonthsArr[i], dataPerMonth); //{month: "Jan 2017", temps: 43}
-                            avgTempsData.push(objTemps[0]);  
-                          }
-            
-                          function getAverageTemp(arr, month, monthlyData) {
-                                var values = arr.filter((fromData) => fromData.date.indexOf(uniqueMonthsArr[i]) > -1)
-                                                .reduce(function(prev, value) { return prev + value.value; }, 0);
-                                var avg = Math.round (values / monthlyData);
-                                var formattedMonth = moment(month).format('MMM'); //"Jan 2017"
-                                var obj = {month: formattedMonth, temps: avg};
-                                //console.log(obj);
-                                return [obj];  
-                          }
-                          //////////////////////////loop for getitng TEMP MIN --------------for DISPLAY
-                        for (i = 0; i < avgTempsData.length; i++){
-                          var monthToMin = avgTempsData[i].month;
-                          var tempToMin = avgTempsData[i].temps
-                          console.log(monthToMin,tempToMin)
+
+                            var avgTempsData = []; //Array to store unique Months and AvgTempData
+                            for (i = 0; i < uniqueMonthsArr.length; i++) {
+                                var dataPerMonth = data.filter((fromData) => fromData.date.indexOf(uniqueMonthsArr[i]) > -1).length;
+                                var objTemps = getAverageTemp(data, uniqueMonthsArr[i], dataPerMonth); //{month: "Jan 2017", temps: 43}
+                                avgTempsData.push(objTemps[0]);
                             }
-        
+
+                            function getAverageTemp(arr, month, monthlyData) {
+                                var values = arr.filter((fromData) => fromData.date.indexOf(uniqueMonthsArr[i]) > -1)
+                                    .reduce(function (prev, value) { return prev + value.value; }, 0);
+                                var avg = Math.round(values / monthlyData);
+                                var formattedMonth = moment(month).format('MMM'); //"Jan 2017"
+                                var obj = { month: formattedMonth, temps: avg };
+                                //console.log(obj);
+                                return [obj];
+                            }
+                            //////////////////////////loop for getitng TEMP MIN --------------for DISPLAY
+                            for (i = 0; i < avgTempsData.length; i++) {
+                                var monthToMin = avgTempsData[i].month;
+                                var tempToMin = avgTempsData[i].temps
+                                console.log(monthToMin, tempToMin)
+                            }
+
                         });
                     });
 
