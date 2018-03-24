@@ -1,18 +1,25 @@
 $(document).ready(function () {
 
+    var state;
+    var city;
 
     $('#submit').on('click', function (e) {
+<<<<<<< HEAD
         console.log("was clicked")
+=======
+
+>>>>>>> db8607cd68177e6b52d994ba2d21141f5fde7fb5
         e.preventDefault();
         $("#data").empty();
         var occupation = $('#occupation').val();
         var cityStateCountry = $('#autocomplete').val().trim();
         var medianPerCapUS = '$29,829';
         var myArr = cityStateCountry.split(',');
-        var city = myArr[0].trim();
-        var state = myArr[1].trim();
+        city = myArr[0].trim();
+        state = myArr[1].trim();
         var cityStateWithSpace = myArr[0] + ',' + myArr[1];
         var cityState = cityStateWithSpace.replace(', ', ',');
+<<<<<<< HEAD
         console.log(city);
         console.log(state);
 
@@ -24,6 +31,9 @@ $(document).ready(function () {
         $('.occupation').text(occupation);
         $('#location').text(cityState);
 
+=======
+
+>>>>>>> db8607cd68177e6b52d994ba2d21141f5fde7fb5
         // career stats ///////////////////////////////////////////////////////////////////////////////
 
         var occCode;
@@ -140,18 +150,39 @@ $(document).ready(function () {
             console.log(statsName);
             console.log(costOfLiving);
             console.log(housingToIncomeRatio);
+<<<<<<< HEAD
 
+=======
+            
+>>>>>>> db8607cd68177e6b52d994ba2d21141f5fde7fb5
         }).fail(function (error) {
             console.log(error);
             $('#cityData').append('There was an error processing your request for city data. Please try another search term.');
         });
 
-        console.log(state);
-        console.log(city);
+        schoolAPIcall();
+    });
 
-        // school data ////////////////////////////////////////////////////////////////////////////////////////
-        var makeError
-        var schoolUrl = `http://anyorigin.com/go?url=https%3A//api.greatschools.org/schools/${state}/${city}/public/%3Fkey%3Dc3fa23155c53d73ae3e185eb12ec0b84%26sort%3Dparent_rating%26limit%3D20&callback=?`;
+    var schoolsOnDisplay = 5;
+
+    $('#moreSchools').on('click', function (e) {
+        e.preventDefault();
+        if (schoolsOnDisplay < 200) {
+            schoolsOnDisplay += 5;
+            schoolAPIcall();
+        }
+    });
+    $('#previousSchools').on('click', function (e) {
+        e.preventDefault();
+        if (schoolsOnDisplay > 5) {
+            schoolsOnDisplay -= 5;
+            schoolAPIcall();
+        }
+    });
+
+    // school data ////////////////////////////////////////////////////////////////////////////////////////
+    function schoolAPIcall() {
+        var schoolUrl = `http://anyorigin.com/go?url=https%3A//api.greatschools.org/schools/${state}/${city}/public/%3Fkey%3Dc3fa23155c53d73ae3e185eb12ec0b84%26sort%3Dparent_rating%26&callback=?`;
 
         $.getJSON(schoolUrl, function (data) {
 
@@ -165,36 +196,49 @@ $(document).ready(function () {
             var school = xmlDoc.getElementsByTagName('school');
 
             console.log(name.length);
-
+            console.log(city);
+            console.log(state);
             //   $('#schoolInfo').text(xmlDoc.getElementsByTagName('name')[0].childNodes[0].nodeValue);
-            console.log(xmlDoc.getElementsByTagName('name')[0].childNodes[0].nodeValue);
-            console.log(school);
+            // console.log(xmlDoc.getElementsByTagName('name')[0].childNodes[0].nodeValue);
+            // console.log(school);
             // console.log(school[0].children[1].textContent);
-
-
-            for (var i = 0; i < school.length; i++) {
+            $('#schoolsDisplayed').text(`${schoolsOnDisplay - 4} - ${schoolsOnDisplay}`);
+            $('#schoolInfo').empty();
+            for (var i = schoolsOnDisplay - 5; i < schoolsOnDisplay; i++) {
                 var parentRating = school[i].children[6].textContent;
                 var gsRating = school[i].children[5].textContent;
-                if (parentRating !== '1' && parentRating !== '2' && parentRating !== '3' && parentRating !== '4' && parentRating !== '5') {
-                    school[i].children[6].textContent = 'N/A';
-                }
+                
                 if (gsRating !== '1' && gsRating !== '2' && gsRating !== '3' && gsRating !== '4' && gsRating !== '5') {
                     school[i].children[5].textContent = 'N/A';
                 }
-                // add $('#someDiv').empty(); /////////////////////////////////<!-- Important! -->////////////////////////////////
-                $('.container').append(`
+               
+                $('#schoolInfo').append(`
                     <div class="outerSchoolDiv">
                         <span>${school[i].children[1].textContent}</span>  
                         <span>${school[i].children[2].textContent}</span>
                         <span>${school[i].children[3].textContent}</span>   
                         <div class="innerSchoolDiv">
-                            <span>Parent Rating: ${school[i].children[6].textContent}</span><br>                               
+                            <span id="parentRating${i}">Parent Rating: </span><br>                              
                             <span>GreatSchools Rating: ${school[i].children[5].textContent}</span><br>
                             <span class="gsRatingDesc">(1 - 10)</span>   
                             <span class="schoolLink"><a href="${school[i].children[15].textContent}" target="_blank">Learn More</a></span> 
                         </div>
                     </div>
                 `);
+                var stars = parseInt(school[i].children[6].textContent);
+                for (var j = 1; j <= 5; j++) {
+                    console.log(stars);
+                    if (stars !== 1 && stars !== 2 && stars !== 3 && stars !== 4 && stars !== 5) {
+                        $(`#parentRating${i}`).text('Parent Rating: N/A');
+                    } else if (j <= stars) {
+                        $(`#parentRating${i}`).append('<span class="fa fa-star checked"></span>');
+                    } else {
+                        $(`#parentRating${i}`).append('<span class="fa fa-star"></span>');
+                        console.log('black star ran');
+                    }
+                    
+                }
+                
             }
 
 
@@ -204,7 +248,7 @@ $(document).ready(function () {
             console.log(error);
             $('.container').append('<h3>There was an error processing your request for school data. Please try another search term.</h3>');
         });
-    });
+    }
 
     function formatDollar(num) {
         var p = num.toFixed().split(".");
@@ -378,6 +422,7 @@ $(document).ready(function () {
                                 var obj = { month: formattedMonth, temps: avg };
                                 //console.log(obj);
                                 return [obj];
+<<<<<<< HEAD
                             }
                             //////////////////////////loop for getitng TEMP MIN --------------for DISPLAY
                             for (i = 0; i < avgTempsData.length; i++) {
@@ -385,6 +430,15 @@ $(document).ready(function () {
                                 var tempToMin = avgTempsData[i].temps
                                 console.log(monthToMin, tempToMin)
                             }
+=======
+                            }
+                            //////////////////////////loop for getitng TEMP MIN --------------for DISPLAY
+                            for (i = 0; i < avgTempsData.length; i++) {
+                                var monthToMin = avgTempsData[i].month;
+                                var tempToMin = avgTempsData[i].temps
+                                console.log(monthToMin, tempToMin)
+                            }
+>>>>>>> db8607cd68177e6b52d994ba2d21141f5fde7fb5
 
                         });
                     });
