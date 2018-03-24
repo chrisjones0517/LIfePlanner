@@ -23,3 +23,11 @@
 #schoolsDisplayed {
     float: right;
 }
+
+.checked {
+    color: #ffd700; 
+}
+
+.blank {
+    color: #000;
+}

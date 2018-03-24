@@ -185,26 +185,38 @@ $(document).ready(function () {
             for (var i = schoolsOnDisplay - 5; i < schoolsOnDisplay; i++) {
                 var parentRating = school[i].children[6].textContent;
                 var gsRating = school[i].children[5].textContent;
-                if (parentRating !== '1' && parentRating !== '2' && parentRating !== '3' && parentRating !== '4' && parentRating !== '5') {
-                    school[i].children[6].textContent = 'N/A';
-                }
+                
                 if (gsRating !== '1' && gsRating !== '2' && gsRating !== '3' && gsRating !== '4' && gsRating !== '5') {
                     school[i].children[5].textContent = 'N/A';
                 }
-                // add $('#someDiv').empty(); /////////////////////////////////<!-- Important! -->////////////////////////////////
+               
                 $('#schoolInfo').append(`
                     <div class="outerSchoolDiv">
                         <span>${school[i].children[1].textContent}</span>  
                         <span>${school[i].children[2].textContent}</span>
                         <span>${school[i].children[3].textContent}</span>   
                         <div class="innerSchoolDiv">
-                            <span>Parent Rating: ${school[i].children[6].textContent}</span><br>                               
+                            <span id="parentRating${i}">Parent Rating: </span><br>                              
                             <span>GreatSchools Rating: ${school[i].children[5].textContent}</span><br>
                             <span class="gsRatingDesc">(1 - 10)</span>   
                             <span class="schoolLink"><a href="${school[i].children[15].textContent}" target="_blank">Learn More</a></span> 
                         </div>
                     </div>
                 `);
+                var stars = parseInt(school[i].children[6].textContent);
+                for (var j = 1; j <= 5; j++) {
+                    console.log(stars);
+                    if (stars !== 1 && stars !== 2 && stars !== 3 && stars !== 4 && stars !== 5) {
+                        $(`#parentRating${i}`).text('Parent Rating: N/A');
+                    } else if (j <= stars) {
+                        $(`#parentRating${i}`).append('<span class="fa fa-star checked"></span>');
+                    } else {
+                        $(`#parentRating${i}`).append('<span class="fa fa-star"></span>');
+                        console.log('black star ran');
+                    }
+                    
+                }
+                
             }
 
 
