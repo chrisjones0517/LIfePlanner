@@ -8,19 +8,28 @@ $(document).ready(function () {
     $('#submit').on('click', function (e) {
         console.log("was clicked")
         e.preventDefault();
-        $("#data").empty();
-       $(".tohide").show() 
-        var occupation = $('#occupation').val();
-        var cityStateCountry = $('#autocomplete').val().trim();
-        var medianPerCapUS = '$29,829';
-        var myArr = cityStateCountry.split(',');
-        city = myArr[0].trim();
-        state = myArr[1].trim();
-        var cityStateWithSpace = myArr[0] + ',' + myArr[1];
-        var cityState = cityStateWithSpace.replace(', ', ',');
-        console.log(city);
-        console.log(state);
-        WaetherCall();
+        console.log($('#autocomplete').val());
+        if ($('#autocomplete').val() === '') {
+            $('#errorBody').modal('show');
+            $('#errorMessage').text('Please enter a location!');
+        } else if ($('#occupation').val() === '') {
+            $('#errorBody').modal('show');
+            $('#errorMessage').text('Please enter an occupation!');
+        } else {
+            
+            $("#data").empty();
+
+            var occupation = $('#occupation').val();
+            var cityStateCountry = $('#autocomplete').val().trim();
+            var medianPerCapUS = '$29,829';
+            var myArr = cityStateCountry.split(',');
+            city = myArr[0].trim();
+            state = myArr[1].trim();
+            var cityStateWithSpace = myArr[0] + ',' + myArr[1];
+            var cityState = cityStateWithSpace.replace(', ', ',');
+            console.log(city);
+            console.log(state);
+            WaetherCall();
 
         console.log(cityState);
 
@@ -150,8 +159,9 @@ $(document).ready(function () {
             console.log(error);
             $('#cityData').append('There was an error processing your request for city data. Please try another search term.');
         });
-
+    }
         schoolAPIcall();
+
     });
 
     var schoolsOnDisplay = 5;
