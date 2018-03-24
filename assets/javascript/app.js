@@ -1,4 +1,4 @@
-$(".tohide").hide()
+$(".tohide").hide();
 $(document).ready(function () {
     
 
@@ -7,6 +7,7 @@ $(document).ready(function () {
 
     $('#submit').on('click', function (e) {
         console.log("was clicked")
+        $(".tohide").show()
         e.preventDefault();
         console.log($('#autocomplete').val());
         if ($('#autocomplete').val() === '') {
@@ -125,7 +126,7 @@ $(document).ready(function () {
 
         // City Data /////////////////////////////////////////////////////////////////////////////////////////////////
 
-        var numbeoUrl = `http://anyorigin.com/go?url=https%3A//www.numbeo.com/api/indices%3Fapi_key%3D2iev2m2k4slcbo%26query%3D${cityState}&callback=?`;
+        var numbeoUrl = `https://anyorigin.com/go?url=https%3A//www.numbeo.com/api/indices%3Fapi_key%3D2iev2m2k4slcbo%26query%3D${cityState}&callback=?`;
 
         $.getJSON(numbeoUrl, function (data) {
 
@@ -183,7 +184,7 @@ $(document).ready(function () {
 
     // school data ////////////////////////////////////////////////////////////////////////////////////////
     function schoolAPIcall() {
-        var schoolUrl = `http://anyorigin.com/go?url=https%3A//api.greatschools.org/schools/${state}/${city}/public/%3Fkey%3Dc3fa23155c53d73ae3e185eb12ec0b84%26sort%3Dparent_rating%26&callback=?`;
+        var schoolUrl = `https://anyorigin.com/go?url=https%3A//api.greatschools.org/schools/${state}/${city}/public/%3Fkey%3Dc3fa23155c53d73ae3e185eb12ec0b84%26sort%3Dparent_rating%26&callback=?`;
 
         $.getJSON(schoolUrl, function (data) {
 
