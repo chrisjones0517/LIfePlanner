@@ -4,30 +4,45 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<!-- BASIC INFO -->
-	<title>Life Planner App</title>
+	<title>Life Planner</title>
 	<link rel="stylesheet" href="./assets/css/lpstyles.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="./assets/css/style.css">
-    <script src="https://maps.googleapis.com/maps/api/js?libraries=places&language=en&key=AIzaSyC75PI0JP6R87nUSYn4R8iySVG0WGUZqMQ"></script>
+	<link rel="stylesheet" href="./assets/css/style.css">
 </head>
 <body>
-    <header>
-        <div class="navbar  bg-dark">
-            <div class="logo">
-                <p>
-                    <span class="text-light">Stay</span>
-                    <span class="text-success font-bold">Fit</span>
-                </p>
-            </div>
-        </div>
-    </header>
-    <div class="container-fluid mt-3">
-
-
-        <div class="row">
-
-            <!-- card for suggested meals -->
-            <div class="col-sm-12 col-md-9">
+	<div id="document" class="document">
+		<!-- HEADER ================================= -->
+		<header id="header" class="header-section section section-dark navbar navbar-fixed-top">
+			<div class="container-fluid">
+				<div class="navbar-header navbar-left">
+					<!-- RESPONSIVE MENU BUTTON -->
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<!-- HEADER LOGO      -->
+					<a class="navbar-logo navbar-brand anchor-link" href="/" id="logo">
+						Life Planner
+					</a>
+				</div>
+				<nav id="navigation" class="navigation navbar-collapse collapse navbar-right">
+					<!-- NAVIGATION LINKS -->
+					<ul id="header-nav" class="nav navbar-nav">
+						<li>
+							<a href="#hero" class="hidden">Top</a>
+						</li>
+						<li>
+							<a href="#how-it-works">How it Works</a>
+						</li>
+						<li>
+							<a href="#faq">FAQs</a>
+						</li>
+						<!-- HEADER ACTION BUTTON -->
+						<li class="header-action-button">
+							<a href="#" class="btn btn-success start-btn">Get Started</a>
+						</li>
 
 					</ul>
 
@@ -35,43 +50,32 @@
 
 			</div>
 
-                    <!-- card for Search -->
-                    <div class="col-sm-12 mt-3">
-                        <div class="card text-center">
-                            <div class="card-header bg-success">
-                                <form>
-                                    <label for="search">What is your profession?</label>
-                                    <input type="text" id="search" required="true"><br><br>
-                                    <label for="cityStateZip">City,State or Zip</label>
-                                    <input type="text" id="cityStateZip" placeholder="e.g. Houston,TX" required="true">
-                                    <button type="submit" id="submit">Search</button>
-                                    <button type="submit" id="weather">WeatherCheck</button>
-                                    <button type="submit" id="climate">climate</button>
-                                </form>
-                            </div>
-                            <div class="card-body">
-                                <div class="row">
+		</header>
+		<!-- HERO ================================= -->
+		<section id="hero" class="hero-section hero-layout-simple hero-fullscreen section section-dark">
+			<div class="section-background">
+				<!-- IMAGE BACKGROUND -->
+				<div class="section-background-image parallax" data-stellar-ratio="0.4">
+					<img src="./assets/images/hero.jpg" style="opacity: 0.3;">
+				</div>
+			</div>
 
-                                    here goes search results
-                                    <div class="col-md-3">
-                                        <div id="city"> </div>
-                                        <div id="cityPop"> </div>
-                                        <div id="description"> </div>
-                                        <div id="highF"> </div>
-                                        <div id="lowF"> </div>
-                                        <div id="timeOfLocation"> </div>
-                                        <div id="newMaxTemp"> </div>
-
-
-                                    </div>
-                                    <!--
-                                        template
-                                        <div class = "col-xm-12 col-sm-4">
-                                            <img>
-                                        </div>
-                                     -->
-                                </div>
-                            </div>
+			<div class="container">
+				<div class="hero-content">
+					<div class="hero-content-inner">
+						<div class="row">
+							<div class="col-md-10 col-md-offset-1">
+								<div class="hero-heading text-center" data-animation="fadeIn">
+									<h1 class="hide-xs">Research your next life's move!</h1>
+									<div class="intro-text">
+										<h2>
+											<span id="list-text-rotator" class="emphasized">WOW, New York City - That is a big move!<br/></span>
+										</h2>
+										<input class="wdywfc-btn btn btn-success start-btn" data-for="me" type="button" value="Get Started" />
+									</div>
+									<h5>It's
+										<u>free forever</u> and
+										<u>no sign-up</u> is required. Scroll to learn more.</h5>
 
 								</div>
 							</div>
@@ -81,7 +85,7 @@
 				</div>
 			</div>
 			<!-- HERO START LINK -->
-			<a href="#headline" class="hero-start-link anchor-link">
+			<a href="#how-it-works" class="hero-start-link anchor-link">
 				<span class="fa fa-angle-double-down"></span>
 			</a>
 		</section>
@@ -93,7 +97,7 @@
 					<!-- HOW IT WORKS - ITEM 1 -->
 					<div class="col-sm-6 col-md-3" data-animation="fadeIn">
 						<div class="hiw-item">
-							<img class="hiw-item-picture" src="https://weblight.imgix.net/fireplace.jpg?q=50" alt="">
+							<img class="hiw-item-picture" src="./assets/images/step1-profession.jpg" alt="">
 							<div class="hiw-item-text">
 								<span class="hiw-item-icon">1</span>
 								<h4 class="hiw-item-title">Enter your profession</h4>
@@ -105,10 +109,10 @@
 					<!-- HOW IT WORKS - ITEM 2 -->
 					<div class="col-sm-6 col-md-3" data-animation="fadeIn">
 						<div class="hiw-item even">
-							<img class="hiw-item-picture" src="https://weblight.imgix.net/family-candle.jpg?q=50" alt="">
+							<img class="hiw-item-picture" src="./assets/images/step2-city.jpg" alt="">
 							<div class="hiw-item-text">
 								<span class="hiw-item-icon">2</span>
-								<h4 class="hiw-item-title">Select the city and state to research?</h4>
+								<h4 class="hiw-item-title">Select the city and state to research.</h4>
 								<p class="hiw-item-description"></p>
 								<p class="hiw-item-description"></p>
 							</div>
@@ -120,7 +124,7 @@
 					<!-- HOW IT WORKS - ITEM 3 -->
 					<div class="col-sm-6 col-md-3" data-animation="fadeIn">
 						<div class="hiw-item">
-							<img class="hiw-item-picture" src="https://weblight.imgix.net/covered-bridge.jpg?q=50" alt="">
+							<img class="hiw-item-picture" src="./assets/images/step3-reports.jpg" alt="">
 							<div class="hiw-item-text">
 								<span class="hiw-item-icon">3</span>
 								<h4 class="hiw-item-title">Analyze the research!</h4>
@@ -133,7 +137,7 @@
 					<!-- HOW IT WORKS - ITEM 4 -->
 					<div class="col-sm-6 col-md-3" data-animation="fadeIn">
 						<div class="hiw-item even">
-							<img class="hiw-item-picture" src="https://weblight.imgix.net/shopping-mall.jpg?q=50" alt="">
+							<img class="hiw-item-picture" src="./assets/images/step4-save.jpg" alt="">
 							<div class="hiw-item-text">
 								<span class="hiw-item-icon">4</span>
 								<h4 class="hiw-item-title">Save your data</h4>
@@ -263,9 +267,6 @@
 		<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 			<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js" integrity="sha256-xNjb53/rY+WmG+4L6tTl9m6PpqknWZvRt0rO1SRnJzw="
   crossorigin="anonymous"></script>
-   <!-- Link to Moment.js should go here -->
-   <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
-        <script src="./assets/javascript/landingpage.js"></script>
-        
+		<script src="./assets/javascript/landingpage.js"></script>
 </body>
 </html>

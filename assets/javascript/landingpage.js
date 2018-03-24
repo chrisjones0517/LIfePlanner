@@ -16,3 +16,11 @@ $(document).ready(function () {
 
     });
 });
+
+$(".fa-angle-double-down").on("click", function(){
+    window.scroll({
+        top: 840, 
+        left: 0, 
+        behavior: 'smooth' 
+      });
+})
