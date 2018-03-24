@@ -4,91 +4,100 @@ $(document).ready(function () {
     var city;
 
     $('#submit').on('click', function (e) {
-        console.log("was clicked")
         e.preventDefault();
-        $("#data").empty();
-       
-        var occupation = $('#occupation').val();
-        var cityStateCountry = $('#autocomplete').val().trim();
-        var medianPerCapUS = '$29,829';
-        var myArr = cityStateCountry.split(',');
-        city = myArr[0].trim();
-        state = myArr[1].trim();
-        var cityStateWithSpace = myArr[0] + ',' + myArr[1];
-        var cityState = cityStateWithSpace.replace(', ', ',');
-        console.log(city);
-        console.log(state);
-        WaetherCall();
+        console.log($('#autocomplete').text());
+        if ($('#autocomplete').text() === '') {
+            $('#errorBody').modal('show');
+            $('#errorMessage').text('Please enter a location!');
+        } else if ($('#occupation').text() === '') {
+            $('#errorBody').modal('show');
+            $('#errorMessage').text('Please enter an occupation!');
+        } else {
 
-        console.log(cityState);
+            $("#data").empty();
+
+            var occupation = $('#occupation').val();
+            var cityStateCountry = $('#autocomplete').val().trim();
+            var medianPerCapUS = '$29,829';
+            var myArr = cityStateCountry.split(',');
+            city = myArr[0].trim();
+            state = myArr[1].trim();
+            var cityStateWithSpace = myArr[0] + ',' + myArr[1];
+            var cityState = cityStateWithSpace.replace(', ', ',');
+            console.log(city);
+            console.log(state);
+            WaetherCall();
+
+            console.log(cityState);
 
 
 
-        $('.occupation').text(occupation);
-        $('#location').text(cityState);
+            $('.occupation').text(occupation);
+            $('#location').text(cityState);
 
-        // career stats ///////////////////////////////////////////////////////////////////////////////
+            // career stats ///////////////////////////////////////////////////////////////////////////////
 
-        var occCode;
-        var queryUrl = `https://api.careeronestop.org/v1/occupation/NzX2rM28B8dZLR3/${occupation}/y/0/10`;
-
-        $.ajax({
-            url: queryUrl,
-            dataType: 'json',
-            type: 'GET',
-            beforeSend: function (xhr) {
-
-                xhr.setRequestHeader('Authorization', 'Bearer ' + 'KZasPLkGaB4qx+wuKxVDBoBHMO3iu+sTcYuhf9Et/1ueVH3efsEr3OEpWUXl24ukjrYWm8GTLn94+RbOE/FKKg==')
-            },
-            success: function (response) {
-                var occTitle = response.OccupationList[0].OnetTitle;
-                occCode = response.OccupationList[0].OnetCode;
-                console.log(response.OccupationList)
-                console.log(occTitle);
-                console.log(occCode);
-            },
-            error: function (request, status, errorThrown) {
-                $('#careerStats').append('There was an error processing your request for career stats. Please try another search term.');
-            }
-        }).then(function () {
+            var occCode;
+            var queryUrl = `https://api.careeronestop.org/v1/occupation/NzX2rM28B8dZLR3/${occupation}/y/0/10`;
 
             $.ajax({
-                url: `https://api.careeronestop.org/v1/occupation/NzX2rM28B8dZLR3/${occCode}/${cityState}?training=false&interest=false&videos=false&tasks=false&dwas=false&wages=true&alternateOnetTitles=false&projectedEmployment=true&ooh=false&stateLMILinks=false&relatedOnetTitles=false&skills=false&knowledge=false&ability=false&trainingPrograms=false`,
+                url: queryUrl,
                 dataType: 'json',
                 type: 'GET',
                 beforeSend: function (xhr) {
 
-                    xhr.setRequestHeader('Authorization', 'Bearer ' + 'KZasPLkGaB4qx+wuKxVDBoBHMO3iu+sTcYuhf9Et/1ueVH3efsEr3OEpWUXl24ukjrYWm8GTLn94+RbOE/FKKg==');
+                    xhr.setRequestHeader('Authorization', 'Bearer ' + 'KZasPLkGaB4qx+wuKxVDBoBHMO3iu+sTcYuhf9Et/1ueVH3efsEr3OEpWUXl24ukjrYWm8GTLn94+RbOE/FKKg==')
                 },
                 success: function (response) {
-                    console.log(response);
-                    var myRoot = response.OccupationDetail[0];
-                    var title = myRoot.OnetTitle;
-                    console.log(title);
-                    var localWages = myRoot.Wages.BLSAreaWagesList;
-                    var natWages = myRoot.Wages.NationalWagesList;
-                    console.log(myRoot);
-                    var stateStats = myRoot.Projections.Projections[0];
-                    var nationalStats = myRoot.Projections.Projections[1];
-                    var crntUSemp = nationalStats.EstimatedEmployment;
-                    var crntStateEmp = stateStats.EstimatedEmployment;
-                    var projectedAnnualOpeningsSt = formatCommas(parseInt(stateStats.ProjectedAnnualJobOpening));
-                    var projectedAnnualOpeningsUS = formatCommas(parseInt(nationalStats.ProjectedAnnualJobOpening));
-                    var stateName = stateStats.StateName;
-                    for (var i = 0; i < localWages.length; i++) {
-                        if (localWages[i].RateType === 'Annual') {
+                    var occTitle = response.OccupationList[0].OnetTitle;
+                    occCode = response.OccupationList[0].OnetCode;
+                    console.log(response.OccupationList)
+                    console.log(occTitle);
+                    console.log(occCode);
+                },
+                error: function (request, status, errorThrown) {
+                    $('#errorBody').modal('show');
+                    $('#errorMessage').text('There was an error processing your request for career stats. Please try another search term.');
+                }
+            }).then(function () {
 
-                            var cityMedianIncomeForOcc = formatDollar(parseInt(localWages[i].Median));
-                        }
-                    }
-                    for (var i = 0; i < natWages.length; i++) {
-                        if (natWages[i].RateType === 'Annual') {
+                $.ajax({
+                    url: `https://api.careeronestop.org/v1/occupation/NzX2rM28B8dZLR3/${occCode}/${cityState}?training=false&interest=false&videos=false&tasks=false&dwas=false&wages=true&alternateOnetTitles=false&projectedEmployment=true&ooh=false&stateLMILinks=false&relatedOnetTitles=false&skills=false&knowledge=false&ability=false&trainingPrograms=false`,
+                    dataType: 'json',
+                    type: 'GET',
+                    beforeSend: function (xhr) {
 
-                            var USmedianIncomeForOcc = formatDollar(parseInt(natWages[i].Median));
+                        xhr.setRequestHeader('Authorization', 'Bearer ' + 'KZasPLkGaB4qx+wuKxVDBoBHMO3iu+sTcYuhf9Et/1ueVH3efsEr3OEpWUXl24ukjrYWm8GTLn94+RbOE/FKKg==');
+                    },
+                    success: function (response) {
+                        console.log(response);
+                        var myRoot = response.OccupationDetail[0];
+                        var title = myRoot.OnetTitle;
+                        console.log(title);
+                        var localWages = myRoot.Wages.BLSAreaWagesList;
+                        var natWages = myRoot.Wages.NationalWagesList;
+                        console.log(myRoot);
+                        var stateStats = myRoot.Projections.Projections[0];
+                        var nationalStats = myRoot.Projections.Projections[1];
+                        var crntUSemp = nationalStats.EstimatedEmployment;
+                        var crntStateEmp = stateStats.EstimatedEmployment;
+                        var projectedAnnualOpeningsSt = formatCommas(parseInt(stateStats.ProjectedAnnualJobOpening));
+                        var projectedAnnualOpeningsUS = formatCommas(parseInt(nationalStats.ProjectedAnnualJobOpening));
+                        var stateName = stateStats.StateName;
+                        for (var i = 0; i < localWages.length; i++) {
+                            if (localWages[i].RateType === 'Annual') {
+
+                                var cityMedianIncomeForOcc = formatDollar(parseInt(localWages[i].Median));
+                            }
                         }
-                    }
-                    $('#careerStats').empty();
-                    $('#careerStats').append(`
+                        for (var i = 0; i < natWages.length; i++) {
+                            if (natWages[i].RateType === 'Annual') {
+
+                                var USmedianIncomeForOcc = formatDollar(parseInt(natWages[i].Median));
+                            }
+                        }
+                        $('#careerStats').empty();
+                        $('#careerStats').append(`
                         <p>US Median Per Capita Income: $29,829</p>
                         <p>US Median Wages for <strong>${title}</strong>: <strong>${USmedianIncomeForOcc}</strong></p>
                         <p>Estimated number of <strong>${title}</strong> jobs in the US: <strong>${crntUSemp}</strong></p>
@@ -97,40 +106,41 @@ $(document).ready(function () {
                         <p>Estimated number of <strong>${title}</strong> jobs in <strong>${state}</strong>: <strong>${crntStateEmp}</strong></p>
                         <p>Projected number of annual job openings for <strong>${title}</strong> in <strong>${state}</strong>: <strong>${projectedAnnualOpeningsSt}</strong></p>
                     `);
-                    console.log('US Median Per Capita Income: $29,829');
-                    console.log(myRoot);
-                    console.log(`Estimated current number of '${title}' jobs in ${stateName}: ${crntStateEmp}`); // Output to page
+                        console.log('US Median Per Capita Income: $29,829');
+                        console.log(myRoot);
+                        console.log(`Estimated current number of '${title}' jobs in ${stateName}: ${crntStateEmp}`); // Output to page
 
-                    console.log(`Projected annual openings for '${title}' jobs in ${stateName}: ${projectedAnnualOpeningsSt}`);
-                    console.log(`Estimated number of '${title}' jobs in the U.S.: ${projectedAnnualOpeningsUS}`)
-                },
-                error: function (request, status, errorThrown) {
-                    $('#careerStats').append('There was an error processing your request for career stats. Please try another search term.');
-                }
+                        console.log(`Projected annual openings for '${title}' jobs in ${stateName}: ${projectedAnnualOpeningsSt}`);
+                        console.log(`Estimated number of '${title}' jobs in the U.S.: ${projectedAnnualOpeningsUS}`)
+                    },
+                    error: function (request, status, errorThrown) {
+                        $('#errorBody').modal('show');
+                        $('#errorMessage').text('There was an error processing your request for career stats. Please try another search term.');
+                    }
+                });
             });
-        });
 
-        console.log(cityState);
+            console.log(cityState);
 
-        // City Data /////////////////////////////////////////////////////////////////////////////////////////////////
+            // City Data /////////////////////////////////////////////////////////////////////////////////////////////////
 
-        var numbeoUrl = `http://anyorigin.com/go?url=https%3A//www.numbeo.com/api/indices%3Fapi_key%3D2iev2m2k4slcbo%26query%3D${cityState}&callback=?`;
+            var numbeoUrl = `http://anyorigin.com/go?url=https%3A//www.numbeo.com/api/indices%3Fapi_key%3D2iev2m2k4slcbo%26query%3D${cityState}&callback=?`;
 
-        $.getJSON(numbeoUrl, function (data) {
+            $.getJSON(numbeoUrl, function (data) {
 
-        }).then(function (data) {
-            var myData = data.contents;
-            var statsName = myData.name;
-            var costOfLiving = Math.round(myData.cpi_index);
-            var housingToIncomeRatio = myData.property_price_to_income_ratio.toFixed(2);
-            var trafficTimeIndex = Math.round(myData.traffic_time_index);
-            var crimeIndex = Math.round(myData.crime_index);
-            var pollutionIndex = Math.round(myData.pollution_index);
-            var qualityOfLifeIndex = Math.round(myData.quality_of_life_index);
-            console.log(myData);
+            }).then(function (data) {
+                var myData = data.contents;
+                var statsName = myData.name;
+                var costOfLiving = Math.round(myData.cpi_index);
+                var housingToIncomeRatio = myData.property_price_to_income_ratio.toFixed(2);
+                var trafficTimeIndex = Math.round(myData.traffic_time_index);
+                var crimeIndex = Math.round(myData.crime_index);
+                var pollutionIndex = Math.round(myData.pollution_index);
+                var qualityOfLifeIndex = Math.round(myData.quality_of_life_index);
+                console.log(myData);
 
-            $('#cityData').empty();
-            $('#cityData').append(`
+                $('#cityData').empty();
+                $('#cityData').append(`
                 <h5>Statistics for <strong>${statsName}:</strong></h5>
                 <p>Cost of Living: <strong>${costOfLiving}</strong></p>
                 <p>Housing to Income Ratio: <strong>${housingToIncomeRatio}</strong></p>
@@ -140,16 +150,18 @@ $(document).ready(function () {
                 <p>Quality of Life Index: <strong>${qualityOfLifeIndex}</strong></p>
             `);
 
-            console.log(statsName);
-            console.log(costOfLiving);
-            console.log(housingToIncomeRatio);
-            
-        }).fail(function (error) {
-            console.log(error);
-            $('#cityData').append('There was an error processing your request for city data. Please try another search term.');
-        });
+                console.log(statsName);
+                console.log(costOfLiving);
+                console.log(housingToIncomeRatio);
 
-        schoolAPIcall();
+            }).fail(function (error) {
+                console.log(error);
+                $('#errorBody').modal('show');
+                $('#errorMessage').text('There was an error processing your request for city data. Please try another search term.');
+            });
+
+            schoolAPIcall();
+        }
     });
 
     var schoolsOnDisplay = 5;
@@ -196,11 +208,11 @@ $(document).ready(function () {
             for (var i = schoolsOnDisplay - 5; i < schoolsOnDisplay; i++) {
                 var parentRating = school[i].children[6].textContent;
                 var gsRating = school[i].children[5].textContent;
-                
+
                 if (gsRating !== '1' && gsRating !== '2' && gsRating !== '3' && gsRating !== '4' && gsRating !== '5') {
                     school[i].children[5].textContent = 'N/A';
                 }
-               
+
                 $('#schoolInfo').append(`
                     <div class="outerSchoolDiv">
                         <span>${school[i].children[1].textContent}</span>  
@@ -225,9 +237,9 @@ $(document).ready(function () {
                         $(`#parentRating${i}`).append('<span class="fa fa-star"></span>');
                         console.log('black star ran');
                     }
-                    
+
                 }
-                
+
             }
 
 
@@ -235,7 +247,8 @@ $(document).ready(function () {
 
         }).fail(function (error) {
             console.log(error);
-            $('.container').append('<h3>There was an error processing your request for school data. Please try another search term.</h3>');
+            $('#errorBody').modal('show');
+            $('#errorMessage').text('There was an error processing your request for school data. Please try another search term.');
         });
     }
 
@@ -289,17 +302,17 @@ $(document).ready(function () {
             console.log(lat, lon)
             console.log(city, cityPop)
             console.log(lowF, highF, description)
-            
-            $('h1.wi').addClass("wi-owm-"+icon2)
+
+            $('h1.wi').addClass("wi-owm-" + icon2)
             $('#highF').html(highF);
-           $('#city').html(city)
+            $('#city').html(city)
             $('#cityPop').html(' City population: ' + cityPop);
-            $('#description').html( description)
-            
+            $('#description').html(description)
+
             $('#lowF').html('lowF: ' + lowF);
             //based on weather lat and lon grabbing time information
             var times_Stamp = (Math.round((new Date().getTime()) / 1000)).toString();
-            
+
             $.ajax({
                 url: "https://maps.googleapis.com/maps/api/timezone/json?location=" + lat + "," + lon + "&timestamp=" + times_Stamp,
                 type: "POST",
