@@ -2,202 +2,283 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-        crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" integrity="sha384-3AB7yXWz4OeoZcPbieVW64vVXEwADiYyAEhwilzWsLw+9FgqpyjjStpPnpBO8o8S"
-        crossorigin="anonymous">
-    <link rel="stylesheet" href="assets/css/udstyle.css">
-    <link rel="stylesheet" href="assets/css/style.css">
-    <script src="https://maps.googleapis.com/maps/api/js?libraries=places&language=en&key=AIzaSyC75PI0JP6R87nUSYn4R8iySVG0WGUZqMQ"></script>
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <!-- Bootstrap core CSS -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Material Design Bootstrap -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.0/css/mdb.min.css" rel="stylesheet">
-    <!-- JQuery -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <!-- Bootstrap tooltips -->
-     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
-    <!-- Bootstrap core JavaScript -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <!-- MDB core JavaScript -->
-    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.0/js/mdb.min.js"></script> -->
-
-    <title>Life Planner</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<!-- BASIC INFO -->
+	<title>Life Planner App</title>
+	<link rel="stylesheet" href="./assets/css/lpstyles.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="./assets/css/style.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	 crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" integrity="sha384-3AB7yXWz4OeoZcPbieVW64vVXEwADiYyAEhwilzWsLw+9FgqpyjjStpPnpBO8o8S"
+	 crossorigin="anonymous">
+	<!--  <script src="https://maps.googleapis.com/maps/api/js?libraries=places&language=en&key=AIzaSyC75PI0JP6R87nUSYn4R8iySVG0WGUZqMQ"></script> -->
+	<script src="https://maps.googleapis.com/maps/api/js?libraries=places&language=en&key=AIzaSyC75PI0JP6R87nUSYn4R8iySVG0WGUZqMQ"></script>
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<!-- Bootstrap core CSS -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Material Design Bootstrap -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.0/css/mdb.min.css" rel="stylesheet">
+	<!-- JQuery -->
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<!-- Bootstrap tooltips -->
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
+	<!-- Bootstrap core JavaScript -->
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<!-- MDB core JavaScript -->
+	<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.0/js/mdb.min.js"></script> -->
+	<!-- Weather pic -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.10/css/weather-icons.min.css" rel="stylesheet" />
 </head>
 
 <body>
-    <header>
-        <div class="navbar bg-dark">
-            <p class="mt-1">
-                <span class="h2 text-light">Life</span>
-                <span class="h2 text-success">Planner</span>
-            </p>
-            <div class="usergreeting float-right text-light">
-                <span class="lead">Welcome </span>
-                <span class="lead username">User </span>
-                <i class="h3 fas fa-user-circle"></i>
-            </div>
-        </div>
-
-    </header>
-    <div class="container mt-3 py-3 animated zoomInUp">
-
-        <div class="row mt-3">
-            <div class="row"></div>
-            <div class="col-xs-12">
-                <div class="row" id="dropping">
-                    <div></div>
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 mb-3">
-                <div class="container">
-
-                    <div class="row">
+	<header>
+		<div class="navbar  bg-dark">
+			<div class="logo">
+				<p>
+					<span class="text-light">Stay</span>
+					<span class="text-success font-bold">Fit</span>
+				</p>
+			</div>
+		</div>
+	</header>
+	<div class="container-fluid mt-3">
 
 
-                        <div class="col-md-4">
-                            <!-- form for search profession -->
-                            <label>Profession</label>
+		<div class="row">
 
-                            <form class="form-inline md-form mr-auto mb-4">
-                                <input id="occupation" class="form-control mr-sm-2" type="text" placeholder="Profession Search" aria-label="Search">
-                            </form>
-                            <!-- Profession search end here -->
-                        </div>
+			<!-- card for suggested meals -->
+			<div class="col-sm-12 col-md-9">
 
-                        <div class="col-md-4">
-                            <!-- city search  -->
-                            <label>City Search</label>
-                            <form class="form-inline md-form mr-auto mb-4">
-                                <input class="form-control mr-sm-2" type="text" id="autocomplete" placeholder="City Search" />
-                            </form>
-                            <!-- ends here  -->
-                        </div>
-                        <div class="col-md-4">
-                            <button type="button" id="submit" class="btn btn-primary btn-rounded">Search Career</button>
-                            <button type="button" class="inline" id="weather">Test</button>
-                        </div>
+				</ul>
+
+				</nav>
+
+			</div>
+
+			<!-- card for Search -->
+
+		</div>
+
+	</div>
+	</div>
+	</div>
+	<!-- HERO START LINK -->
+	<a href="#headline" class="hero-start-link anchor-link">
+		<span class="fa fa-angle-double-down"></span>
+	</a>
+	</section>
+	<!-- HOW IT WORKS ================================= -->
+	<section id="how-it-works" class="how-it-works-section section">
+		<div class="container-fluid">
+			<h2 class="section-heading text-center">LOOKING FOR CHANGE</h2>
+
+		</div>
+
+	</section>
+	
+	<section id="testimonial-slider" class="testimonial-slider-section section deep-orange lighten-5 section">
+		<div class="container">
+			<h2 class="section-heading">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-5">
+							<!-- form for search profession -->
+							<label>Profession</label>
+							<form class="form-inline md-form mr-auto mb-4">
+								<input id="occupation" class="form-control mr-sm-2 newSize" type="text" placeholder="Profession Search" aria-label="Search">
+							</form>
+							<!-- Profession search end here -->
+						</div>
+						<div class="col-md-5">
+							<!-- city search  -->
+							<label>City Search</label>
+							<form class="form-inline md-form mr-auto mb-4 ">
+								<input class="form-control mr-sm-2 newSize" type="text" id="autocomplete" placeholder="City Search" />
+							</form>
+							<!-- ends here  -->
+						</div>
+						<div class="col-md-2">
+							<button type="button" id="submit" class="btn btn-primary btn-rounded">Search Career</button>
+							<button type="button" class="inline" id="weather">Test</button>
+						</div>
+					</div>
+				</div>
+			</h2>
+
+		</div>
+	</section>
+	<!-- FAQ ================================= -->
+	<section id="faq" class="faq-section section">
+		<div class="container">
+			<h2 class="section-heading text-center ">Weather Information</h2>
+			<div class="faq-row row">
+				<div class="col-md-4">
+					<!-- <div class="faq-item"> -->
+					<div class="card  mb-5" style="max-width: 18rem;">
+						<div class="card-header" id="size">
+							<div>
+								<h1 id="city"></h1>
+							</div>
+							<div>
+								<h2 id="timeOfLocation"></h2>
+							</div>
+							<div>
+								<h3 id="cityPop"></h3>
+							</div>
+						</div>
+						<div class="card-body ">
+							<h1 class="card-title">
+								<div id="forecast">
+									<p id="highF"></p>
+									<h1 id="new" class="wi"></h1>
+									<p id="description"></p>
+								</div>
+							</h1>
+						</div>
+					</div>
+					<!-- </div> -->
+				</div>
+				<div class="col-md-8">
+						<img src="temperatures.png" alt="Mountain View">
+					<div class="card gftp">
+						<p class="testing"> </p>
+					</div>
+				</div>
+			</div>
+		</div>
+		</div>
+	</section>
+	<!-- CLOSING ================================= -->
+	<section id="faq" class="faq-section  rgba-blue-grey-light section">
+			<div class="container">
+				<h2 class="section-heading text-center">City Pictures</h2>
+				<div class="faq-row row">
+					<div class="col-md-12">
+						<!-- <div class="faq-item"> -->
+								
+								<div id="dropping" class="card-body text-center ">
+										
+										
+									</div>
+						<!-- </div> -->
+					</div>
+					
+				</div>
+			</div>
+			</div>
+		</section>
+	<!-- #64b5f6 blue lighten-2
+
+ -->
+	<section id="closing" class="closing-section  rgba-indigo-light section">
+		<div class="container">
+
+				<h2 class="section-heading">
+
+					<div class="container">
+
+						<div class="row">
+
+							<div class="col-md-5">
+								<!-- CITY DATA  -->
+									<label>City Data</label>
+										<div id="cityData" class="card-body">
+											<blockquote class="blockquote mb-0">
+												<!--  -->
+												<footer class="blockquote-footer">Someone famous in
+													<cite title="Source Title">Source Title</cite>
+												</footer>
+											</blockquote>
+											<div id="dropping">
+
+											</div>
+										</div>
+								<!-- Profession search end here -->
+							</div>
 
 
-                    </div>
-                </div>
-            </div>
+							<div class="col-md-7">
+								<!-- city search  -->
+								<label>Career Stats</label>
+									<div id="careerStats" class="card-body">
+											<blockquote class="blockquote mb-0">
+												<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+												<footer class="blockquote-footer">Someone famous in
+													<cite title="Source Title">Source Title</cite>
+												</footer>
+											</blockquote>
+											<div id="dropping">
 
-            <div class="col-xm-12 col-md-8 my-2">
-                <div class="card">
-                    <!-- leftbo -->
-                    <div class="card-header bg-warning">
-                        Weather
-                    </div>
-                    <div class="card-body">
-                        <blockquote class="blockquote mb-0">
-                            <p>Weather.</p>
-                            <p id="timeOfLocation"></p>
-                            <p id="city"></p>
-                            <p id="cityPop"></p>
-                            <p id="description"></p>
-                            <p id="highF"></p>
-                            <p id="lowF"></p>
-                            <p id="newMaxTemp"></p>
-                            <p id="newMinTemp"></p>
-                            <footer class="blockquote-footer">Someone famous in
-                                <cite title="Source Title">Source Title</cite>
-                            </footer>
-                        </blockquote>
-                    </div>
-                </div>
-            </div>
+											</div>
+										</div>
+								<!-- ends here  -->
+							</div>
 
+						</div>
+					</div>
+				</h2>
 
-
-            <div class="col-xm-12 col-md-4 my-2">
-
-
-                <div class="card">
-                    <div class="card-header bg-warning">
-                        Schools
-                    </div>
-                    <div id="schoolInfo" class="card-body">
-
-                        <div class="card-body">
-                            <blockquote class="blockquote mb-0">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-                                <footer class="blockquote-footer">Someone famous in
-                                    <cite title="Source Title">Source Title</cite>
-                                </footer>
-                            </blockquote>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        <!-- </div> -->
-
-
-
-        <div class="row my-1">
-
-            <div class="col-xm-12 col-md-6 my-2">
-                <div class="card">
-                    <div class="card-header bg-warning">
-                        <p class="h4 pl-4 font-italic">Career Stats</p>
-                    </div>
-                    <div id="careerStats" class="card-body">
-
-                    </div>
-                </div>
-            </div>
-
-
-
-            <div class="col-xm-12 col-md-6 my-2">
-                <div class="card">
-                    <div class="card-header bg-warning">
-                        City Data
-                    </div>
-                    <div id="cityData" class="card-body">
-
-                        <blockquote class="blockquote mb-0">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-                            <footer class="blockquote-footer">Someone famous in
-                                <cite title="Source Title">Source Title</cite>
-                            </footer>
-                        </blockquote>
-                        <div id="dropping">
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-
-
-    </div>
-    <div class="spacer"></div>
-
-    <div class="currentstat"></div>
-
-
-
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.js"></script>
-    <script src="./assets/javascript/data.js"></script>
-    <script src="./assets/javascript/app.js"></script>
-    <!-- Link to Moment.js should go here -->
-    <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+			
+			<!-- ++++++++++++++++++++++++++++++++++++++++++ -->
+		</div>
+	</section>
+	<!-- ========================================== -->
+	<section id="faq" class="faq-section section">
+			<div class="container">
+				<h2 class="section-heading text-center">TOP Schools</h2>
+				<div class="faq-row row">
+					<div class="col-md-12">
+						<!-- <div class="faq-item"> -->
+								<label>Schools</label>
+								<!-- <div id="schoolInfo" class="card-body"> -->
+										<blockquote class="blockquote mb-0">
+											<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+											<footer class="blockquote-footer">Someone famous in
+												<cite title="Source Title">Source Title</cite>
+											</footer>
+										</blockquote>
+										
+									</div>
+						<!-- </div> -->
+					</div>
+					
+				</div>
+			</div>
+			</div>
+		</section>
+	<!-- FOOTER ================================= -->
+	<section id="footer" class="footer-section section section-dark">
+		<div class="container">
+			<div class="footer-socmed">
+				<a href="#" target="_blank">
+					<span class="fa fa-facebook"></span>
+				</a>
+				<a href="#" target="_blank">
+					<span class="fa fa-twitter"></span>
+				</a>
+			</div>
+			<div class="footer-copyright">
+				&copy; 2018-2019 Life Planner App |
+				<a href="#">Privacy Policy</a> |
+				<a href="#">Terms of Service</a>
+			</div>
+		</div>
+	</section>
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+	 crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+	 crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+	 crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.js"></script>
+	<script src="./assets/javascript/data.js"></script>
+	<script src="./assets/javascript/app.js"></script>
+	<!-- Link to Moment.js should go here -->
+	<script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
 </body>
 
 </html>
