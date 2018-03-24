@@ -5,15 +5,15 @@ $(document).ready(function () {
 
     $('#submit').on('click', function (e) {
         e.preventDefault();
-        console.log($('#autocomplete').text());
-        if ($('#autocomplete').text() === '') {
+        console.log($('#autocomplete').val());
+        if ($('#autocomplete').val() === '') {
             $('#errorBody').modal('show');
             $('#errorMessage').text('Please enter a location!');
-        } else if ($('#occupation').text() === '') {
+        } else if ($('#occupation').val() === '') {
             $('#errorBody').modal('show');
             $('#errorMessage').text('Please enter an occupation!');
         } else {
-
+            
             $("#data").empty();
 
             var occupation = $('#occupation').val();
