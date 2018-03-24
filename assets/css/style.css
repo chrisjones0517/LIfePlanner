@@ -19,7 +19,6 @@
     float: right;
     margin-right: 2rem;
 }
-<<<<<<< HEAD
 #dropping {
     align-content: center;
 
@@ -96,17 +95,3 @@
     width: 350px;
     padding: 30px
 }
-=======
-
-#schoolsDisplayed {
-    float: right;
-}
-
-.checked {
-    color: #ffd700; 
-}
-
-.blank {
-    color: #000;
-}
->>>>>>> db8607cd68177e6b52d994ba2d21141f5fde7fb5

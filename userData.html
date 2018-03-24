@@ -35,7 +35,6 @@
 </head>
 
 <body>
-<<<<<<< HEAD
 	<header>
 		<div class="navbar  bg-dark">
 			<div class="logo">
@@ -104,7 +103,7 @@
 						</div>
 						<div class="col-md-2">
 							<button type="button" id="submit" class="btn btn-primary btn-rounded">Search Career</button>
-							<button type="button" class="inline" id="weather">Test</button>
+							<!-- <button type="button" class="inline" id="weather">Test</button> -->
 						</div>
 					</div>
 				</div>
@@ -234,12 +233,15 @@
 				<div class="faq-row row">
 					<div class="col-md-12">
 						<!-- <div class="faq-item"> -->
-								<label>Schools</label>
-								<!-- <div id="schoolInfo" class="card-body"> -->
+								<!-- <label>Schools</label> -->
+								<div  class="card-body">
 										<blockquote class="blockquote mb-0">
-											<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-											<footer class="blockquote-footer">Someone famous in
-												<cite title="Source Title">Source Title</cite>
+                                            <button id = "moreSchools">moreSchools</button>
+                                            <button id = "previousSchools">previousSchools</button>
+                                            <span id ="schoolsDisplayed"></span>
+											<p id="schoolInfo">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+											<footer class="blockquote-footer">Looking for more information?
+												<cite title="Source Title"> lets us know LP team</cite>
 											</footer>
 										</blockquote>
 										
@@ -280,170 +282,6 @@
 	<script src="./assets/javascript/app.js"></script>
 	<!-- Link to Moment.js should go here -->
 	<script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
-=======
-    <header>
-        <div class="navbar bg-dark">
-            <p class="mt-1">
-                <span class="h2 text-light">Life</span>
-                <span class="h2 text-success">Planner</span>
-            </p>
-            <div class="usergreeting float-right text-light">
-                <span class="lead">Welcome </span>
-                <span class="lead username">User </span>
-                <i class="h3 fas fa-user-circle"></i>
-            </div>
-        </div>
-
-    </header>
-    <div class="container mt-3 py-3 animated zoomInUp">
-
-        <div class="row mt-3">
-            <div class="row"></div>
-            <div class="col-xs-12">
-                <div class="row" id="dropping">
-                    <div></div>
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 mb-3">
-                <div class="container">
-
-                    <div class="row">
-
-
-                        <div class="col-md-4">
-                            <!-- form for search profession -->
-                            <label>Profession</label>
-
-                            <form class="form-inline md-form mr-auto mb-4">
-                                <input id="occupation" class="form-control mr-sm-2" type="text" placeholder="Profession Search" aria-label="Search">
-                            </form>
-                            <!-- Profession search end here -->
-                        </div>
-
-                        <div class="col-md-4">
-                            <!-- city search  -->
-                            <label>City Search</label>
-                            <form class="form-inline md-form mr-auto mb-4">
-                                <input class="form-control mr-sm-2" type="text" id="autocomplete" placeholder="City Search" />
-                            </form>
-                            <!-- ends here  -->
-                        </div>
-                        <div class="col-md-4">
-                            <button type="button" id="submit" class="btn btn-primary btn-rounded">Search Career</button>
-                            <button type="button" class="inline" id="weather">Test</button>
-                        </div>
-
-
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-xm-12 col-md-8 my-2">
-                <div class="card">
-                    <!-- leftbo -->
-                    <div class="card-header bg-warning">
-                        Weather
-                    </div>
-                    <div class="card-body">
-                        <blockquote class="blockquote mb-0">
-                            <p>Weather.</p>
-                            <p id="timeOfLocation"></p>
-                            <p id="city"></p>
-                            <p id="cityPop"></p>
-                            <p id="description"></p>
-                            <p id="highF"></p>
-                            <p id="lowF"></p>
-                            <p id="newMaxTemp"></p>
-                            <p id="newMinTemp"></p>
-                            <footer class="blockquote-footer">Someone famous in
-                                <cite title="Source Title">Source Title</cite>
-                            </footer>
-                        </blockquote>
-                    </div>
-                </div>
-            </div>
-
-
-
-            <div class="col-xm-12 col-md-4 my-2">
-
-
-                <div class="card">
-                    <div class="card-header bg-warning">
-                        Schools
-                    </div>
-                    <div class="card-body">
-                        <button id="moreSchools">Next</button>
-                        <button id="previousSchools">Previous</button>
-                        <span id="schoolsDisplayed"></span>
-                        <div id="schoolInfo" class="card-body">
-                        
-                        </div>
-                    </div>
-                </div>
-            </div>
-        <!-- </div> -->
-
-
-
-        <div class="row my-1">
-
-            <div class="col-xm-12 col-md-6 my-2">
-                <div class="card">
-                    <div class="card-header bg-warning">
-                        <p class="h4 pl-4 font-italic">Career Stats</p>
-                    </div>
-                    <div id="careerStats" class="card-body">
-
-                    </div>
-                </div>
-            </div>
-
-
-
-            <div class="col-xm-12 col-md-6 my-2">
-                <div class="card">
-                    <div class="card-header bg-warning">
-                        City Data
-                    </div>
-                    <div id="cityData" class="card-body">
-
-                        <blockquote class="blockquote mb-0">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-                            <footer class="blockquote-footer">Someone famous in
-                                <cite title="Source Title">Source Title</cite>
-                            </footer>
-                        </blockquote>
-                        <div id="dropping">
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-    
-
-    </div>
-    <div class="spacer"></div>
-
-    <div class="currentstat"></div>
-
-
-
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.js"></script>
-    <script src="./assets/javascript/data.js"></script>
-    <script src="./assets/javascript/app.js"></script>
-    <!-- Link to Moment.js should go here -->
-    <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
->>>>>>> db8607cd68177e6b52d994ba2d21141f5fde7fb5
 </body>
 
 </html>

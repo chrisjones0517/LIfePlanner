@@ -4,13 +4,10 @@ $(document).ready(function () {
     var city;
 
     $('#submit').on('click', function (e) {
-<<<<<<< HEAD
         console.log("was clicked")
-=======
-
->>>>>>> db8607cd68177e6b52d994ba2d21141f5fde7fb5
         e.preventDefault();
         $("#data").empty();
+       
         var occupation = $('#occupation').val();
         var cityStateCountry = $('#autocomplete').val().trim();
         var medianPerCapUS = '$29,829';
@@ -19,10 +16,9 @@ $(document).ready(function () {
         state = myArr[1].trim();
         var cityStateWithSpace = myArr[0] + ',' + myArr[1];
         var cityState = cityStateWithSpace.replace(', ', ',');
-<<<<<<< HEAD
         console.log(city);
         console.log(state);
-
+        WaetherCall();
 
         console.log(cityState);
 
@@ -31,9 +27,6 @@ $(document).ready(function () {
         $('.occupation').text(occupation);
         $('#location').text(cityState);
 
-=======
-
->>>>>>> db8607cd68177e6b52d994ba2d21141f5fde7fb5
         // career stats ///////////////////////////////////////////////////////////////////////////////
 
         var occCode;
@@ -150,11 +143,7 @@ $(document).ready(function () {
             console.log(statsName);
             console.log(costOfLiving);
             console.log(housingToIncomeRatio);
-<<<<<<< HEAD
-
-=======
             
->>>>>>> db8607cd68177e6b52d994ba2d21141f5fde7fb5
         }).fail(function (error) {
             console.log(error);
             $('#cityData').append('There was an error processing your request for city data. Please try another search term.');
@@ -270,14 +259,15 @@ $(document).ready(function () {
         WaetherCall();
         //pullingCityPic()
     });
+
     var units = 'imperial';
-    var inputWeather = "New York"//"San Francisco"
+    //var inputWeather = $('#autocomplete')//"San Francisco"
     //weather function
     function WaetherCall() {
         //will take input from search based on lat and long
         //$("#search-input").val().trim() ;
 
-        var queryURL = "http://api.openweathermap.org/data/2.5/forecast?q=" + inputWeather + ",us&APPID=eeda0b646e014b160ccbce009bb655ef";
+        var queryURL = "http://api.openweathermap.org/data/2.5/forecast?q=" + city + ",us&APPID=eeda0b646e014b160ccbce009bb655ef";
         $.ajax({
             url: queryURL,
             method: "GET",
@@ -422,7 +412,6 @@ $(document).ready(function () {
                                 var obj = { month: formattedMonth, temps: avg };
                                 //console.log(obj);
                                 return [obj];
-<<<<<<< HEAD
                             }
                             //////////////////////////loop for getitng TEMP MIN --------------for DISPLAY
                             for (i = 0; i < avgTempsData.length; i++) {
@@ -430,15 +419,6 @@ $(document).ready(function () {
                                 var tempToMin = avgTempsData[i].temps
                                 console.log(monthToMin, tempToMin)
                             }
-=======
-                            }
-                            //////////////////////////loop for getitng TEMP MIN --------------for DISPLAY
-                            for (i = 0; i < avgTempsData.length; i++) {
-                                var monthToMin = avgTempsData[i].month;
-                                var tempToMin = avgTempsData[i].temps
-                                console.log(monthToMin, tempToMin)
-                            }
->>>>>>> db8607cd68177e6b52d994ba2d21141f5fde7fb5
 
                         });
                     });
