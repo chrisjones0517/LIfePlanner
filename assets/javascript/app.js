@@ -1,5 +1,8 @@
 $(document).ready(function () {
 
+    var state;
+    var city;
+
     $('#submit').on('click', function (e) {
 
         e.preventDefault();
@@ -8,8 +11,8 @@ $(document).ready(function () {
         var cityStateCountry = $('#autocomplete').val().trim();
         var medianPerCapUS = '$29,829';
         var myArr = cityStateCountry.split(',');
-        var city = myArr[0].trim();
-        var state = myArr[1].trim();
+        city = myArr[0].trim();
+        state = myArr[1].trim();
         var cityStateWithSpace = myArr[0] + ',' + myArr[1];
         var cityState = cityStateWithSpace.replace(', ', ',');
 
@@ -129,7 +132,7 @@ $(document).ready(function () {
             console.log(statsName);
             console.log(costOfLiving);
             console.log(housingToIncomeRatio);
-
+            
         }).fail(function (error) {
             console.log(error);
             $('#cityData').append('There was an error processing your request for city data. Please try another search term.');
@@ -149,7 +152,7 @@ $(document).ready(function () {
     });
     $('#previousSchools').on('click', function (e) {
         e.preventDefault();
-        if (schoolsOnDisplay > 0) {
+        if (schoolsOnDisplay > 5) {
             schoolsOnDisplay -= 5;
             schoolAPIcall();
         }
@@ -171,12 +174,13 @@ $(document).ready(function () {
             var school = xmlDoc.getElementsByTagName('school');
 
             console.log(name.length);
-
+            console.log(city);
+            console.log(state);
             //   $('#schoolInfo').text(xmlDoc.getElementsByTagName('name')[0].childNodes[0].nodeValue);
-            console.log(xmlDoc.getElementsByTagName('name')[0].childNodes[0].nodeValue);
-            console.log(school);
+            // console.log(xmlDoc.getElementsByTagName('name')[0].childNodes[0].nodeValue);
+            // console.log(school);
             // console.log(school[0].children[1].textContent);
-
+            $('#schoolsDisplayed').text(`${schoolsOnDisplay - 4} - ${schoolsOnDisplay}`);
             $('#schoolInfo').empty();
             for (var i = schoolsOnDisplay - 5; i < schoolsOnDisplay; i++) {
                 var parentRating = school[i].children[6].textContent;
