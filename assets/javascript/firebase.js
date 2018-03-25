@@ -110,10 +110,10 @@ $(document).ready(function () {
     db.ref("users").on("value", function (res) {
         snapshot = res;
         snapshotVal = res.val();
-        // console.log(res);
+         console.log(res);
         if (res.exists()) { //conditional to increase index number for future signin
             dbIndex = snapshotVal.length;
-            console.log(dbIndex);
+           // console.log(dbIndex);
         } else {
             dbIndex = 0;
             console.log(dbIndex);
