@@ -5,7 +5,7 @@ $(document).ready(function () {
     var city;
 
     $('#submit').on('click', function (e) {
-
+        $('<svg>').empty();
         $(".tohide").show()
         e.preventDefault();
         if ($('#autocomplete').val() === '') {
@@ -393,11 +393,16 @@ $(document).ready(function () {
                                 var objTemps = getAverageTemp(data, uniqueMonthsForMinTemps[i], dataPerMonth); //{month: "Jan 2017", temps: 43}
                                 avgMinTempsData.push(objTemps[0]);
                             }
+                            
+                            $('#chart1').empty();
                             tempObjforGraph();
                             console.log(graphFinal);///////////// <!-- graphsFinal is the variable that gets sent to the graph -->////////////
                             findMinAndMax();
                             render_chart();
-
+                            avgMaxTempsData = [];
+                            avgMinTempsData = [];
+                            graphReadyTempArr = [];
+                            graphFinal = [];
                         });
                     });
             });
@@ -406,7 +411,6 @@ $(document).ready(function () {
 
     //////////////////// <!-- Begin Graph  -->///////////////////////
 
-<<<<<<< HEAD
     function findMinAndMax() {
         var maxTempArr = [];
         var minTempArr = [];
@@ -427,11 +431,10 @@ $(document).ready(function () {
     }
 
 
-=======
->>>>>>> c718248a381e58b4bb45e5e350e690aa1eb2b0e5
 
     function render_chart() {
         var stack = d3.layout.stack();
+
         var dataset = {
             "categories": ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', ''],
             "series": ["City1"],
@@ -454,7 +457,7 @@ $(document).ready(function () {
             .rangeRoundBands([0, width], .08);
 
         var y = d3.scale.linear()
-            .domain([yGroupMin, yGroupMax]) ////////////////////////// yGroupMin, yGroupMax          tried replacing with my variables
+            .domain([yGroupMin - 10, yGroupMax + 5]) ////////////////////////// yGroupMin, yGroupMax          tried replacing with my variables
             .range([height, 0]);///// change from height, 0 to 0, 200
 
         var xAxis = d3.svg.axis()
@@ -488,16 +491,16 @@ $(document).ready(function () {
             .attr("width", x.rangeBand() / n)
             .transition()
             .attr("y", function (d) { return y(d.y0); })
-            .attr("height", function (d) { return height - y(d.y0 - d.y)}) ////// tried reversing d.y0 and d.y
+            .attr("height", function (d) { return height - y(d.y0 - d.y) }) ////// tried reversing d.y0 and d.y
             .attr("class", "bar")
             .style("fill", function (d) { return dataset["colors"][d.colorIndex]; })
         console.log(height);
         svg.append("g")
             .attr("class", "x axis")/////////////////////////////// tried changing height to height/2
-            .attr("transform", "translate(0," + height + ")")
+            .attr("transform", "translate(0," + 250 + ")")
             .call(xAxis);
 
-        svg.append("g") ///////////// changed from select to append
+        svg.select("g") ///////////// changed from select to append
             .attr("class", "y axis")
             .call(yAxis);
 
