@@ -1,3 +1,64 @@
+body {
+    width: 100vw;
+}
+/* navbar Start*/
+
+.navbar .logo img {
+    position: absolute;
+    width: 80px;
+    filter: drop-shadow(0 0 10px #fff);
+    top: -10px
+}
+
+.navbar .logo .lp {
+    margin: 0px;
+    width: 100vw;
+    text-align: center;
+    font-family: 'Cardo', serif;
+}
+
+.navbar .userinfo {
+    position: absolute;
+    right: 50px;
+    top: 10px;
+    color: #fff;
+    font-size: 18px;
+}
+
+.navbar .userinfo button {
+    width: 250px;
+    padding: 5px;
+    background: transparent;
+    border: 1px solid #ffd700;
+    color: #ffd700;
+    transition: .5s;
+}
+
+.navbar .userinfo button:hover {
+    background: #ffd700;
+    color: #000;
+}
+
+/* navbar end --------------*/
+
+
+/* search box start */
+.how-it-works-section{
+    font-family: 'Cardo', serif;
+}
+/* search box end --------------*/
+
+/* city stats start*/
+#cityData p{
+    margin:5px 0;
+    font-size: 20px;
+}
+
+#careerStats p{
+    margin:5px 0;
+    font-size: 20px;
+}
+/* city stats end ----------------*/
 .bold {
     font-weight: 700;
 }
