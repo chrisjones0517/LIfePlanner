@@ -7,7 +7,7 @@ $(document).ready(function () {
     $('#submit').on('click', function (e) {
 
         $(".tohide").show()
-       e.preventDefault();
+        e.preventDefault();
         if ($('#autocomplete').val() === '') {
             $('#errorBody').modal('show');
             $('#errorMessage').text('Please enter a location!');
@@ -147,18 +147,18 @@ $(document).ready(function () {
     });
 
 
-    var schoolsOnDisplay = 5;
+    var schoolsOnDisplay = 6;
     $('#moreSchools').on('click', function (e) {
         e.preventDefault();
-        if (schoolsOnDisplay < 200) {
-            schoolsOnDisplay += 5;
+        if (schoolsOnDisplay < 198) {
+            schoolsOnDisplay += 6;
             schoolAPIcall();
         }
     });
     $('#previousSchools').on('click', function (e) {
-       e.preventDefault();
-        if (schoolsOnDisplay > 5) {
-            schoolsOnDisplay -= 5;
+        e.preventDefault();
+        if (schoolsOnDisplay > 6) {
+            schoolsOnDisplay -= 6;
             schoolAPIcall();
         }
     });
@@ -178,9 +178,9 @@ $(document).ready(function () {
             var schoolArr = [];
             var school = xmlDoc.getElementsByTagName('school');
 
-            $('#schoolsDisplayed').text(`${schoolsOnDisplay - 4} - ${schoolsOnDisplay}`);
+            $('#schoolsDisplayed').text(`${schoolsOnDisplay - 5} - ${schoolsOnDisplay}`);
             $('#schoolInfo').empty();
-            for (var i = schoolsOnDisplay - 5; i < schoolsOnDisplay; i++) {
+            for (var i = schoolsOnDisplay - 6; i < schoolsOnDisplay; i++) {
                 var parentRating = school[i].children[6].textContent;
                 var gsRating = school[i].children[5].textContent;
 
@@ -189,7 +189,7 @@ $(document).ready(function () {
                 }
 
                 $('#schoolInfo').append(`
-                    <div class="outerSchoolDiv">
+                    <div class="outerSchoolDiv col-md-6 col-xs-12">
                         <span>${school[i].children[1].textContent}</span>
                         <span>${school[i].children[2].textContent}</span>
                         <span>${school[i].children[3].textContent}</span>
@@ -393,7 +393,7 @@ $(document).ready(function () {
                                 var objTemps = getAverageTemp(data, uniqueMonthsForMinTemps[i], dataPerMonth); //{month: "Jan 2017", temps: 43}
                                 avgMinTempsData.push(objTemps[0]);
                             }
-                            
+
                             $('#chart1').empty();
                             tempObjforGraph();
                             console.log(graphFinal);///////////// <!-- graphsFinal is the variable that gets sent to the graph -->////////////
@@ -437,7 +437,7 @@ $(document).ready(function () {
 
         var dataset = {
             "categories": ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', ''],
-            "series": ["City1"],
+            "series": [city],
             "colors": ["#3498db"],
             "layers": graphFinal
         }
@@ -447,7 +447,7 @@ $(document).ready(function () {
 
             yGroupMax = d3.max(dataset["layers"], function (layer) { return d3.max(layer, function (d) { return d.y0; }); });
         yGroupMin = d3.min(dataset["layers"], function (layer) { return d3.min(layer, function (d) { return d.y; }); });
-
+        
         var margin = { top: 50, right: 50, bottom: 50, left: 100 },
             width = 900 - margin.left - margin.right,
             height = 500 - margin.top - margin.bottom;
@@ -491,25 +491,22 @@ $(document).ready(function () {
             .attr("width", x.rangeBand() / n)
             .transition()
             .attr("y", function (d) { return y(d.y0); })
-            .attr("height", function (d) { return height - y(d.y0 - d.y) }) ////// tried reversing d.y0 and d.y
+            .attr("height", function (d) { return height - y(d.y0 - d.y) }) ////// tried reversing d.y0 and d.y  
             .attr("class", "bar")
             .style("fill", function (d) { return dataset["colors"][d.colorIndex]; })
-        console.log(height);
         svg.append("g")
             .attr("class", "x axis")/////////////////////////////// tried changing height to height/2
             .attr("transform", "translate(0," + 250 + ")")
             .call(xAxis);
-
         svg.select("g") ///////////// changed from select to append
             .attr("class", "y axis")
             .call(yAxis);
-
         svg.append("text")
             .attr("x", width / 3)
             .attr("y", 0)
             .attr("dx", ".71em")
             .attr("dy", "-.71em")
-            .text("Min - Max Temperature (Month wise)");
+            .text("Min - Max Temperature (Monthly)");
 
         // add legend
         var legend = svg.append("g")
