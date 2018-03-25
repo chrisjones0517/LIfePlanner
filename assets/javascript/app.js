@@ -301,7 +301,7 @@ $(document).ready(function () {
             lat = data.city.coord.lat;
             lon = data.city.coord.lon;
             city = data.city.name;
-            cityPop = data.city.population;
+            cityPop = formatCommas(data.city.population);
             highF = Math.round(data.list[0].main.temp_max) + '°';
             lowF = Math.round(data.list[0].main.temp_min) + '°';
             description = data.list[0].weather[0].description;
