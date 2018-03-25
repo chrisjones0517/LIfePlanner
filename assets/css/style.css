@@ -1,17 +1,29 @@
 body {
-    width: 100vw;
+    width: 100vw!important;
+    background: #eee!important;
 }
+
+.container-fluid {
+    width: 95vw!important;
+    background: #fff;
+    box-shadow: 0 0 10px #333;
+    position: relative;
+    top: -50px
+}
+
 /* navbar Start*/
 
 .navbar {
-    height: 60px;
+    height: 450px;
+    background-image:url("../images/bg.jpg")
+
 }
 
 .navbar .logo img {
     position: absolute;
     width: 80px;
     filter: drop-shadow(0 0 10px #F00);
-    top: -10px;
+    top: 10px;
     animation: glow 5s infinite;
 }
 
@@ -26,9 +38,13 @@ body {
 
 .navbar .logo .lp {
     margin: 0px;
-    width: 100vw;
-    text-align: center;
     font-family: 'Cardo', serif;
+    margin-left: 100px;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+.navbar .logo .lp .h4 {
+    font-family: 'IBM Plex Sans Condensed', sans-serif;
 }
 
 .navbar .userinfo {
@@ -43,13 +59,13 @@ body {
     width: 200px;
     padding: 5px;
     background: transparent;
-    border: 1px solid #ffd700;
-    color: #ffd700;
+    border: 1px solid #bf2e55;
+    color: #bf2e55;
     transition: .5s;
 }
 
 .navbar .userinfo button:hover {
-    background: #ffd700;
+    background: #bf2e55;
     color: #000;
 }
 
@@ -57,20 +73,30 @@ body {
     font-size: 18px;
     line-height: 36px;
     font-style: italic;
-    text-shadow: 0 0 5px #ffd700;
+    text-shadow: 0 0 5px #bf2e55;
 }
 
-/* navbar end --------------*/
-
-
-/* search box start */
 .how-it-works-section{
     font-family: 'Cardo', serif;
     padding: 32px;
 }
+/* navbar end --------------*/
+
+
+/* search box start */
+#search-slider{
+    
+}
+
+#search-slider .searchwrap{
+    background: #fff;
+    
+} 
+
 /* search box end --------------*/
 
 /* city stats start*/
+
 #cityData p{
     margin:5px 0;
     font-size: 20px;
@@ -82,7 +108,7 @@ body {
 }
 
 #submit {
-    background: #ffd700;
+    background: #bf2e55;
     color: #000!important;
     font-size: 18;
     font-weight: bold;
@@ -177,7 +203,7 @@ body {
 }
 
 .checked {
-    color: #ffd700; 
+    color: #bf2e55; 
 }
 
 .gftp{
@@ -201,6 +227,10 @@ body {
     font-size:50px
 }
 
+#photo {
+    background: #bf2e55;
+}
+
 #autocomplete, #occupation{
     font-size: 20px
 }
@@ -211,5 +241,5 @@ body {
     border-radius: 40px;
     font-size: 40px;
     width: 65px;
-    background: #ffd700;
+    background: #bf2e55;
 }

@@ -14,7 +14,7 @@
     width: 500px;
     height: 305px;
     border-radius: 5px;
-    border: 3px solid #f8a725;
+    border: 3px solid #bf2e55;
     background: #FFF;
     transition: .5s
 }
@@ -68,7 +68,7 @@ hr {
 .userReg input {
     padding-left: 10px;
     border: transparent;
-    border-bottom: 2px dashed #f8a725;
+    border-bottom: 2px dashed #bf2e55;
     width:315px;
 }
 
@@ -122,15 +122,15 @@ hr {
     position: absolute;
     top: -40px;
     border-radius: 0px !important;
-    background: #f8a725!important;
-    border:10px solid #f8a725!important;
+    background: #bf2e55!important;
+    border:10px solid #bf2e55!important;
     width: 200px;
     transition: .5s;
     font-size: 20px;
 }
 
 .btnReg:hover {
-    background: #d68605!important;
+    background: #a51c40!important;
 }
 
 .btnSign {
