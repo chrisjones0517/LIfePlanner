@@ -5,9 +5,13 @@ $(document).ready(function () {
     var city;
 
     $('#submit').on('click', function (e) {
+<<<<<<< Updated upstream
         $('<svg>').empty();
+=======
+       
+>>>>>>> Stashed changes
         $(".tohide").show()
-        e.preventDefault();
+       e.preventDefault();
         if ($('#autocomplete').val() === '') {
             $('#errorBody').modal('show');
             $('#errorMessage').text('Please enter a location!');
@@ -156,7 +160,7 @@ $(document).ready(function () {
         }
     });
     $('#previousSchools').on('click', function (e) {
-        e.preventDefault();
+       e.preventDefault();
         if (schoolsOnDisplay > 5) {
             schoolsOnDisplay -= 5;
             schoolAPIcall();
@@ -274,12 +278,12 @@ $(document).ready(function () {
         return [obj];
     }
 
-    $('#weather').on('click', function (e) {
-        e.preventDefault();
-        console.log("wasclicked")
-        WaetherCall();
-        //pullingCityPic()
-    });
+    // $('#weather').on('click', function (e) {
+    //     e.preventDefault();
+    //     console.log("wasclicked")
+    //     WaetherCall();
+    //     //pullingCityPic()
+    // });
 
     var units = 'imperial';
     //weather function
@@ -570,6 +574,7 @@ $(document).ready(function () {
     }
 
     function tempObjforGraph() {
+
         for (var i = 0; i < avgMaxTempsData.length; i++) {
             graphReadyTempArr.push(
                 {
