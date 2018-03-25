@@ -64,6 +64,17 @@ body {
     font-size: 20px;
 }
 /* city stats end ----------------*/
+
+/* Weather Start */
+
+.graph{
+    min-height: 244px;
+}
+
+.chart {
+    transform: scale(.9) translateX(-92px);
+}
+/* Weather End ---------------- */
 .bold {
     font-weight: 700;
 }
