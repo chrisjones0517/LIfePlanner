@@ -3,6 +3,10 @@ body {
 }
 /* navbar Start*/
 
+.navbar {
+    height: 60px;
+}
+
 .navbar .logo img {
     position: absolute;
     width: 80px;
@@ -26,7 +30,7 @@ body {
 }
 
 .navbar .userinfo button {
-    width: 250px;
+    width: 200px;
     padding: 5px;
     background: transparent;
     border: 1px solid #ffd700;
@@ -165,7 +169,11 @@ body {
     font-size: 20px
 }
 #new{font-size: 100px;}
-#size{
-    width: 350px;
-    padding: 30px
+
+
+#school button{
+    border-radius: 40px;
+    font-size: 40px;
+    width: 65px;
+    background: #ffd700;
 }

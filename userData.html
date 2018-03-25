@@ -36,11 +36,12 @@
     <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.0/js/mdb.min.js"></script> -->
     <!-- Weather pic -->
 
-    
+
     <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.10/css/weather-icons.min.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Cardo:700" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/graph.css">
     <link rel="stylesheet" href="./assets/css/animate.min.css">
     <link rel="stylesheet" href="./assets/css/register.css">
 </head>
@@ -50,24 +51,25 @@
 
     <!-- ######### login/Register start ########## -->
 
-<div class="screen animated regHidden">
+    <div class="screen animated regHidden">
         <div class="userReg animated">
-                <button class = "btnReg btnSign">Register</button>
-                <button class = "btnReg btnLog">Login</button>
+            <button class="btnReg btnSign">Register</button>
+            <button class="btnReg btnLog">Login</button>
 
             <div class="wrapper">
                 <div class="register mr-2">
                     <p class="userheadtext">New User:</p>
-                    <hr><br>
-                    <label for="username" class = "lead">
+                    <hr>
+                    <br>
+                    <label for="username" class="lead">
                         <i class="fas fa-user"></i> Username: </label>
                     <input type="text" id="username">
                     <br>
-                    <label for="password" class = "lead">
+                    <label for="password" class="lead">
                         <i class="fas fa-lock"></i> Password:</label>
                     <input type="password" id="password">
                     <br>
-                    <label for="fullname" class = "lead">
+                    <label for="fullname" class="lead">
                         <i class="fas fa-sticky-note"></i> Full name:</label>
                     <input type="text" id="fullname">
                     <br>
@@ -75,29 +77,32 @@
                 </div>
                 <div class="login mr-2 regHidden">
                     <p class="userheadtext">Current User:</p>
-                    <hr><br>
-                    <label for="username1" class = "lead">
+                    <hr>
+                    <br>
+                    <label for="username1" class="lead">
                         <i class="fas fa-user"></i> Username: </label>
                     <input type="text" id="username1">
                     <br>
-                    <label for="password1" class = "lead">
+                    <label for="password1" class="lead">
                         <i class="fas fa-lock"></i> Password:</label>
                     <input type="password" id="password1">
                     <br>
                     <button id="compare" class="animated">Login</button>
                 </div>
                 <div class="guest">
-                    <button id="guest"><i class="fas fa-sign-out-alt"></i></button>
+                    <button id="guest">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </button>
                 </div>
 
 
                 <p id="regMessage"></p>
             </div>
-            
+
         </div>
     </div>
 
-<!-- ######### login/Register End ########## -->
+    <!-- ######### login/Register End ########## -->
 
 
 
@@ -106,7 +111,7 @@
         <div class="navbar bg-dark my-3">
             <div class="logo">
                 <img src="./assets/images/lp.png" alt="lp">
-                <div class = "lp">
+                <div class="lp d-none d-md-block">
                     <p class="h2">
                         <span class="text-light">Life</span>
                         <span class="text-success font-bold">Planner</span>
@@ -125,7 +130,7 @@
     <!-- HOW IT WORKS ================================= -->
     <section id="how-it-works" class="how-it-works-section section">
         <div class="container-fluid">
-            <h2 class="section-heading text-center h1">LOOKING FOR CHANGE</h2>
+            <h2 class="section-heading text-center h2">LOOKING FOR CHANGE</h2>
 
         </div>
 
@@ -165,8 +170,8 @@
     <!-- ############### Search box END ################ -->
 
 
-<!-- ############### Carrer Stats Starts ############### -->
-<section id="closing" class="py-3 closing-section grey lighten-4 section">
+    <!-- ############### Carrer Stats Starts ############### -->
+    <section id="closing" class="py-3 my-3 closing-section grey lighten-4 section">
         <div class="container">
 
             <h2 class="section-heading">
@@ -189,7 +194,7 @@
                             <!-- city search  -->
                             <label>Career Stats</label>
                             <div id="careerStats" class="card-body">
-                                
+
                                 <div id="dropping">
 
                                 </div>
@@ -208,13 +213,13 @@
 
 
     <!-- ############## Weather START ############### -->
-    <section id="faq" class="faq-section section">
+    <section id="weather" class="faq-section section">
         <div class="container">
             <h2 class="section-heading text-center ">Weather Information</h2>
             <div class="faq-row row">
                 <div class="col-md-4">
                     <!-- <div class="faq-item"> -->
-                    <div class="card  mb-5" style="max-width: 18rem;">
+                    <div class="card mb-5">
                         <div class="card-header" id="size">
                             <div>
                                 <h1 id="city"></h1>
@@ -253,7 +258,7 @@
     <!-- ############# Weather END ########### -->
 
     <!-- ############### photos Start ############ -->
-    <section id="faq" class=" my-3 py-3 faq-section orange lighten-3 section">
+    <section id="photo" class=" my-3 py-3 faq-section grey lighten-4 section">
         <div class="container">
             <h2 class="section-heading text-center">City Pictures</h2>
             <div class="faq-row row">
@@ -269,15 +274,15 @@
 
             </div>
         </div>
-    
+
     </section>
 
     <!-- photos End -->
     <!-- #64b5f6 blue lighten-2 -->
 
 
-
-    <section id="faq" class="faq-section section orange lighten-3">
+    <!-- ############### School ################ -->
+    <section id="school" class="school-section section">
         <div class="container">
             <h2 class="section-heading text-center">TOP Schools</h2>
             <div class="faq-row row">
@@ -285,15 +290,20 @@
                     <!-- <div class="faq-item"> -->
                     <!-- <label>Schools</label> -->
                     <div class="card-body">
-                        <blockquote class="blockquote mb-0">
-                            <button id="moreSchools">moreSchools</button>
-                            <button id="previousSchools">previousSchools</button>
+                        <div class="text-center">
+                            <button id="previousSchools">
+                                <i class="fas fa-chevron-circle-left"></i>
+                            </button>
                             <span id="schoolsDisplayed"></span>
-                            <p id="schoolInfo">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-                            <footer class="blockquote-footer">Looking for more information?
-                                <cite title="Source Title"> lets us know LP team</cite>
-                            </footer>
-                        </blockquote>
+                            <button id="moreSchools">
+                                <i class="fas fa-chevron-circle-right"></i>
+                            </button>
+                            <p id="schoolInfo"></p>
+                        </div>
+                        <footer class="blockquote-footer">Looking for more information?
+                            <cite title="Source Title"> lets us know LP team</cite>
+                        </footer>
+
 
                     </div>
                     <!-- </div> -->
@@ -322,6 +332,7 @@
         </div>
     </section>
 
+    <!-- ############# Bootstrap Modal ################## -->
     <div id="errorBody" class="modal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
