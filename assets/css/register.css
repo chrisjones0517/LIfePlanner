@@ -4,6 +4,7 @@
     width: 100vw;
     height: 100vh;
     z-index: 10;
+    top: 0;
 }
 
 .userReg {
@@ -67,7 +68,7 @@ hr {
 .userReg input {
     padding-left: 10px;
     border: transparent;
-    border-bottom: 2px dashed var(--blue);
+    border-bottom: 2px dashed #f8a725;
     width:315px;
 }
 

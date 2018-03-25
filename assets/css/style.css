@@ -10,8 +10,18 @@ body {
 .navbar .logo img {
     position: absolute;
     width: 80px;
-    filter: drop-shadow(0 0 10px #fff);
-    top: -10px
+    filter: drop-shadow(0 0 10px #F00);
+    top: -10px;
+    animation: glow 5s infinite;
+}
+
+@keyframes glow {
+    0%, 100% {
+        filter: drop-shadow(0 0 0px #F00);
+    }
+    50% {
+        filter: drop-shadow(0 0 10px #F00);
+    }
 }
 
 .navbar .logo .lp {
@@ -43,6 +53,13 @@ body {
     color: #000;
 }
 
+.navbar .userinfo p {
+    font-size: 18px;
+    line-height: 36px;
+    font-style: italic;
+    text-shadow: 0 0 5px #ffd700;
+}
+
 /* navbar end --------------*/
 
 
@@ -62,6 +79,13 @@ body {
 #careerStats p{
     margin:5px 0;
     font-size: 20px;
+}
+
+#submit {
+    background: #ffd700;
+    color: #000!important;
+    font-size: 18;
+    font-weight: bold;
 }
 /* city stats end ----------------*/
 
