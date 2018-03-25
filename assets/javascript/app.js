@@ -5,11 +5,7 @@ $(document).ready(function () {
     var city;
 
     $('#submit').on('click', function (e) {
-<<<<<<< Updated upstream
-        $('<svg>').empty();
-=======
-       
->>>>>>> Stashed changes
+
         $(".tohide").show()
        e.preventDefault();
         if ($('#autocomplete').val() === '') {
