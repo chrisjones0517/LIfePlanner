@@ -15,8 +15,8 @@ $(document).ready(function () {
     var dbIndex;
     var snapshot,
         snapshotVal,
-        userLogin =[]; //store login info
-    $("#userlogin").on("click", function(){
+        userLogin = []; //store login info
+    $("#userlogin").on("click", function () {
         $(".screen").removeClass("regHidden");
         $(".userReg").addClass("fadeInDown");
     })
@@ -51,6 +51,7 @@ $(document).ready(function () {
                     console.log("registered")
                     //users tree in firebase
                     $(".userReg").addClass("flipOutY");
+                    $("#userlogin").hide();
                     setTimeout(() => {
                         $(".screen").hide();
                     }, 1000);
@@ -69,7 +70,9 @@ $(document).ready(function () {
                     }
                     //store user for later use
                     userLogin.push(x);
-                    console.log(userLogin); 
+                    console.log(userLogin);
+                    $(".userinfo p").removeClass("regHidden");
+                    $("#userfullname").text(userLogin[0].fullname);
                 } //end of username comparison
             }
         } else {
@@ -110,10 +113,10 @@ $(document).ready(function () {
     db.ref("users").on("value", function (res) {
         snapshot = res;
         snapshotVal = res.val();
-         console.log(res);
+        console.log(res);
         if (res.exists()) { //conditional to increase index number for future signin
             dbIndex = snapshotVal.length;
-           // console.log(dbIndex);
+            // console.log(dbIndex);
         } else {
             dbIndex = 0;
             console.log(dbIndex);
@@ -140,7 +143,12 @@ $(document).ready(function () {
         });
         console.log(userLogin)
         if (userLogin.length) { //if array length is 1 => true
-            console.log("good to go")
+            console.log("good to go");
+            $("#userlogin").hide();
+
+            $(".userinfo p").removeClass("regHidden");
+            $("#userfullname").text(userLogin[0].fullname);
+            console.log(userLogin[0].fullname)
             $(".userReg").addClass("flipOutY");
             setTimeout(() => {
                 $(".screen").hide();
@@ -155,19 +163,19 @@ $(document).ready(function () {
         $(".screen").addClass("fadeOut")
         setTimeout(function () {
             $(".screen").addClass("regHidden");
-        $(".userReg").removeClass("fadeInDown");
-        $(".screen").removeClass("fadeOut")
+            $(".userReg").removeClass("fadeInDown");
+            $(".screen").removeClass("fadeOut")
         }, 2500)
     })
 
 
 
-    $(".btnSign").on("click", function (){
+    $(".btnSign").on("click", function () {
         $(".register").removeClass("regHidden");
         $(".login").addClass("regHidden");
     })
 
-    $(".btnLog").on("click", function (){
+    $(".btnLog").on("click", function () {
         $(".register").addClass("regHidden");
         $(".login").removeClass("regHidden");
     })
