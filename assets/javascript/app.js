@@ -333,7 +333,6 @@ $(document).ready(function () {
 
             });
         });
-
     }
 
     function getHist() {
@@ -404,7 +403,7 @@ $(document).ready(function () {
 
     //////////////////// <!-- Begin Graph  -->///////////////////////
 
-    
+
     function render_chart() {
         var stack = d3.layout.stack();
         var dataset = {
