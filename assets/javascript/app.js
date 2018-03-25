@@ -5,7 +5,7 @@ $(document).ready(function () {
     var city;
 
     $('#submit').on('click', function (e) {
-        console.log("was clicked")
+        
         $(".tohide").show()
         e.preventDefault();
         if ($('#autocomplete').val() === '') {
@@ -233,17 +233,13 @@ function formatCommas(num) {
     }, "");
 }
 
-var pickupMaxTempArr;
-function globalMaxArray(arr) {
-    pickupMaxTempArr = arr;
-    console.log(pickupMaxTempArr);
-}
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+var avgMaxTempsData = [];
+var avgMinTempsData = [];
+var graphReadyTempArr = [];
+var graphFinal = [];
 
-var pickupMinTempArr;
-function globalMinArray(arr) {
-    pickupMinTempArr = arr;
-    console.log(pickupMinTempArr);
-}
+
 
 
 var aData = [];
@@ -367,14 +363,14 @@ function getHist() {
                 data = data.results;
 
                 var uniqMonthsForMaxTemps = uniqueResultsFromData(data);
-                var avgMaxTempsData = [];
-                for (i = 0; i < uniqMonthsForMaxTemps.length; i++) {
+               
+                for (i = 0; i < uniqMonthsForMaxTemps.length - 1; i++) {
                     //iterate through each unique month inside our uniqMonthsForMaxTemps array
                     var dataPerMonth = data.filter((fromData) => fromData.date.indexOf(uniqMonthsForMaxTemps[i]) > -1).length;
                     var objTemps = getAverageTemp(data, uniqMonthsForMaxTemps[i], dataPerMonth); //{month: "Jan 2017", temps: 43}
                     avgMaxTempsData.push(objTemps[0]);
                 }
-                globalMaxArray(avgMaxTempsData);
+                
                 /////////////////////loop for getitng TEMP MAX --------------for DISPLAY
                 // for (i = 0; i < avgMaxTempsData.length; i++) {
                 //     var monthToMax = avgMaxTempsData[i].month;
@@ -391,19 +387,47 @@ function getHist() {
                     }).then(function (data) {
                         data = data.results;
                         var uniqueMonthsForMinTemps = uniqueResultsFromData(data);
-                        var avgMinTempsData = [];
-                        for (i = 0; i < uniqueMonthsForMinTemps.length; i++) {
+                        
+                        for (i = 0; i < uniqueMonthsForMinTemps.length - 1; i++) {
                             var dataPerMonth = data.filter((fromData) => fromData.date.indexOf(uniqueMonthsForMinTemps[i]) > -1).length;
                             var objTemps = getAverageTemp(data, uniqueMonthsForMinTemps[i], dataPerMonth); //{month: "Jan 2017", temps: 43}
                             avgMinTempsData.push(objTemps[0]);
                         }
-                        globalMinArray(avgMinTempsData);
+                        
                     });
                 });
         });
     //});
 }
 
+
+function tempObjforGraph() {
+    for (var i = 0; i < avgMaxTempsData.length; i++) {
+        graphReadyTempArr.push(
+            {
+                "y":avgMinTempsData[i].temps, 
+                "y0":avgMaxTempsData[i].temps,
+                "month":avgMaxTempsData[i].month
+            }
+        );
+    }
+    graphReadyTempArr.push(
+        {
+            "y": 0,
+            "y0":0,
+            "month":""
+        }
+    );
+    graphFinal.push(graphReadyTempArr);
+}
+
+$('#testBtn').on('click', function() {
+    console.log(avgMaxTempsData);
+    console.log(avgMinTempsData);
+    tempObjforGraph();
+    console.log(graphFinal);
+    
+});
 
 ///google auto city
 var input = document.getElementById('autocomplete');
@@ -438,4 +462,3 @@ function pullingCityPic() {
 
 }
 });
-
