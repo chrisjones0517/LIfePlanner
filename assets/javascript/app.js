@@ -579,13 +579,13 @@ $(document).ready(function () {
                 }
             );
         }
-        // graphReadyTempArr.push(
-        //     {
-        //         "y": 0,
-        //         "y0": 0,
-        //         "month": ""
-        //     }
-        // );
+        graphReadyTempArr.push(
+            {
+                "y": 0,
+                "y0": 0,
+                "month": ""
+            }
+        );
         graphFinal.push(graphReadyTempArr);
     }
     console.log(avgMinTempsData);
