@@ -49,6 +49,7 @@ body {
 /* search box start */
 .how-it-works-section{
     font-family: 'Cardo', serif;
+    padding: 32px;
 }
 /* search box end --------------*/
 
@@ -63,6 +64,17 @@ body {
     font-size: 20px;
 }
 /* city stats end ----------------*/
+
+/* Weather Start */
+
+.graph{
+    min-height: 244px;
+}
+
+.chart {
+    transform: scale(.9) translateX(-92px);
+}
+/* Weather End ---------------- */
 .bold {
     font-weight: 700;
 }

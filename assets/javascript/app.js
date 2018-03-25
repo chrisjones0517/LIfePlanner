@@ -334,7 +334,6 @@ $(document).ready(function () {
 
             });
         });
-
     }
 
     function getHist() {
@@ -407,6 +406,7 @@ $(document).ready(function () {
 
     //////////////////// <!-- Begin Graph  -->///////////////////////
 
+<<<<<<< HEAD
     function findMinAndMax() {
         var maxTempArr = [];
         var minTempArr = [];
@@ -427,6 +427,8 @@ $(document).ready(function () {
     }
 
 
+=======
+>>>>>>> c718248a381e58b4bb45e5e350e690aa1eb2b0e5
 
     function render_chart() {
         var stack = d3.layout.stack();
