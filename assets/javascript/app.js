@@ -238,7 +238,8 @@ $(document).ready(function () {
     var avgMinTempsData = [];
     var graphReadyTempArr = [];
     var graphFinal = [];
-
+    var seasonalMin;
+    var seasonalMax;
 
 
 
@@ -395,7 +396,9 @@ $(document).ready(function () {
                             }
                             tempObjforGraph();
                             console.log(graphFinal);///////////// <!-- graphsFinal is the variable that gets sent to the graph -->////////////
+                            findMinAndMax();
                             render_chart();
+
                         });
                     });
             });
@@ -404,14 +407,34 @@ $(document).ready(function () {
 
     //////////////////// <!-- Begin Graph  -->///////////////////////
 
-    
+    function findMinAndMax() {
+        var maxTempArr = [];
+        var minTempArr = [];
+        for (var i = 0; i < avgMaxTempsData.length; i++) {
+            maxTempArr.push(avgMaxTempsData[i].temps);
+            minTempArr.push(avgMinTempsData[i].temps);
+        }
+        maxTempArr.sort(function (a, b) {
+            return b - a;
+        });
+        seasonalMax = maxTempArr[0];
+        minTempArr.sort(function (a, b) {
+            return a - b;
+        });
+        seasonalMin = minTempArr[0];
+        console.log(seasonalMax);
+        console.log(seasonalMin);
+    }
+
+
+
     function render_chart() {
         var stack = d3.layout.stack();
         var dataset = {
             "categories": ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', ''],
             "series": ["City1"],
             "colors": ["#3498db"],
-            "layers":  graphFinal
+            "layers": graphFinal
         }
 
         n = dataset["series"].length, // Number of Layers
@@ -429,8 +452,8 @@ $(document).ready(function () {
             .rangeRoundBands([0, width], .08);
 
         var y = d3.scale.linear()
-            .domain([yGroupMin, yGroupMax])
-            .range([height, 0]);
+            .domain([yGroupMin, yGroupMax]) ////////////////////////// yGroupMin, yGroupMax          tried replacing with my variables
+            .range([height, 0]);///// change from height, 0 to 0, 200
 
         var xAxis = d3.svg.axis()
             .scale(x)
@@ -463,16 +486,16 @@ $(document).ready(function () {
             .attr("width", x.rangeBand() / n)
             .transition()
             .attr("y", function (d) { return y(d.y0); })
-            .attr("height", function (d) { return height - y(d.y0 - d.y) })
+            .attr("height", function (d) { return height - y(d.y0 - d.y)}) ////// tried reversing d.y0 and d.y
             .attr("class", "bar")
             .style("fill", function (d) { return dataset["colors"][d.colorIndex]; })
-
+        console.log(height);
         svg.append("g")
-            .attr("class", "x axis")
+            .attr("class", "x axis")/////////////////////////////// tried changing height to height/2
             .attr("transform", "translate(0," + height + ")")
             .call(xAxis);
 
-        svg.select("g")
+        svg.append("g") ///////////// changed from select to append
             .attr("class", "y axis")
             .call(yAxis);
 
@@ -551,16 +574,16 @@ $(document).ready(function () {
                 }
             );
         }
-        graphReadyTempArr.push(
-            {
-                "y": 0,
-                "y0": 0,
-                "month": ""
-            }
-        );
+        // graphReadyTempArr.push(
+        //     {
+        //         "y": 0,
+        //         "y0": 0,
+        //         "month": ""
+        //     }
+        // );
         graphFinal.push(graphReadyTempArr);
     }
-
+    console.log(avgMinTempsData);
     ///google auto city
     var input = document.getElementById('autocomplete');
     var search = new google.maps.places.Autocomplete(input, { types: ['(regions)'] });
