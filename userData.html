@@ -8,6 +8,10 @@
     <title>Life Planner</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css" integrity="sha384-v2Tw72dyUXeU3y4aM2Y0tBJQkGfplr39mxZqlTBDUZAb9BGoC40+rdFCG0m10lXk"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/fontawesome.css" integrity="sha384-q3jl8XQu1OpdLgGFvNRnPdj5VIlCvgsDQTQB6owSOHWlAurxul7f+JpUOVdAiJ5P"
+        crossorigin="anonymous">
     <link rel="stylesheet" href="./assets/css/style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
         crossorigin="anonymous">
@@ -31,11 +35,73 @@
     <!-- MDB core JavaScript -->
     <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.0/js/mdb.min.js"></script> -->
     <!-- Weather pic -->
+
+    
+    <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
+
     <link href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.10/css/weather-icons.min.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Cardo:700" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/animate.min.css">
+    <link rel="stylesheet" href="./assets/css/register.css">
 </head>
 
 <body>
+
+
+    <!-- ######### login/Register start ########## -->
+
+<div class="screen animated regHidden">
+        <div class="userReg animated">
+                <button class = "btnReg btnSign">Register</button>
+                <button class = "btnReg btnLog">Login</button>
+
+            <div class="wrapper">
+                <div class="register mr-2">
+                    <p class="userheadtext">New User:</p>
+                    <hr><br>
+                    <label for="username" class = "lead">
+                        <i class="fas fa-user"></i> Username: </label>
+                    <input type="text" id="username">
+                    <br>
+                    <label for="password" class = "lead">
+                        <i class="fas fa-lock"></i> Password:</label>
+                    <input type="password" id="password">
+                    <br>
+                    <label for="fullname" class = "lead">
+                        <i class="fas fa-sticky-note"></i> Full name:</label>
+                    <input type="text" id="fullname">
+                    <br>
+                    <button id="send" class="animated">Register</button>
+                </div>
+                <div class="login mr-2 regHidden">
+                    <p class="userheadtext">Current User:</p>
+                    <hr><br>
+                    <label for="username1" class = "lead">
+                        <i class="fas fa-user"></i> Username: </label>
+                    <input type="text" id="username1">
+                    <br>
+                    <label for="password1" class = "lead">
+                        <i class="fas fa-lock"></i> Password:</label>
+                    <input type="password" id="password1">
+                    <br>
+                    <button id="compare" class="animated">Login</button>
+                </div>
+                <div class="guest">
+                    <button id="guest"><i class="fas fa-sign-out-alt"></i></button>
+                </div>
+
+
+                <p id="regMessage"></p>
+            </div>
+            
+        </div>
+    </div>
+
+<!-- ######### login/Register End ########## -->
+
+
+
+
     <header>
         <div class="navbar bg-dark my-3">
             <div class="logo">
@@ -175,7 +241,9 @@
                 <div class="col-md-8">
                     <!-- <img src="temperatures.png" alt="Mountain View"> -->
                     <div class="card gftp">
-                        <p class="testing"> here goes graph </p>
+                        <!-- temp graph -->
+
+                        <div id="chart1" class="chart"></div>
                     </div>
                 </div>
             </div>
@@ -273,10 +341,7 @@
         </div>
     </div>
 
-<!-- ######### login/Register start ########## -->
 
-
-<!-- ######### login/Register End ########## -->
 
 
 
@@ -290,6 +355,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.js"></script>
     <script src="./assets/javascript/data.js"></script>
     <script src="./assets/javascript/app.js"></script>
+    <script src="./assets/javascript/firebase.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
     <!-- Link to Moment.js should go here -->
     <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
 </body>
