@@ -9,7 +9,6 @@ $(document).ready(function () {
         console.log("was clicked")
         $(".tohide").show()
         e.preventDefault();
-        console.log($('#autocomplete').val());
         if ($('#autocomplete').val() === '') {
             $('#errorBody').modal('show');
             $('#errorMessage').text('Please enter a location!');
@@ -28,14 +27,7 @@ $(document).ready(function () {
             state = myArr[1].trim();
             var cityStateWithSpace = myArr[0] + ',' + myArr[1];
             var cityState = cityStateWithSpace.replace(', ', ',');
-            console.log(city);
-            console.log(state);
             WaetherCall();
-
-            console.log(cityState);
-
-
-
             $('.occupation').text(occupation);
             $('#location').text(cityState);
 
@@ -55,9 +47,6 @@ $(document).ready(function () {
                 success: function (response) {
                     var occTitle = response.OccupationList[0].OnetTitle;
                     occCode = response.OccupationList[0].OnetCode;
-                    console.log(response.OccupationList)
-                    console.log(occTitle);
-                    console.log(occCode);
                 },
                 error: function (request, status, errorThrown) {
                     $('#errorBody').modal('show');
@@ -74,13 +63,10 @@ $(document).ready(function () {
                         xhr.setRequestHeader('Authorization', 'Bearer ' + 'KZasPLkGaB4qx+wuKxVDBoBHMO3iu+sTcYuhf9Et/1ueVH3efsEr3OEpWUXl24ukjrYWm8GTLn94+RbOE/FKKg==');
                     },
                     success: function (response) {
-                        console.log(response);
                         var myRoot = response.OccupationDetail[0];
                         var title = myRoot.OnetTitle;
-                        console.log(title);
                         var localWages = myRoot.Wages.BLSAreaWagesList;
                         var natWages = myRoot.Wages.NationalWagesList;
-                        console.log(myRoot);
                         var stateStats = myRoot.Projections.Projections[0];
                         var nationalStats = myRoot.Projections.Projections[1];
                         var crntUSemp = nationalStats.EstimatedEmployment;
@@ -110,12 +96,12 @@ $(document).ready(function () {
                         <p>Estimated number of <strong>${title}</strong> jobs in <strong>${state}</strong>: <strong>${crntStateEmp}</strong></p>
                         <p>Projected number of annual job openings for <strong>${title}</strong> in <strong>${state}</strong>: <strong>${projectedAnnualOpeningsSt}</strong></p>
                     `);
-                        console.log('US Median Per Capita Income: $29,829');
-                        console.log(myRoot);
-                        console.log(`Estimated current number of '${title}' jobs in ${stateName}: ${crntStateEmp}`); // Output to page
+                        // console.log('US Median Per Capita Income: $29,829');
+                        // console.log(myRoot);
+                        // console.log(`Estimated current number of '${title}' jobs in ${stateName}: ${crntStateEmp}`); // Output to page
 
-                        console.log(`Projected annual openings for '${title}' jobs in ${stateName}: ${projectedAnnualOpeningsSt}`);
-                        console.log(`Estimated number of '${title}' jobs in the U.S.: ${projectedAnnualOpeningsUS}`)
+                        // console.log(`Projected annual openings for '${title}' jobs in ${stateName}: ${projectedAnnualOpeningsSt}`);
+                        // console.log(`Estimated number of '${title}' jobs in the U.S.: ${projectedAnnualOpeningsUS}`)
                     },
                     error: function (request, status, errorThrown) {
                         $('#errorBody').modal('show');
@@ -123,8 +109,6 @@ $(document).ready(function () {
                     }
                 });
             });
-
-            console.log(cityState);
 
             // City Data /////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -141,7 +125,7 @@ $(document).ready(function () {
                 var crimeIndex = Math.round(myData.crime_index);
                 var pollutionIndex = Math.round(myData.pollution_index);
                 var qualityOfLifeIndex = Math.round(myData.quality_of_life_index);
-                console.log(myData);
+                // console.log(myData);
 
                 $('#cityData').empty();
                 $('#cityData').append(`
@@ -154,12 +138,7 @@ $(document).ready(function () {
                 <p>Quality of Life Index: <strong>${qualityOfLifeIndex}</strong></p>
             `);
 
-                console.log(statsName);
-                console.log(costOfLiving);
-                console.log(housingToIncomeRatio);
-
             }).fail(function (error) {
-                console.log(error);
                 $('#errorBody').modal('show');
                 $('#errorMessage').text('There was an error processing your request for city data. Please try another search term.');
             });
@@ -168,8 +147,8 @@ $(document).ready(function () {
 
     });
 
-    var schoolsOnDisplay = 5;
 
+    var schoolsOnDisplay = 5;
     $('#moreSchools').on('click', function (e) {
         e.preventDefault();
         if (schoolsOnDisplay < 200) {
@@ -200,13 +179,6 @@ $(document).ready(function () {
             var schoolArr = [];
             var school = xmlDoc.getElementsByTagName('school');
 
-            console.log(name.length);
-            console.log(city);
-            console.log(state);
-            //   $('#schoolInfo').text(xmlDoc.getElementsByTagName('name')[0].childNodes[0].nodeValue);
-            // console.log(xmlDoc.getElementsByTagName('name')[0].childNodes[0].nodeValue);
-            // console.log(school);
-            // console.log(school[0].children[1].textContent);
             $('#schoolsDisplayed').text(`${schoolsOnDisplay - 4} - ${schoolsOnDisplay}`);
             $('#schoolInfo').empty();
             for (var i = schoolsOnDisplay - 5; i < schoolsOnDisplay; i++) {
@@ -219,38 +191,30 @@ $(document).ready(function () {
 
                 $('#schoolInfo').append(`
                     <div class="outerSchoolDiv">
-                        <span>${school[i].children[1].textContent}</span>  
+                        <span>${school[i].children[1].textContent}</span>
                         <span>${school[i].children[2].textContent}</span>
-                        <span>${school[i].children[3].textContent}</span>   
+                        <span>${school[i].children[3].textContent}</span>
                         <div class="innerSchoolDiv">
-                            <span id="parentRating${i}">Parent Rating: </span><br>                              
+                            <span id="parentRating${i}">Parent Rating: </span><br>
                             <span>GreatSchools Rating: ${school[i].children[5].textContent}</span><br>
-                            <span class="gsRatingDesc">(1 - 10)</span>   
-                            <span class="schoolLink"><a href="${school[i].children[15].textContent}" target="_blank">Learn More</a></span> 
+                            <span class="gsRatingDesc">(1 - 10)</span>
+                            <span class="schoolLink"><a href="${school[i].children[15].textContent}" target="_blank">Learn More</a></span>
                         </div>
                     </div>
                 `);
                 var stars = parseInt(school[i].children[6].textContent);
                 for (var j = 1; j <= 5; j++) {
-                    console.log(stars);
                     if (stars !== 1 && stars !== 2 && stars !== 3 && stars !== 4 && stars !== 5) {
                         $(`#parentRating${i}`).text('Parent Rating: N/A');
                     } else if (j <= stars) {
                         $(`#parentRating${i}`).append('<span class="fa fa-star checked"></span>');
                     } else {
                         $(`#parentRating${i}`).append('<span class="fa fa-star"></span>');
-                        console.log('black star ran');
                     }
-
                 }
-
             }
 
-
-            console.log(schoolArr);
-
         }).fail(function (error) {
-            console.log(error);
             $('#errorBody').modal('show');
             $('#errorMessage').text('There was an error processing your request for school data. Please try another search term.');
         });
@@ -270,6 +234,50 @@ $(document).ready(function () {
         }, "");
     }
 
+    var pickupMaxTempArr;
+    function globalMaxArray(arr) {
+        pickupMaxTempArr = arr;
+        console.log(pickupMaxTempArr);
+    }
+
+    var pickupMinTempArr;
+    function globalMinArray(arr) {
+        pickupMinTempArr = arr;
+        console.log(pickupMinTempArr);
+    }
+
+
+    var aData = [];
+
+    /* object constructor */
+    function graphData(minTemp, maxTemp, month) {
+        this.y = minTemp;
+        this.y0 = maxTemp;
+        this.month = month;
+    }
+
+    var uniqueMonthsArr; //To hold an array holding unique Months from our data.
+
+    //This function will return ( uniqueMonthsArr ) with the unique months from the data response.
+    function uniqueResultsFromData(data) {
+        let uniqMonthsSet = new Set();
+        for (i = 0; i < data.length; i++) {
+            uniqMonthsSet = uniqMonthsSet.add(data[i].date); //Get me only unique line items
+        }
+        uniqueMonthsArr = Array.from(uniqMonthsSet); //Convert the
+        return uniqueMonthsArr;
+    }
+
+    //This function will return the month and average temperatures as an Object { month: ####### temps: ###### }
+    function getAverageTemp(arr, month, monthlyData) {
+        var values = arr.filter((fromData) => fromData.date.indexOf(uniqueMonthsArr[i]) > -1)
+            .reduce(function (prev, value) { return prev + value.value; }, 0);
+        var avg = Math.round(values / monthlyData);
+        var formattedMonth = moment(month).format('MMM'); //"Jan 2017"
+        var obj = { month: formattedMonth, temps: avg };
+        return [obj];
+    }
+
     $('#weather').on('click', function (e) {
         e.preventDefault();
         console.log("wasclicked")
@@ -278,7 +286,6 @@ $(document).ready(function () {
     });
 
     var units = 'imperial';
-    //var inputWeather = $('#autocomplete')//"San Francisco"
     //weather function
     function WaetherCall() {
         //will take input from search based on lat and long
@@ -326,18 +333,15 @@ $(document).ready(function () {
                 var Loc_Date = new Date(UTC + (1000 * response.rawOffset) + (1000 * response.dstOffset));
                 var formatTime = moment(Loc_Date).format(("MMM Do, hh:mm"));
                 $("#timeOfLocation").html(formatTime);
-                getHist()
-                pullingCityPic()
+                getHist();
+                pullingCityPic();
 
             });
         });
 
     }
 
-    //    $('#climate').on('click', function (e) {
     function getHist() {
-        // e.preventDefault();
-        // url = "https://www.ncdc.noaa.gov/cdo-web/api/v2/data?datasetid=GSOM&locationid=" + city + "&datatypeid=TMAX&startdate=2018-01-01&enddate=2018-04-01&units=standard"
         //getting city information from first weather api
         url = "https://www.ncdc.noaa.gov/cdo-web/api/v2/search?limit=50&offset=1&resulttype=CITY&text=" + city + "&datasetid=GSOM&startdate=2018-01-01&enddate=2018-02-01&sortfield=score&sortorder=desc"
         var tokenFromNoaa = "WWKoJVmRVKlQKXOsSHFiQZXozlzIBzJY";
@@ -347,104 +351,62 @@ $(document).ready(function () {
                 token: tokenFromNoaa
             },
             success: function (data) {
-                //console.log(data.results[0].station)
                 console.log(data);
                 cityToPass = data.results[0].id;
-                console.log(cityToPass)
+                console.log(cityToPass);
 
-                //console.log(data.results[0].date)
             }
         })
-
             .then(function (data) {
-                url = "https://www.ncdc.noaa.gov/cdo-web/api/v2/data?datasetid=GSOM&locationid=" + cityToPass + "&datatypeid=TMAX&startdate=2017-01-01&enddate=2018-01-01&units=standard&limit=1000"
+                url = "https://www.ncdc.noaa.gov/cdo-web/api/v2/data?datasetid=GSOM&locationid=" + cityToPass + "&datatypeid=TMAX&startdate=2017-01-01&enddate=2018-01-01&units=standard&limit=1000";
                 $.ajax({
                     url: url,
                     headers: {
                         token: tokenFromNoaa
-                    },
+                    }
                 }).then(function (data) {
+                    data = data.results;
 
-                    data = data.results
-                    let uniqMonthsSet = new Set();
-                    for (i = 0; i < data.length; i++) {
-                        uniqMonthsSet = uniqMonthsSet.add(data[i].date); //Get me only unique line items
+                    var uniqMonthsForMaxTemps =  uniqueResultsFromData(data);
+                    var avgMaxTempsData = [];
+                    for (i = 0; i < uniqMonthsForMaxTemps.length; i++) {
+                        //iterate through each unique month inside our uniqMonthsForMaxTemps array
+                        var dataPerMonth = data.filter((fromData) => fromData.date.indexOf(uniqMonthsForMaxTemps[i]) > -1).length;
+                        var objTemps = getAverageTemp(data, uniqMonthsForMaxTemps[i], dataPerMonth); //{month: "Jan 2017", temps: 43}
+                        avgMaxTempsData.push(objTemps[0]);
                     }
-
-                    var uniqueMonthsArr = Array.from(uniqMonthsSet) //Convert the Set back to an array
-
-                    var avgTempsData = []; //Array to store unique Months and AvgTempData
-                    for (i = 0; i < uniqueMonthsArr.length; i++) {
-                        var dataPerMonth = data.filter((fromData) => fromData.date.indexOf(uniqueMonthsArr[i]) > -1).length;
-                        var objTemps = getAverageTemp(data, uniqueMonthsArr[i], dataPerMonth); //{month: "Jan 2017", temps: 43}
-                        avgTempsData.push(objTemps[0]);
-                    }
-
-                    function getAverageTemp(arr, month, monthlyData) {
-                        var values = arr.filter((fromData) => fromData.date.indexOf(uniqueMonthsArr[i]) > -1)
-                            .reduce(function (prev, value) { return prev + value.value; }, 0);
-                        var avg = Math.round(values / monthlyData);
-                        var formattedMonth = moment(month).format('MMM'); //"Jan 2017"
-                        var obj = { month: formattedMonth, temps: avg };
-                        //console.log(obj);
-                        return [obj];
-                    }
+                    globalMaxArray(avgMaxTempsData);
                     /////////////////////loop for getitng TEMP MAX --------------for DISPLAY
-                    for (i = 0; i < avgTempsData.length; i++) {
-                        var monthToMax = avgTempsData[i].month;
-                        var tempToMax = avgTempsData[i].temps
-                        console.log(monthToMax, tempToMax)
-                    }
-
+                    // for (i = 0; i < avgMaxTempsData.length; i++) {
+                    //     var monthToMax = avgMaxTempsData[i].month;
+                    //     var tempToMax = avgMaxTempsData[i].temps;
+                    // }
                 })
-                    .then(function (data) {
-                        url = "https://www.ncdc.noaa.gov/cdo-web/api/v2/data?datasetid=GSOM&locationid=" + cityToPass + "&datatypeid=TMIN&startdate=2017-01-01&enddate=2018-01-01&units=standard&limit=1000"
+                .then(function (data) {
+                    url = "https://www.ncdc.noaa.gov/cdo-web/api/v2/data?datasetid=GSOM&locationid=" + cityToPass + "&datatypeid=TMIN&startdate=2017-01-01&enddate=2018-01-01&units=standard&limit=1000";
                         $.ajax({
                             url: url,
                             headers: {
                                 token: tokenFromNoaa
                             },
                         }).then(function (data) {
-
-                            data = data.results
-                            let uniqMonthsSet = new Set();
-                            for (i = 0; i < data.length; i++) {
-                                uniqMonthsSet = uniqMonthsSet.add(data[i].date); //Get me only unique line items
+                            data = data.results;
+                            var uniqueMonthsForMinTemps = uniqueResultsFromData(data);
+                            var avgMinTempsData = [];
+                            for (i = 0; i < uniqueMonthsForMinTemps.length; i++) {
+                                var dataPerMonth = data.filter((fromData) => fromData.date.indexOf(uniqueMonthsForMinTemps[i]) > -1).length;
+                                var objTemps = getAverageTemp(data, uniqueMonthsForMinTemps[i], dataPerMonth); //{month: "Jan 2017", temps: 43}
+                                avgMinTempsData.push(objTemps[0]);
                             }
-
-                            var uniqueMonthsArr = Array.from(uniqMonthsSet) //Convert the Set back to an array
-
-                            var avgTempsData = []; //Array to store unique Months and AvgTempData
-                            for (i = 0; i < uniqueMonthsArr.length; i++) {
-                                var dataPerMonth = data.filter((fromData) => fromData.date.indexOf(uniqueMonthsArr[i]) > -1).length;
-                                var objTemps = getAverageTemp(data, uniqueMonthsArr[i], dataPerMonth); //{month: "Jan 2017", temps: 43}
-                                avgTempsData.push(objTemps[0]);
-                            }
-
-                            function getAverageTemp(arr, month, monthlyData) {
-                                var values = arr.filter((fromData) => fromData.date.indexOf(uniqueMonthsArr[i]) > -1)
-                                    .reduce(function (prev, value) { return prev + value.value; }, 0);
-                                var avg = Math.round(values / monthlyData);
-                                var formattedMonth = moment(month).format('MMM'); //"Jan 2017"
-                                var obj = { month: formattedMonth, temps: avg };
-                                //console.log(obj);
-                                return [obj];
-                            }
-                            //////////////////////////loop for getitng TEMP MIN --------------for DISPLAY
-                            for (i = 0; i < avgTempsData.length; i++) {
-                                var monthToMin = avgTempsData[i].month;
-                                var tempToMin = avgTempsData[i].temps
-                                console.log(monthToMin, tempToMin)
-                            }
-
+                            globalMinArray(avgMinTempsData);
                         });
                     });
-
-            })
+            });
         //});
     }
 
-    ///google auto city 
+
+    ///google auto city
     var input = document.getElementById('autocomplete');
     var search = new google.maps.places.Autocomplete(input, { types: ['(regions)'] });
     google.maps.event.addListener(search, 'place_changed', function () {
@@ -455,7 +417,7 @@ $(document).ready(function () {
         var geocodeURL = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + input + '&key=AIzaSyC75PI0JP6R87nUSYn4R8iySVG0WGUZqMQ';
         console.log(input)
     });
-    //end 
+    //end
     function pullingCityPic() {
         var queryURL = "https://pixabay.com/api/?key=8449388-e25d53a8bbc2d9948e151d998&q=" + city + "&image_type=photo&per_page=5";
         $.ajax({
