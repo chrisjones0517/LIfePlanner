@@ -151,7 +151,71 @@ header .navbar {
     }
 }
 
+#forecast {
+    position: relative;
+}
+
+h2#new {
+    position: absolute;
+    right: 55px;
+    top: 42px;
+}
+
+p#highF {
+    position: relative;
+    left: 65px;
+}
+
+p#description {
+    text-align: center;
+}
+
+
 /* Weather End ---------------- */
+
+/* School start */
+#school i{
+    font-size: 40px;
+    color: #bf2e55;
+}
+
+.innerSchoolDiv {
+    border-radius: 15px;
+    background: #eee;
+    padding-left: 10px;
+}
+
+.schoolLink {
+    float: right;
+    margin-right: 2rem;
+    border: 1px solid #bf2e55;
+    position: relative;
+    bottom: 42px;
+    padding: 5px;
+    font-weight: bold;
+    background: #bf2e55;
+    right: -18px;
+
+}
+
+.schoolLink a{
+    color: #fff!important;
+}
+
+.checked { /*golden star*/
+    color: #ffd700; 
+}
+
+.schoolName {
+    font-weight: bold;
+    padding-left: 5px;
+}
+
+.schoolType {
+    float: right;
+    padding-right: 10px;
+}
+/* School End -----------------*/
 .bold {
     font-weight: 700;
 }
@@ -161,18 +225,13 @@ header .navbar {
     padding: 10px;
 }
 
-.innerSchoolDiv {
-    border: 1px solid black;
-}
+
 
 .gsRatingDesc {
     font-weight: 300;
 }
 
-.schoolLink {
-    float: right;
-    margin-right: 2rem;
-}
+
 #dropping {
     align-content: center;
 
@@ -203,18 +262,11 @@ header .navbar {
     padding: 10px;
 }
 
-.innerSchoolDiv {
-    border: 1px solid black;
-}
 
 .gsRatingDesc {
     font-weight: 300;
 }
 
-.schoolLink {
-    float: right;
-    margin-right: 2rem;
-}
 #dropping {
     align-content: center;
 
@@ -229,9 +281,7 @@ header .navbar {
     color: #000;
 }
 
-.checked {
-    color: #bf2e55; 
-}
+
 
 .gftp{
  
@@ -264,9 +314,3 @@ header .navbar {
 #new{font-size: 100px;}
 
 
-#school button{
-    border-radius: 40px;
-    font-size: 40px;
-    width: 65px;
-    background: #bf2e55;
-}

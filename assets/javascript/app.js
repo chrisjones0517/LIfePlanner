@@ -191,13 +191,15 @@ $(document).ready(function () {
 
                 $('#schoolInfo').append(`
                     <div class="outerSchoolDiv col-md-6 col-xs-12">
-                        <span>${school[i].children[1].textContent}</span>
+                        <span class = 'schoolName'>${school[i].children[1].textContent}</span>
+                        <div class = 'schoolType'>
                         <span>${school[i].children[2].textContent}</span>
-                        <span>${school[i].children[3].textContent}</span>
+                        <span class = 'schoolX'>${school[i].children[3].textContent}</span>
+                        </div>
                         <div class="innerSchoolDiv">
                             <span id="parentRating${i}">Parent Rating: </span><br>
-                            <span>GreatSchools Rating: ${school[i].children[5].textContent}</span><br>
-                            <span class="gsRatingDesc">(1 - 10)</span>
+                            <span>GreatSchools Rating: ${school[i].children[5].textContent}/10</span><br>
+                            
                             <span class="schoolLink"><a href="${school[i].children[15].textContent}" target="_blank">Learn More</a></span>
                         </div>
                     </div>
@@ -311,7 +313,7 @@ $(document).ready(function () {
             console.log(city, cityPop)
             console.log(lowF, highF, description)
 
-            $('h1.wi').addClass("wi-owm-" + icon2)
+            $('h2.wi').addClass("wi-owm-" + icon2)
             $('#highF').html(highF);
             $('#city').html(city)
             $('#cityPop').html(' City population: ' + cityPop);
@@ -328,7 +330,7 @@ $(document).ready(function () {
                 var Cur_Date = new Date();
                 var UTC = Cur_Date.getTime() + (Cur_Date.getTimezoneOffset() * 60000);
                 var Loc_Date = new Date(UTC + (1000 * response.rawOffset) + (1000 * response.dstOffset));
-                var formatTime = moment(Loc_Date).format(("MMM Do, hh:mm"));
+                var formatTime = moment(Loc_Date).format(("MMM Do, hh:mm a"));
                 $("#timeOfLocation").html(formatTime);
                 getHist();
                 pullingCityPic();
