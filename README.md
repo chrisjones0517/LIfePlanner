@@ -3,7 +3,7 @@
 The purpose of this application is to provide the user with pertinent information to help decide what US city and state would best benefit their interests based on user preferences. 
 
 # How does the App work
-The user is asked to input their career and city of interest, upon which data is returned on the climate for the location, economic data for the location by user career, top rated schools in the area, taxation and cost of living considerations, quality of life index, and other related data. 
+The user is asked to input their career and city of interest, upon which data is returned on the climate for the location, economic data for the location by user career, top rated schools in the area, taxation and cost of living considerations, quality of life index, and other related data. Climate data is displayed using the d3.js data visualization library.   
 
 # API's being used
 
