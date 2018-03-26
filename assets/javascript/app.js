@@ -16,6 +16,7 @@ $(document).ready(function () {
             $('#errorBody').modal('show');
             $('#errorMessage').text('Please enter an occupation!');
         } else {
+            $("#searchResults").removeClass("tempheight"); 
 
             $("#data").empty();
 
