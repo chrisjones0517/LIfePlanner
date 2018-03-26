@@ -13,7 +13,7 @@ body {
 
 /* navbar Start*/
 
-.navbar {
+header .navbar {
     height: 450px;
     background-image:url("../images/bg.jpg")
 
@@ -66,7 +66,7 @@ body {
 
 .navbar .userinfo button:hover {
     background: #bf2e55;
-    color: #000;
+    color: #fff;
 }
 
 .navbar .userinfo p {
@@ -84,9 +84,6 @@ body {
 
 
 /* search box start */
-#search-slider{
-    
-}
 
 #search-slider .searchwrap{
     background: #fff;
@@ -109,7 +106,7 @@ body {
 
 #submit {
     background: #bf2e55;
-    color: #000!important;
+    color: #fff!important;
     font-size: 18;
     font-weight: bold;
 }
@@ -124,6 +121,31 @@ body {
 .chart {
     transform: scale(.9) translateX(-92px);
 }
+
+@media (max-width: 575px) {
+    .chart {
+        transform: scale(0.5) translateX(-286px);
+    }
+}
+
+@media (min-width: 576px) and (max-width:767px) {
+    .chart {
+        transform: scale(0.65) translateX(-175px);
+    }
+}
+
+@media (min-width: 768px) and (max-width:991px) {
+    .chart {
+        transform: scale(0.5) translateX(-265px);
+    }
+}
+
+@media (min-width: 992px) and (max-width:1199px) {
+    .chart {
+        transform: scale(0.5) translateX(-225px);
+    }
+}
+
 /* Weather End ---------------- */
 .bold {
     font-weight: 700;
