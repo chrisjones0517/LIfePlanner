@@ -8,6 +8,7 @@ $(document).ready(function () {
 
         $(".tohide").show()
         e.preventDefault();
+        $("#searchResults").removeClass("tempheight"); 
         if ($('#autocomplete').val() === '') {
             $('#errorBody').modal('show');
             $('#errorMessage').text('Please enter a location!');

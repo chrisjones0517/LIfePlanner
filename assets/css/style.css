@@ -11,6 +11,11 @@ body {
     top: -50px
 }
 
+.tempheight {
+    height: 210px;
+    overflow: hidden;
+}
+
 /* navbar Start*/
 
 header .navbar {
