@@ -16,6 +16,32 @@ body {
     overflow: hidden;
 }
 
+@media (max-width: 575px) {
+    .tempheight {
+        height: 422px;
+    
+    }
+}
+
+@media (min-width: 576px) and (max-width:767px) {
+    .tempheight {
+        height: 422px;
+    }
+}
+
+@media (min-width: 768px) and (max-width:991px) {
+    .tempheight {
+        height: 210px;
+    }
+}
+
+@media (min-width: 992px) and (max-width:1199px) {
+    .tempheight {
+        height: 210px;
+    }
+}
+
+
 /* navbar Start*/
 
 header .navbar {
@@ -129,7 +155,7 @@ header .navbar {
 
 @media (max-width: 575px) {
     .chart {
-        transform: scale(0.5) translateX(-286px);
+        transform: scale(0.45) translateX(-286px);
     }
 }
 
@@ -180,7 +206,7 @@ p#description {
 }
 
 .innerSchoolDiv {
-    border-radius: 15px;
+    border-radius: 10px;
     background: #eee;
     padding-left: 10px;
 }
