@@ -16779,4 +16779,9 @@ fieldset[disabled] .btn-purple.active {
     }
 }
 
+.checked { /*golden star*/
+    color: #ffd700;
+}
+
+
 /***********************************/
