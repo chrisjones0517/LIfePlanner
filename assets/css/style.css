@@ -123,7 +123,7 @@ header .navbar {
     
 } 
 
-input {
+#searchResults input {
     width: 80%!important;
 }
 
