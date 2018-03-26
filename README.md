@@ -7,13 +7,13 @@ The user is asked to input their career and city of interest, upon which data is
 
 # API's being used
 
-1- Google API 
-2- Careeronestop
-3- Numbeo
-4- Greatschools
-5- Openweathermap
-6- NCDC and
-7- Pixabay
+1. Google API 
+2. Careeronestop
+3. Numbeo
+4. Greatschools
+5. Openweathermap
+6. NCDC and
+7. Pixabay
 
 The location input is filtered through a Google API that provides the user with autocomplete.
 The other APIs used are from www.careeronestop.org, www.numbeo.com, www.greatschools.org, www.openweathermap.org, maps.googleapis.com, www.ncdc.noaa.gov, and www.pixabay.com. The user is provided value by having access the most relevant data in a single user friendly location. The user is provided an option to login or register to store his/her credentials in the firebase database system, or to simply search as a guest. The login function allows a user's past searches to be recorded for comparison or later use.
