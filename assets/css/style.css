@@ -12,32 +12,32 @@ body {
 }
 
 .tempheight {
-    height: 210px;
+    height: 165px;
     overflow: hidden;
 }
 
 @media (max-width: 575px) {
     .tempheight {
-        height: 422px;
+        height: 365px;
     
     }
 }
 
 @media (min-width: 576px) and (max-width:767px) {
     .tempheight {
-        height: 422px;
+        height: 365px;
     }
 }
 
 @media (min-width: 768px) and (max-width:991px) {
     .tempheight {
-        height: 210px;
+        height: 165px;
     }
 }
 
 @media (min-width: 992px) and (max-width:1199px) {
     .tempheight {
-        height: 210px;
+        height: 165px;
     }
 }
 
@@ -45,8 +45,10 @@ body {
 /* navbar Start*/
 
 header .navbar {
-    height: 450px;
-    background-image:url("../images/bg.jpg")
+    height: 600px;
+    background-image:url("../images/bg.jpg");
+    background-size: cover;
+    background-attachment: fixed;
 
 }
 
@@ -91,7 +93,7 @@ header .navbar {
     padding: 5px;
     background: transparent;
     border: 1px solid #bf2e55;
-    color: #bf2e55;
+    color: #FFF;
     transition: .5s;
 }
 
@@ -121,6 +123,10 @@ header .navbar {
     
 } 
 
+input {
+    width: 80%!important;
+}
+
 /* search box end --------------*/
 
 /* city stats start*/
@@ -139,6 +145,12 @@ header .navbar {
     background: #bf2e55;
     color: #fff!important;
     font-size: 18;
+    font-weight: bold;
+    width: 200px;
+}
+
+.citylabels{
+    font-size: 22px;
     font-weight: bold;
 }
 /* city stats end ----------------*/
@@ -196,6 +208,32 @@ p#description {
     text-align: center;
 }
 
+@media (min-width: 768px) and (max-width:991px) {
+    #city {
+        font-size: 30px;
+    }
+    #timeOfLocation, #cityPop {
+        font-size: 24px;
+    }
+
+    h2#new {
+        position: absolute;
+        font-size: 30px;
+        right: 55px;
+        top: 42px;
+    }
+    
+    p#highF {
+        font-size: 30px;
+        position: relative;
+        left: 65px;
+    }
+    
+    p#description {
+        font-size: 22px;
+    }
+    
+}
 
 /* Weather End ---------------- */
 
@@ -240,6 +278,22 @@ p#description {
 .schoolType {
     float: right;
     padding-right: 10px;
+}
+
+@media (max-width: 575px) {
+    .schoolLink {
+        float: right;
+        margin-right: 2rem;
+        border: 1px solid #bf2e55;
+        position: relative;
+        bottom: 35px;
+        padding: 0px;
+        font-weight: bold;
+        background: #bf2e55;
+        right: -18px;
+        font-size: 12px;
+    
+    }
 }
 /* School End -----------------*/
 .bold {
@@ -325,7 +379,7 @@ p#description {
 .paddingto{
     padding: 30px
 }
-#submit {margin-top: 50px;}
+
 #highF{
     font-size:50px
 }

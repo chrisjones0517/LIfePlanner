@@ -8,7 +8,6 @@ $(document).ready(function () {
 
         $(".tohide").show()
         e.preventDefault();
-        $("#searchResults").removeClass("tempheight"); 
         if ($('#autocomplete').val() === '') {
             $('#errorBody').modal('show');
             $('#errorMessage').text('Please enter a location!');
@@ -16,7 +15,8 @@ $(document).ready(function () {
             $('#errorBody').modal('show');
             $('#errorMessage').text('Please enter an occupation!');
         } else {
-
+            $("#searchResults").removeClass("tempheight"); 
+            
             $("#data").empty();
 
             var occupation = $('#occupation').val();
