@@ -178,15 +178,16 @@ $(document).ready(function () {
             xmlDoc = parser.parseFromString(text, "text/xml");
             var schoolArr = [];
             var school = xmlDoc.getElementsByTagName('school');
-
+            
             $('#schoolsDisplayed').text(`${schoolsOnDisplay - 5} - ${schoolsOnDisplay}`);
             $('#schoolInfo').empty();
             for (var i = schoolsOnDisplay - 6; i < schoolsOnDisplay; i++) {
                 var parentRating = school[i].children[6].textContent;
                 var gsRating = school[i].children[5].textContent;
-
+                var ratingScale = '/10';
                 if (gsRating !== '1' && gsRating !== '2' && gsRating !== '3' && gsRating !== '4' && gsRating !== '5') {
                     school[i].children[5].textContent = 'N/A';
+                    ratingScale = '';
                 }
 
                 $('#schoolInfo').append(`
@@ -198,7 +199,7 @@ $(document).ready(function () {
                         </div>
                         <div class="innerSchoolDiv">
                             <span id="parentRating${i}">Parent Rating: </span><br>
-                            <span>GreatSchools Rating: ${school[i].children[5].textContent}/10</span><br>
+                            <span>GreatSchools Rating: ${school[i].children[5].textContent}${ratingScale}</span><br>
                             
                             <span class="schoolLink"><a href="${school[i].children[15].textContent}" target="_blank">Learn More</a></span>
                         </div>
