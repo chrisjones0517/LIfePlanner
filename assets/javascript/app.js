@@ -8,7 +8,6 @@ $(document).ready(function () {
 
         $(".tohide").show()
         e.preventDefault();
-        $("#searchResults").removeClass("tempheight"); 
         if ($('#autocomplete').val() === '') {
             $('#errorBody').modal('show');
             $('#errorMessage').text('Please enter a location!');
@@ -16,7 +15,8 @@ $(document).ready(function () {
             $('#errorBody').modal('show');
             $('#errorMessage').text('Please enter an occupation!');
         } else {
-            $("#searchResults").removeClass("tempheight"); 
+            $("#searchResults").removeClass("tempheight");
+
 
             $("#data").empty();
 
@@ -179,7 +179,7 @@ $(document).ready(function () {
             xmlDoc = parser.parseFromString(text, "text/xml");
             var schoolArr = [];
             var school = xmlDoc.getElementsByTagName('school');
-            
+
             $('#schoolsDisplayed').text(`${schoolsOnDisplay - 5} - ${schoolsOnDisplay}`);
             $('#schoolInfo').empty();
             for (var i = schoolsOnDisplay - 6; i < schoolsOnDisplay; i++) {
@@ -201,7 +201,7 @@ $(document).ready(function () {
                         <div class="innerSchoolDiv">
                             <span id="parentRating${i}">Parent Rating: </span><br>
                             <span>GreatSchools Rating: ${school[i].children[5].textContent}${ratingScale}</span><br>
-                            
+
                             <span class="schoolLink"><a href="${school[i].children[15].textContent}" target="_blank">Learn More</a></span>
                         </div>
                     </div>
@@ -452,7 +452,7 @@ $(document).ready(function () {
 
             yGroupMax = d3.max(dataset["layers"], function (layer) { return d3.max(layer, function (d) { return d.y0; }); });
         yGroupMin = d3.min(dataset["layers"], function (layer) { return d3.min(layer, function (d) { return d.y; }); });
-        
+
         var margin = { top: 50, right: 50, bottom: 50, left: 100 },
             width = 900 - margin.left - margin.right,
             height = 500 - margin.top - margin.bottom;
@@ -496,7 +496,7 @@ $(document).ready(function () {
             .attr("width", x.rangeBand() / n)
             .transition()
             .attr("y", function (d) { return y(d.y0); })
-            .attr("height", function (d) { return height - y(d.y0 - d.y) }) ////// tried reversing d.y0 and d.y  
+            .attr("height", function (d) { return height - y(d.y0 - d.y) }) ////// tried reversing d.y0 and d.y
             .attr("class", "bar")
             .style("fill", function (d) { return dataset["colors"][d.colorIndex]; })
         svg.append("g")
