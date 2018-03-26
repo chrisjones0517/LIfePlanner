@@ -437,13 +437,8 @@ $(document).ready(function () {
 
         var dataset = {
             "categories": ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', ''],
-<<<<<<< Updated upstream
             "series": [city],
             "colors": ["#3498db"],
-=======
-            "series": ["City1"],
-            "colors": ["#bf2e55"],
->>>>>>> Stashed changes
             "layers": graphFinal
         }
 
