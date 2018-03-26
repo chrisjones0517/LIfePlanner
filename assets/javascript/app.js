@@ -439,11 +439,7 @@ $(document).ready(function () {
         var dataset = {
             "categories": ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', ''],
             "series": [city],
-<<<<<<< HEAD
-            "colors": ["#3498db"],
-=======
             "colors": ["#bf2e55"],
->>>>>>> 4e23e833346f8b37b8e29a8ef2627d3a9e7fa007
             "layers": graphFinal
         }
 
