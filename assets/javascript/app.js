@@ -179,7 +179,7 @@ $(document).ready(function () {
             xmlDoc = parser.parseFromString(text, "text/xml");
             var schoolArr = [];
             var school = xmlDoc.getElementsByTagName('school');
-
+            
             $('#schoolsDisplayed').text(`${schoolsOnDisplay - 5} - ${schoolsOnDisplay}`);
             $('#schoolInfo').empty();
             for (var i = schoolsOnDisplay - 6; i < schoolsOnDisplay; i++) {
@@ -202,7 +202,7 @@ $(document).ready(function () {
                             <span id="parentRating${i}">Parent Rating: </span><br>
                             <span>GreatSchools Rating: ${school[i].children[5].textContent}${ratingScale}</span><br>
 
-                            <span class="schoolLink"><a href="${school[i].children[15].textContent}" target="_blank">Learn More</a></span>
+                            <span class="schoolLink"><a href="http://${school[i].children[15].textContent}" target="_blank">Learn More</a></span>
                         </div>
                     </div>
                 `);
@@ -302,7 +302,7 @@ $(document).ready(function () {
             }
 
         }).then(function (data) {
-            console.log(data)
+            //  console.log(data)
             lat = data.city.coord.lat;
             lon = data.city.coord.lon;
             city = data.city.name;
@@ -311,9 +311,9 @@ $(document).ready(function () {
             lowF = Math.round(data.list[0].main.temp_min) + '°';
             description = data.list[0].weather[0].description;
             const icon2 = data.list[0].weather[0].id;
-            console.log(lat, lon)
-            console.log(city, cityPop)
-            console.log(lowF, highF, description)
+            // console.log(lat, lon)
+            // console.log(city, cityPop)
+            // console.log(lowF, highF, description)
 
             $('h2.wi').addClass("wi-owm-" + icon2)
             $('#highF').html(highF);
@@ -351,9 +351,9 @@ $(document).ready(function () {
                 token: tokenFromNoaa
             },
             success: function (data) {
-                console.log(data);
+                //  console.log(data);
                 cityToPass = data.results[0].id;
-                console.log(cityToPass);
+                //   console.log(cityToPass);
 
             }
         })
@@ -401,7 +401,7 @@ $(document).ready(function () {
 
                             $('#chart1').empty();
                             tempObjforGraph();
-                            console.log(graphFinal);///////////// <!-- graphsFinal is the variable that gets sent to the graph -->////////////
+                            //   console.log(graphFinal);///////////// <!-- graphsFinal is the variable that gets sent to the graph -->////////////
                             findMinAndMax();
                             render_chart();
                             avgMaxTempsData = [];
@@ -431,8 +431,8 @@ $(document).ready(function () {
             return a - b;
         });
         seasonalMin = minTempArr[0];
-        console.log(seasonalMax);
-        console.log(seasonalMin);
+        // console.log(seasonalMax);
+        // console.log(seasonalMin);
     }
 
 
@@ -441,7 +441,7 @@ $(document).ready(function () {
         var stack = d3.layout.stack();
 
         var dataset = {
-            "categories": ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', ''],
+            "categories": ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
             "series": [city],
             "colors": ["#bf2e55"],
             "layers": graphFinal
@@ -496,12 +496,12 @@ $(document).ready(function () {
             .attr("width", x.rangeBand() / n)
             .transition()
             .attr("y", function (d) { return y(d.y0); })
-            .attr("height", function (d) { return height - y(d.y0 - d.y) }) ////// tried reversing d.y0 and d.y
+            .attr("height", function (d) { return 6.5 * (d.y0 - d.y) }) ////// tried reversing d.y0 and d.y
             .attr("class", "bar")
             .style("fill", function (d) { return dataset["colors"][d.colorIndex]; })
         svg.append("g")
             .attr("class", "x axis")/////////////////////////////// tried changing height to height/2
-            .attr("transform", "translate(0," + 250 + ")")
+            .attr("transform", "translate(0," + height + ")")
             .call(xAxis);
         svg.select("g") ///////////// changed from select to append
             .attr("class", "y axis")
@@ -582,16 +582,16 @@ $(document).ready(function () {
                 }
             );
         }
-        graphReadyTempArr.push(
-            {
-                "y": 0,
-                "y0": 0,
-                "month": ""
-            }
-        );
+        // graphReadyTempArr.push(
+        //     {
+        //         "y": 0,
+        //         "y0": 0,
+        //         "month": ""
+        //     }
+        // );
         graphFinal.push(graphReadyTempArr);
     }
-    console.log(avgMinTempsData);
+    // console.log(avgMinTempsData);
     ///google auto city
     var input = document.getElementById('autocomplete');
     var search = new google.maps.places.Autocomplete(input, { types: ['(regions)'] });
@@ -601,7 +601,7 @@ $(document).ready(function () {
     google.maps.event.addListener(search, 'place_changed', function (event) {
         var input = document.getElementById('autocomplete').value;
         var geocodeURL = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + input + '&key=AIzaSyC75PI0JP6R87nUSYn4R8iySVG0WGUZqMQ';
-        console.log(input)
+        //   console.log(input)
     });
     //end
     function pullingCityPic() {
@@ -610,7 +610,7 @@ $(document).ready(function () {
             url: queryURL,
             method: "GET",
         }).then(function (response) {
-            console.log(response)
+            //  console.log(response)
             $("#dropping").empty()
             var results = response.hits;
             for (var i = 0; i < results.length; i++) {

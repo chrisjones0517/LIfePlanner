@@ -143,3 +143,47 @@ hr {
     color: #fff;
 }
 
+@media (max-width: 575px) {
+    
+    .userReg {
+        top:calc(50vh - 140px);
+        left: calc(50vw - 150px);
+        width: 300px;
+        height: 305px;
+    }
+
+    .register, .login {
+        position: absolute;
+        top: 20px;
+        left: 10px;
+        height: 280px;
+    }
+
+    .userReg label {
+        font-size: 14px;
+    }
+
+    .userReg input {
+        padding-left: 10px;
+        width:200px;
+    }
+
+    .btnReg {
+        top: -40px;
+        width: 120px;
+        transition: .5s;
+        font-size: 20px;
+    }
+
+    .btnSign {
+        left: 25px;
+        color: #fff;
+    }
+    
+    .btnLog {
+        left:145px;
+        color: #fff;
+    }
+
+}
+

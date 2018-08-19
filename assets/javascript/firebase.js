@@ -34,7 +34,7 @@ $(document).ready(function () {
         if (userName != "" && userPassword != "" && userFullName != "") {
 
             if (userPassword.length < 8) {
-                console.log(userPassword)
+             //   console.log(userPassword)
                 var message = "password should be 8 characters or more!";
                 getSalty(clickedButton, message);
             } else {
@@ -48,7 +48,7 @@ $(document).ready(function () {
                     getSalty(clickedButton, message);
 
                 } else {
-                    console.log("registered")
+                  //  console.log("registered")
                     //users tree in firebase
                     $(".userReg").addClass("flipOutY");
                     $("#userlogin").hide();
@@ -70,7 +70,7 @@ $(document).ready(function () {
                     }
                     //store user for later use
                     userLogin.push(x);
-                    console.log(userLogin);
+                  //  console.log(userLogin);
                     $(".userinfo p").removeClass("regHidden");
                     $("#userfullname").text(userLogin[0].fullname);
                 } //end of username comparison
@@ -113,13 +113,13 @@ $(document).ready(function () {
     db.ref("users").on("value", function (res) {
         snapshot = res;
         snapshotVal = res.val();
-        console.log(res);
+      //  console.log(res);
         if (res.exists()) { //conditional to increase index number for future signin
             dbIndex = snapshotVal.length;
             // console.log(dbIndex);
         } else {
             dbIndex = 0;
-            console.log(dbIndex);
+          //  console.log(dbIndex);
         };
 
 
@@ -141,14 +141,14 @@ $(document).ready(function () {
             //compare against username and password
             return (val.name === compareUser && val.passkey === comparePass)
         });
-        console.log(userLogin)
+      //  console.log(userLogin)
         if (userLogin.length) { //if array length is 1 => true
-            console.log("good to go");
+          //  console.log("good to go");
             $("#userlogin").hide();
 
             $(".userinfo p").removeClass("regHidden");
             $("#userfullname").text(userLogin[0].fullname);
-            console.log(userLogin[0].fullname)
+          //  console.log(userLogin[0].fullname)
             $(".userReg").addClass("flipOutY");
             setTimeout(() => {
                 $(".screen").hide();

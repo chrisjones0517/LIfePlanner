@@ -17,15 +17,23 @@ body {
 }
 
 @media (max-width: 575px) {
+    .container-fluid {
+        top: -200px;
+    }
+
     .tempheight {
-        height: 365px;
+        height: 335px;
     
     }
 }
 
 @media (min-width: 576px) and (max-width:767px) {
+    .container-fluid {
+        top: -200px;
+    }
+
     .tempheight {
-        height: 365px;
+        height: 335px;
     }
 }
 
@@ -40,7 +48,6 @@ body {
         height: 165px;
     }
 }
-
 
 /* navbar Start*/
 
@@ -74,7 +81,10 @@ header .navbar {
     font-family: 'Cardo', serif;
     margin-left: 100px;
     font-family: 'Source Sans Pro', sans-serif;
+    max-width: 500px;
 }
+
+
 
 .navbar .logo .lp .h4 {
     font-family: 'IBM Plex Sans Condensed', sans-serif;
@@ -112,6 +122,21 @@ header .navbar {
 .how-it-works-section{
     font-family: 'Cardo', serif;
     padding: 32px;
+}
+
+@media (max-width: 575px) {
+    .navbar .logo .lp {
+        position: relative;
+        margin: 0px;
+        margin-left: 20px;
+        top: -20px;
+        
+    }
+
+    .navbar .userinfo button {
+        position: relative;
+        top:20px;
+    }
 }
 /* navbar end --------------*/
 
