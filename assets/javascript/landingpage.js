@@ -6,8 +6,8 @@
 var peopleRotator = ['What is the cost of living in Miami?',
                      'What are the top schools in California?',
                      'What is the climate like in Kansas City?',
-                     'What is the average income for a Mechanic in Seattle?',
-                     'What income should I expect as a Nurse in Denver?',
+                     'What is the average income for a mechanic in Seattle?',
+                     'What income should I expect as a nurse in Denver?',
                      'Can I get a job as a _____________ in Minneapolis?'];
 
 $(document).ready(function () {

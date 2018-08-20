@@ -172,41 +172,81 @@ $(document).ready(function () {
         $.getJSON(schoolUrl, function (data) {
 
         }).then(function (data) {
-            //   console.log(data.contents);
+            // console.log(data.contents);
             var text, parser, xmlDoc;
             text = data.contents;
             parser = new DOMParser();
             xmlDoc = parser.parseFromString(text, "text/xml");
             var schoolArr = [];
-            var school = xmlDoc.getElementsByTagName('school');
+            var schools = xmlDoc.getElementsByTagName('school');
+
+            for (var key in schools) {
+                schoolArr.push([]);
+                var nodes = schools[key].childNodes;
+                for (var el in nodes) {
+                    if (nodes[el]) {
+                        schoolArr[key].push(nodes[el]);
+                    }
+                }
+            }
+           
+            var schoolObjArr = [];
+
+            for (var i = 0; i < schoolArr.length; i++) {
+                var currentObj = {};
+                for (var j = 0; j < schoolArr[i].length; j++) {
+                    switch (schoolArr[i][j].tagName) {
+                        case 'name':
+                            currentObj.name = schoolArr[i][j].innerHTML;
+                            break;
+                        case 'type':
+                            currentObj.type = schoolArr[i][j].innerHTML;
+                            break;    
+                        case 'gradeRange':
+                            currentObj.gradeRange = schoolArr[i][j].innerHTML;
+                            break;
+                        case 'parentRating':
+                            currentObj.parentRating = schoolArr[i][j].innerHTML;
+                            break;
+                        case 'gsRating':
+                            currentObj.gsRating = schoolArr[i][j].innerHTML;
+                            break;
+                        case 'website':
+                            currentObj.website = schoolArr[i][j].innerHTML;
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                schoolObjArr.push(currentObj);
+            }
+
+            schoolObjArr.sort(function(a, b) {
+                return (b.gsRating + b.parentRating) - (a.gsRating + a.parentRating);
+            });
             
             $('#schoolsDisplayed').text(`${schoolsOnDisplay - 5} - ${schoolsOnDisplay}`);
             $('#schoolInfo').empty();
-            for (var i = schoolsOnDisplay - 6; i < schoolsOnDisplay; i++) {
-                var parentRating = school[i].children[6].textContent;
-                var gsRating = school[i].children[5].textContent;
-                var ratingScale = '/10';
-                if (gsRating !== '1' && gsRating !== '2' && gsRating !== '3' && gsRating !== '4' && gsRating !== '5') {
-                    school[i].children[5].textContent = 'N/A';
-                    ratingScale = '';
-                }
 
+            for (var i = schoolsOnDisplay - 6; i < schoolsOnDisplay; i++) {
                 $('#schoolInfo').append(`
                     <div class="outerSchoolDiv col-md-6 col-xs-12">
-                        <span class = 'schoolName'>${school[i].children[1].textContent}</span>
-                        <div class = 'schoolType'>
-                        <span>${school[i].children[2].textContent}</span>
-                        <span class = 'schoolX'>${school[i].children[3].textContent}</span>
+                        <span class='schoolName'>${schoolObjArr[i].name}</span>
+                        <div class='schoolType'>
+                        <span>${schoolObjArr[i].type}</span>
+                        <span class='schoolX'>${schoolObjArr[i].gradeRange}</span>
                         </div>
                         <div class="innerSchoolDiv">
                             <span id="parentRating${i}">Parent Rating: </span><br>
-                            <span>GreatSchools Rating: ${school[i].children[5].textContent}${ratingScale}</span><br>
+                            <span>GreatSchools Rating: ${schoolObjArr[i].gsRating}/10</span><br>
 
-                            <span class="schoolLink"><a href="http://${school[i].children[15].textContent}" target="_blank">Learn More</a></span>
+                            <span class="schoolLink"><a href="http://${schoolObjArr[i].website}" target="_blank">Learn More</a></span>
                         </div>
                     </div>
                 `);
-                var stars = parseInt(school[i].children[6].textContent);
+                
+                var stars = parseInt(schoolObjArr[i].parentRating);
+                
                 for (var j = 1; j <= 5; j++) {
                     if (stars !== 1 && stars !== 2 && stars !== 3 && stars !== 4 && stars !== 5) {
                         $(`#parentRating${i}`).text('Parent Rating: N/A');
